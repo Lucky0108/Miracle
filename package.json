@@ -2,10 +2,21 @@
   "name": "softcopy-v1",
   "version": "1.0.0",
   "description": "One place stop for all your needs",
-  "main": "index.js",
+  "main": "./softcopy-back-end/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./softcopy-back-end/server.js",
+    "server": "nodemon ./softcopy-back-end/server.js",
+    "client": "npm start --prefix softcopy-front-end cd",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Lakshay Yadav & Umashankar Sarswat",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.7.0",
+    "mongoose": "^5.10.18",
+    "nodemon": "^2.0.6"
+  }
 }
