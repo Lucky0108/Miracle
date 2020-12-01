@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 
 /**
 * @author
@@ -9,22 +10,22 @@ import { Navbar, Nav, Container } from 'react-bootstrap'
 const NavbarComp = (props) => {
   return (
     <>
-    <Navbar fixed="top" bg="dark" variant="dark" color="white" expand="lg">
+    <Navbar className="navDiv" fixed="top" expand="lg">
         <Container fluid>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Servies</Nav.Link>
-            <Nav.Link href="#home">About Us</Nav.Link>
-            <Nav.Link href="#home">Contact Us</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-        <Navbar.Brand href="#home">Softcopy</Navbar.Brand>
+        <NavLink to="/" className="navbar-brand">Softcopy<span style={{color:'#FC6E36',fontSize:'2.5rem'}}>.</span> </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <NavLink exact to="/" className="navLink" activeClassName="activeNavLink">Home</NavLink>
+            <NavLink to="/service" className="navLink" activeClassName="activeNavLink">Services</NavLink>
+            <NavLink to="/about" className="navLink" activeClassName="activeNavLink">About Us</NavLink>
+            <NavLink to="/contact" className="navLink" activeClassName="activeNavLink">Contact Us</NavLink>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#home">Login</Nav.Link>
-            <Nav.Link href="#link">Join Us</Nav.Link>
+            <NavLink to="/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
+            <NavLink to="/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
           </Nav>
         </Navbar.Collapse>
         </Container>
