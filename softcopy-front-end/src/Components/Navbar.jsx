@@ -12,7 +12,7 @@ const NavbarComp = (props) => {
     <>
     <Navbar className="navDiv" fixed="top" expand="lg">
         <Container fluid>
-        <NavLink to="/" className="navbar-brand">Softcopy<span style={{color:'#FC6E36',fontSize:'2.5rem'}}>.</span> </NavLink>
+        <NavLink to="/" className="navbar-brand site-brand">Softcopy<span style={{color:'#FC6E36',fontSize:'2.5rem'}}>.</span> </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
