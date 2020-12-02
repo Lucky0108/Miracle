@@ -15,13 +15,13 @@ const Home = (props) => {
         <div className="container hero-container">
           <Row>
             <Col md={8}>
-              <div class="slide-heading">
+              <div className="slide-heading">
                 <h2>Soft Copy</h2>
                 <span>Best Place To Work</span>
               </div>
-              <div class="slide-text">
+              <div className="slide-text">
                 <p>
-                  Recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and
+                  Recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat.
                 </p>
               </div>
               <div>

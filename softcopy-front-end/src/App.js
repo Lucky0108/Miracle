@@ -20,6 +20,9 @@ function App() {
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
       </Switch>
+      <div style={{height:'100vh'}}>
+      Body
+      </div>
       <Footer />
     </div>
   );
