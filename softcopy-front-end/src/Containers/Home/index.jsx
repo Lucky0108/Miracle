@@ -1,7 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import sec1 from '../img/cloud.png'
+import sec1 from '../../img/cloud.png'
+import './Home.css'
 
 /**
 * @author

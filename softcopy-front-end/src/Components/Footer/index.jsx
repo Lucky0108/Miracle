@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import footCloud from '../img/footer-shape.jpg'
+import footCloud from '../../img/footer-shape.jpg'
+import './Footer.css'
 
 /**
 * @author
