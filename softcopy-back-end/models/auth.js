@@ -41,17 +41,17 @@ const UserSchema = new mongoose.Schema({
 },{timestamps: true});
 
 UserSchema.virtual('password')
-.set((password) => {
+.set(function(password){
     this.hash_password = bcrypt.hashSync(password, 10);
 });
 
 UserSchema.virtual('fullName')
-.set(() => {
+.get(function(){
     return `${this.firstName} ${this.lastName}`
 })
 
 UserSchema.methods = {
-    authenticate: (password) => {
+    authenticate: function(password){
         return bcrypt.compareSync(password, this.hash_password);
     }
 }
