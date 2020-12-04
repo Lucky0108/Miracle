@@ -5,6 +5,7 @@ import './Navbar.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../actions'
 import { toastr } from 'react-redux-toastr'
+import { useEffect } from 'react'
 
 /**
 * @author
@@ -31,15 +32,18 @@ const NavbarComp = (props) => {
     dispatch(logout())
   }
 
-  if(auth.success) {
-    toastr.success("Yayy", "You are logged out successfully!!")
-  }
+  useEffect(() => {
+    if(auth.success) {
+      toastr.success("Yayy", "You are logged out successfully!!");
+      auth.success = false
+    }
+  },[auth, auth.success])
 
   const renderLoggedinLinks = () => {
     return (
       <Nav className="ml-auto"> 
        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-       <a className="navLink" activeClassName="activeNavLink" onClick={logoutBtn} style={{cursor: "pointer"}}>Logout</a>
+       <a className="navLink" onClick={logoutBtn} style={{cursor: "pointer"}}>Logout</a>
       </Nav>
     )
   }

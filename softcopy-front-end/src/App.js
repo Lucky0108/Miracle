@@ -10,8 +10,23 @@ import Login from './Containers/Login';
 import Signup from './Containers/Signup';
 import ReduxToastr from 'react-redux-toastr'
 import 'react-redux-toastr/src/styles/index.scss'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { isLoggedin } from './actions';
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  const auth = useSelector(state => state.auth)
+
+  useEffect(() => {
+    if(!auth.authenticate){
+      dispatch(isLoggedin())
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="App">
       <Navbar />
@@ -23,9 +38,6 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
       </Switch>
-      {/* <div style={{height:'100vh'}}>
-      Body
-      </div> */}
       <Footer />
       <ReduxToastr 
         newestOnTop={false}

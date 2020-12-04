@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from '../../Components/PageTitle'
 import './Login.css'
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap'
@@ -28,9 +28,14 @@ const Login = (props) => {
 
     dispatch(login(user))
   }
-  
+
+  useEffect(() => {
+    if(auth.authenticate) {
+      toastr.success("Success", "Login was Success!!")
+    }
+  },[auth, auth.authenticate])
+
   if(auth.authenticate) {
-    toastr.success("Success", "Login was Success!!")
     return <Redirect to={"/"} />
   }
 
