@@ -8,6 +8,8 @@ import About from './Containers/About'
 import Footer from './Components/Footer';
 import Login from './Containers/Login';
 import Signup from './Containers/Signup';
+import ReduxToastr from 'react-redux-toastr'
+import 'react-redux-toastr/src/styles/index.scss'
 
 function App() {
   return (
@@ -19,12 +21,20 @@ function App() {
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
         <Route exact path='/login' component={Login} />
-        <Route exact path='/about' component={Signup} />
+        <Route exact path='/signup' component={Signup} />
       </Switch>
       {/* <div style={{height:'100vh'}}>
       Body
       </div> */}
       <Footer />
+      <ReduxToastr 
+        newestOnTop={false}
+        preventDuplicates
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar
+        closeOnToastrClick
+      />
     </div>
   );
 }

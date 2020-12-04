@@ -26,7 +26,7 @@ exports.signup = (req,res) => {
 
         _user.save((err, data) => {
             if(err) return res.status(400).json({ message: "Something Went Wrong!", error: err })
-            if(data) return res.status(201).json({ message: "User Created Successfully!" })
+            if(data) return res.status(201).json({ message: "User Created Successfully!", data: data })
         })
     })
 }
@@ -38,12 +38,12 @@ exports.signin = (req,res) => {
         if(user) {
             if(user.authenticate(req.body.password)) {
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d'})
-                const { _id, firstName, lastName, userName, email } = user
+                const { _id, firstName, lastName, userName, email, fullName } = user
 
                 return res.status(200).json({
                     token,
                     user: {
-                        _id, firstName, lastName, email, userName
+                        _id, firstName, lastName, email, userName, fullName
                     },
                 })
             } else {

@@ -29,7 +29,7 @@ const Login = (props) => {
   }
   
   if(auth.authenticate) {
-    return <Redirect to={"/about"} />
+    return <Redirect to={"/"} />
   }
 
   return (

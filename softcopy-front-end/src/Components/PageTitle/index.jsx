@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import './PageTitle.css'
-import pageTitleBg from '../../img/page-title-bg.png'
 
 
 /**
@@ -12,7 +11,7 @@ import pageTitleBg from '../../img/page-title-bg.png'
 const PageTitle = (props) => {
   return(
     <>
-    <div className="page-title" style={{ background: `url(${pageTitleBg}) 50%/cover no-repeat local;` }}>
+    <div className="page-title">
         <Container>
             <Row>
                 <Col sm={12} className="col" >

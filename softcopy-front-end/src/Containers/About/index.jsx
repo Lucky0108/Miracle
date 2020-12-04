@@ -1,4 +1,5 @@
 import React from 'react'
+import PageTitle from '../../Components/PageTitle'
 
 /**
 * @author
@@ -7,7 +8,9 @@ import React from 'react'
 
 const About = (props) => {
   return(
-    <div>About</div>
+    <>
+   <PageTitle title="About Us" />
+    </>
    )
   }
 
