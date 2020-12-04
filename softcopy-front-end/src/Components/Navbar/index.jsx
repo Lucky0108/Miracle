@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../actions'
+import { toastr } from 'react-redux-toastr'
 
 /**
 * @author
@@ -10,8 +13,10 @@ import './Navbar.css'
 
 const NavbarComp = (props) => {
  
-  const [nav, setNav] = useState(false)
-  
+  const [nav, setNav] = useState(false);
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
   const changeNavColor = () => {
     if(window.scrollY >= 100) {
       setNav(true)
@@ -21,6 +26,32 @@ const NavbarComp = (props) => {
   }
 
   window.addEventListener('scroll', changeNavColor);
+
+  const logoutBtn = () => {
+    dispatch(logout())
+  }
+
+  if(auth.success) {
+    toastr.success("Yayy", "You are logged out successfully!!")
+  }
+
+  const renderLoggedinLinks = () => {
+    return (
+      <Nav className="ml-auto"> 
+       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+       <a className="navLink" activeClassName="activeNavLink" onClick={logoutBtn} style={{cursor: "pointer"}}>Logout</a>
+      </Nav>
+    )
+  }
+
+  const renderNonLoggedinLinks = () => {
+    return (
+      <Nav className="ml-auto"> 
+       <NavLink to="/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
+       <NavLink to="/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
+      </Nav>
+    )
+  }
 
   return (
     <>
@@ -37,10 +68,7 @@ const NavbarComp = (props) => {
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <NavLink to="/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
-            <NavLink to="/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
-          </Nav>
+            {auth.authenticate ? renderLoggedinLinks() : renderNonLoggedinLinks() }
         </Navbar.Collapse>
         </Container>
       </Navbar>

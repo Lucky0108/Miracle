@@ -37,15 +37,17 @@ const Signup = (props) => {
 
   if(user.loading === true){
    toastr.info('Loading...')
-  } else if(user.loading === "done") {
+  } else if(user.loading === "Done") {
     toastr.success('Congratulations', user.message)
     setFirstName('')
     setLastName('')
     setEmail('')
     setPassword('')
     user.message = '';
-    user.loading = false;
+    user.loading = '';
     return <Redirect to={'/'} />
+  } else if(user.loading === "Failed") {
+    toastr.error('Error', user.message || user.error)
   }
 
  
@@ -68,6 +70,7 @@ const Signup = (props) => {
                       placeholder="Enter first name"
                       value={firstName} 
                       onChange = {e => setFirstName(e.target.value)}
+                      required = {true}
                     />
 
                     <Input 
@@ -77,6 +80,7 @@ const Signup = (props) => {
                       placeholder="Enter last name"
                       value={lastName} 
                       onChange = {e => setLastName(e.target.value)}
+                      required={true}
                     />
 
                     <Input 
@@ -87,6 +91,7 @@ const Signup = (props) => {
                       value={email} 
                       onChange = {e => setEmail(e.target.value)}
                       message = "We'll never share your email with anyone else."
+                      required={true}
                     />
 
                     <Input
@@ -95,7 +100,8 @@ const Signup = (props) => {
                       type="password" 
                       placeholder="Password"
                       value={password}
-                      onChange= {e => setPassword(e.target.value)} 
+                      onChange= {e => setPassword(e.target.value)}
+                      required={true} 
                     />
                     <Button variant="primary" type="submit">
                       Submit

@@ -11,7 +11,9 @@ const initState = {
     error: null,
     authenticating: false,
     authenticate: false,
-    message: ''
+    message: '',
+    loading: false,
+    success: false
 }
 
 export default(state = initState, action) => {
@@ -37,6 +39,29 @@ export default(state = initState, action) => {
         case authConstants.LOGIN_FAILURE:
             state = {
                 ...initState,
+                error: action.payload.message
+            }
+        break;
+
+        case authConstants.LOGOUT_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+        break;
+
+        case authConstants.LOGOUT_SUCCESS:
+            state = {
+                ...initState,
+                loading: false,
+                success: true
+            }
+        break;
+
+        case authConstants.LOGOUT_FAILURE:
+            state = {
+                ...state,
+                loading: false,
                 error: action.payload.message
             }
         break;

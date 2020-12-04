@@ -6,6 +6,7 @@ import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../../actions/auth.action'
 import { Redirect } from 'react-router-dom'
+import {toastr} from 'react-redux-toastr'
 
 /**
 * @author
@@ -29,6 +30,7 @@ const Login = (props) => {
   }
   
   if(auth.authenticate) {
+    toastr.success("Success", "Login was Success!!")
     return <Redirect to={"/"} />
   }
 

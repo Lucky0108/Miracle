@@ -4,7 +4,7 @@ import { signupConstants } from "../actions/constants"
 const initState = {
     error: '',
     message: '',
-    loading: false
+    loading: ''
 }
 
 export default (state = initState, action ) => {
@@ -19,7 +19,7 @@ export default (state = initState, action ) => {
         case signupConstants.SIGNUP_SUCCESS:
             state = {
                 ...state,
-                loading: "done",
+                loading: "Done",
                 message: action.payload.message
             }
         break;
@@ -27,7 +27,7 @@ export default (state = initState, action ) => {
         case signupConstants.SIGNUP_FAILURE:
             state = {
                 ...state,
-                loading: false,
+                loading: "Failed",
                 error: action.payload.error
             }
         break;
