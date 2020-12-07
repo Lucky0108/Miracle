@@ -24,6 +24,20 @@ p {
   line-height: 1.9em;
 }
 
+a{
+  text-decoration: none;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+img {
+  max-width: 100%;
+}
+
 .optionDiv {
   height: 100vh;
   background: #2a2a2a;
@@ -60,7 +74,6 @@ p {
 }
 
 .btn-theme:hover,.extra-links > ul > li > a:hover,.site-footer, .site-footer a{
-  text-decoration: none !important;
   color: snow;
 }
 

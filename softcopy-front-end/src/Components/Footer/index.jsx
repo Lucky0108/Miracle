@@ -52,22 +52,22 @@ const Footer = (props) => {
                                     <h3 className="widget-title">Company</h3>
                                     <ul>
                                         <li>
-                                            <a href="/">
+                                            <a href="/about">
                                                 About us
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/">
+                                            <a href="/service">
                                                 Our services
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/">
+                                            <a href="/contact">
                                                 Contact us
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/">
+                                            <a href="/team">
                                                 Meet team
                                             </a>
                                         </li>
@@ -101,22 +101,22 @@ const Footer = (props) => {
                                     <h3 className="widget-title">Services</h3>
                                     <ul>
                                         <li>
-                                            <a href="/webdev">
+                                            <a href="/service">
                                                 Web Development
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/seo">
+                                            <a href="/service">
                                                 SEO Optimization
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/earning">
+                                            <a href="/service">
                                                 Earning Tricks
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/notes">
+                                            <a href="/service">
                                                 Notes
                                             </a>
                                         </li>
