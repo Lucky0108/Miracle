@@ -10,7 +10,23 @@ import './Footer.css'
 **/
 
 const Footer = (props) => {
-  
+//   const listItems = {
+//     "a" : [ "https://instagram.com/softcopy_official", "https://instagram.com/softcopy_official1", "https://instagram.com/softcopy_official2", "https://instagram.com/softcopy_official3" ],
+//     "icon":  [ "fa-facebook", "fa-twitter", "fa-instagram", "fa-linkedin" ]
+//   }
+
+//   const renderListItems = () => {
+//    return (
+//        listItems.icon.map(function (icons) {
+//             return <li>
+//             {listItems.a.map((link) => {return  <a href={link}>
+//                                                     <i className={`fa ${icons}`} aria-hidden="true"></i>
+//                                                 </a>} )}
+//             </li>
+//            })          
+//    )
+//   }
+
     return (
         <>
             <footer fixed="bottom" className="site-footer" style={{ background: `url(${footCloud}) bottom/cover no-repeat local` }}>
@@ -22,6 +38,9 @@ const Footer = (props) => {
                                     <h3 style={{marginTop:'-12px'}} className="site-brand widget-title">Softcopy<span style={{ color: '#FC6E36', fontSize: '2.5rem' }}>.</span></h3>
                                     <p>Anand International College of Engineering, Near Kanota, Agra Road, Jaipur, Rajasthan 303012</p>
                                     <div className="social-icons">
+                                        {/* <ul>
+                                            { renderListItems() }
+                                        </ul> */}
                                         <ul>
                                             <li>
                                                 <a href="https://instagram.com/softcopy_official">

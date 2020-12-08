@@ -23,6 +23,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Action Import
 import { isLoggedin } from './actions';
+import ErrorPage from './Containers/404';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
         <Route exact path='/about' component={About} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
+        <Route component={ErrorPage} />
       </Switch>
       <Footer />
       <ReduxToastr 

@@ -2,6 +2,10 @@
 .site-footer{
     background-color: #1d41aa;
   }
+
+  .site-footer p {
+    color: #fff;
+  }
   
   .site-footer ul{
     list-style: none;
@@ -132,4 +136,10 @@
   
   .newsletter-input::-ms-input-placeholder { /* Microsoft Edge */
     color: white !important;
+  }
+
+  @media (max-width: 768px) {
+    .widget {
+      margin-top: 30px;
+    }
   }
