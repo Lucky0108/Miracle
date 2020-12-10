@@ -1,5 +1,5 @@
 // Basic Imports
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './App.css';
@@ -26,6 +26,13 @@ import { isLoggedin } from './actions';
 import ErrorPage from './Containers/404';
 
 function App() {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll top when location changes
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const dispatch = useDispatch()
 
