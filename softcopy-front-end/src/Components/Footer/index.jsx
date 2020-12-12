@@ -10,22 +10,46 @@ import './Footer.css'
 **/
 
 const Footer = (props) => {
-  const listItems = {
-    "a" : [ "https://instagram.com/softcopy_official", "https://instagram.com/softcopy_official1", "https://instagram.com/softcopy_official2", "https://instagram.com/softcopy_official3" ],
-    "icon":  [ "fa-facebook", "fa-twitter", "fa-instagram", "fa-linkedin" ]
-  }
+    // 2-D Array for Footer Icons having links and icon names
+    const FooterIconListItems = [
+        ["https://facebook.com/softcopy_official", "fa-facebook"], ["https://twitter.com/softcopy_official", "fa-twitter"],
+        ["https://instagram.com/softcopy_official", "fa-instagram"], ["https://linkedin.com/softcopy_official", "fa-linkedin"]
+    ]
 
-  const renderListItems = () => {
-   return (
-       listItems.icon.map(function (icons) {
-            return <li>
-            {listItems.a.map((link) => {return  <a href={link}>
-                                                    <i className={`fa ${icons}`} aria-hidden="true"></i>
-                                                </a>} )}
-            </li>
-           })          
-   )
-  }
+    // 2-D Array for Footer Company List having links and Respective Name
+    const FooterCompanyList = [
+        ["/about", "About us"], ["/service", "Our services"], ["/contact", "Contact us"], ["/team", "Meet team"]
+    ]
+
+    // 2-D Array for Footer Company List 2 having links and Respective Name
+    const FooterCompanyList2 = [
+        ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/news", "News"], ["/faq", "FAQ"]
+    ]
+
+    // 2-D Array for Footer Service List  having links and Service Name
+    const FooterServiceList = [
+        ["/service", "Web Development"], ["/service", "SEO Optimization"], ["/service", "Earning Tricks"], ["/service", "Notes"]
+    ]
+
+    //  Function To Render Icon List
+    const renderIconListItems = () => {
+        return (  FooterIconListItems.map((val) => { return <li> <NavLink to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </NavLink> </li> }) )
+    }
+
+    // Function To Render Company List
+    const renderCompanyList = () => {
+        return ( FooterCompanyList.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+    }
+
+    // Function To Render Company List 2
+    const renderCompanyList2 = () => {
+        return ( FooterCompanyList2.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+    }
+
+    // Function To Render Service List 
+    const renderServiceList = () => {
+        return ( FooterServiceList.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+    }
 
     return (
         <>
@@ -35,34 +59,12 @@ const Footer = (props) => {
                         <Row>
                             <Col lg={3} md={6} sm={12} xs={12}>
                                 <div className="footer-about-section">
-                                    <h3 style={{marginTop:'-12px'}} className="site-brand widget-title">Softcopy<span style={{ color: '#FC6E36', fontSize: '2.5rem' }}>.</span></h3>
+                                    <h3 style={{ marginTop: '-12px' }} className="site-brand widget-title">Softcopy<span style={{ color: '#FC6E36', fontSize: '2.5rem' }}>.</span></h3>
                                     <p>Anand International College of Engineering, Near Kanota, Agra Road, Jaipur, Rajasthan 303012</p>
                                     <div className="social-icons">
                                         <ul>
-                                            { renderListItems() }
+                                            {renderIconListItems()}
                                         </ul>
-                                        {/* <ul>
-                                            <li>
-                                                <a href="https://instagram.com/softcopy_official">
-                                                    <i className="fa fa-facebook" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="https://instagram.com/softcopy_official">
-                                                    <i className="fa fa-twitter" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="https://instagram.com/softcopy_official">
-                                                    <i className="fa fa-instagram" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="https://instagram.com/softcopy_official">
-                                                    <i className="fa fa-linkedin" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                        </ul> */}
                                     </div>
                                 </div>
                             </Col>
@@ -70,48 +72,10 @@ const Footer = (props) => {
                                 <div className="widget footer-company-section">
                                     <h3 className="widget-title">Company</h3>
                                     <ul>
-                                        <li>
-                                            <a href="/about">
-                                                About us
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/service">
-                                                Our services
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/contact">
-                                                Contact us
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/team">
-                                                Meet team
-                                            </a>
-                                        </li>
+                                        {renderCompanyList()}
                                     </ul>
                                     <ul>
-                                        <li>
-                                            <a href="/">
-                                                Privacy Policy
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/">
-                                                Testimonials
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/">
-                                                News
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/">
-                                                FAQ
-                                            </a>
-                                        </li>
+                                        {renderCompanyList2()}
                                     </ul>
                                 </div>
                             </Col>
@@ -119,46 +83,27 @@ const Footer = (props) => {
                                 <div className="widget footer-service-section">
                                     <h3 className="widget-title">Services</h3>
                                     <ul>
-                                        <li>
-                                            <a href="/service">
-                                                Web Development
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/service">
-                                                SEO Optimization
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/service">
-                                                Earning Tricks
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/service">
-                                                Notes
-                                            </a>
-                                        </li>
+                                      {renderServiceList()}
                                     </ul>
                                 </div>
                             </Col>
                             <Col lg={3} md={6} sm={12} xs={12}>
-                            <div className="widget footer-newsletter-section">
-                            <h3 className="widget-title">Newsletter</h3>
-                            <p>
-                            You will be notified when somthing new will be appear.
-                            </p>
-                            <form>
-                                <div className="newsletter-input-div">
-                                    <input type="email" className="form-control newsletter-input" placeholder="Email Address *" required />
+                                <div className="widget footer-newsletter-section">
+                                    <h3 className="widget-title">Newsletter</h3>
+                                    <p>
+                                        You will be notified when somthing new will be appear.
+                                    </p>
+                                    <form>
+                                        <div className="newsletter-input-div">
+                                            <input type="email" className="form-control newsletter-input" placeholder="Email Address *" required />
+                                        </div>
+                                        <div className="submit-button-div">
+                                            <button type="submit">
+                                                <i className="fa fa-envelope-o"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div className="submit-button-div">
-                                    <button type="submit">
-                                    <i className="fa fa-envelope-o"></i>
-                                    </button>
-                                </div>
-                            </form>
-                            </div>
                             </Col>
                         </Row>
                     </Container>
