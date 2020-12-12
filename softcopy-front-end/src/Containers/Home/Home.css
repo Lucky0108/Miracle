@@ -66,7 +66,7 @@ background-color: #FC6E36;
     margin: 0 -15px;
 }
 
-.grid {
+.home-section-1 .grid, .testimonial-section .grid {
     background: #fff;
     padding: 50px 25px; 
     width: calc(50% - 30px);
@@ -77,17 +77,17 @@ background-color: #FC6E36;
     box-shadow: 0 4px 21.36px 2.64px rgba(25,38,62,.06);
 }
 
-.grid:nth-child(2) {
+.home-section-1 .grid:nth-child(2) {
     position: relative;
     top: 150px;
 }
 
-.grid div > i {
+.home-section-1 .grid div > i {
     font-size: 2rem;
     color: white;
 }
 
-.grid > h3 {
+.home-section-1 .grid > h3 {
     font-size: 1.2rem;
     margin: 1.3em 0 0.7em;
 }
@@ -115,19 +115,19 @@ background-color: #FC6E36;
     background-color: #7633ff;
 }
 
-.home-section-1 .home-section-1-heading > h2, .home-section-2 .home-section-2-heading > h2, .home-section-3 .home-section-3-heading > h2, .home-section-4 .home-section-4-heading > h2, .home-section-5 .home-section-5-heading > h2, .contact-section-title > h2 {
+.contact-section-title > h2 {
     font-size: 2.4rem;
     margin: 0.7rem 0 1rem;
+}
+
+.home-section-1 .home-section-1-details > p {
+    margin-bottom: 2.5em;
 }
 
 .home-section-1 .home-section-1-details > h5 {
     font-size: 1.2rem !important;
     line-height: 1.6em;
     margin: 0 0 1em;
-}
-
-.home-section-1 .home-section-1-details > p , .home-section-2 .home-section-2-heading > p, .home-section-3 .home-section-3-heading > p, .home-section-4 .home-section-4-heading > p,  .home-section-5 .home-section-5-heading > p {
-    margin-bottom: 2.5em;
 }
 
 .home-section-1 .home-section-1-details .btn-theme, .video-cta-area .content .btn-theme, .error-section .error-message .btn-theme, .contact-form form button {
@@ -456,19 +456,14 @@ background-color: #FC6E36;
         margin-top: 50px;
     }
 
-    .grid:nth-child(2) {
+    .home-section-1 .grid:nth-child(2) {
         top: 0px;
     }
 
-    .grid {
+    .home-section-1 .grid {
         width: auto;
         float: none;
         padding: 40px 25px;
-    }
-
-    .home-section-1 .home-section-1-heading > h2, .home-section-2 .home-section-2-heading > h2, .home-section-3 .home-section-3-heading > h2, .home-section-4 .home-section-4-heading > h2, .home-section-5 .home-section-5-heading > h2 {
-        font-size: 2rem;
-        margin-bottom: 1.7rem;
     }
 
     .home-section-1 .home-section-1-details > h5 {
@@ -548,10 +543,6 @@ background-color: #FC6E36;
 }
 
 @media (max-width: 767px) {
-
-    .home-section-1 .home-section-1-heading > h2, .home-section-2 .home-section-2-heading > h2, .home-section-3 .home-section-3-heading > h2, .home-section-4 .home-section-4-heading > h2, .home-section-5 .home-section-5-heading > h2  {
-        font-size: 1.7rem;
-    }
 
     .home-section-4-grid {
         width: calc(50% - 15px);

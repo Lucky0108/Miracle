@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PageTitle from '../../Components/PageTitle'
+import PageTitle from '../../Components/UI/PageTitle'
 import './Login.css'
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap'
 import Input from '../../Components/UI/Input'

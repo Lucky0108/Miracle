@@ -8,7 +8,7 @@ import Slider from "react-slick";
 // Components Import
 import MainSection3Card from '../../Components/UI/Home/MainSection3Card'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
-import HomeGrid from '../../Components/UI/Home/HomeGrids'
+import HomeServiceGrid from '../../Components/UI/Home/HomeServiceGrids'
 import MainSection4Grid from '../../Components/UI/Home/MainSection4Grid'
 import TestimonialGrid from '../../Components/UI/Home/TestimonialGrid';
 
@@ -75,7 +75,7 @@ const Home = (props) => {
         <section className="section-padding about-us-section home-section-1">
             <Container>
               <Row>
-                <HomeGrid lg={6} xs={12} completeGridsClass="feature-grids clearfix" gridClass="grid" extraFontClass="font-icon" />
+                <HomeServiceGrid lg={6} xs={12} completeGridsClass="feature-grids clearfix" gridClass="grid" extraFontClass="font-icon" />
                 <Col className="col" lg={6} xs={12}>
                   <HomeHeading class="home-section-1-heading" span="01. About Us" h2="Build Your Business with Our All In One Agency" />
                   <div className="home-section-1-details">
@@ -96,7 +96,7 @@ const Home = (props) => {
         <section className="section-padding why-choose-us-section home-section-2">
             <Container>
               <Row>
-                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-md-1">
+                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                   <HomeHeading class="home-section-2-heading" span="02. Why Choose Us" h2="We Provide You Both Services And Earning Opprotunity" p="We not only provide you with different types of services but we also provide you with an opportunity to earn extra side income with us." />
                 </Col>
               </Row>
@@ -106,7 +106,7 @@ const Home = (props) => {
                     <img src={home2img} alt="" className="home-section-2-img" />
                   </div>
                 </Col>
-                <HomeGrid lg={6} xs={12} md={6} sm={12} extraFontClass="" completeGridsClass="about-us-grids" iconDiv="icon" gridClass="about-grid" />
+                <HomeServiceGrid lg={6} xs={12} md={6} sm={12} extraFontClass="" completeGridsClass="about-us-grids" iconDiv="icon" gridClass="about-grid" />
               </Row>
             </Container>
         </section>
@@ -115,7 +115,7 @@ const Home = (props) => {
         <section className="section-padding services-section home-section-3">
             <Container>
               <Row>
-                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-md-1">
+                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                   <HomeHeading class="home-section-3-heading" span="03. Best Services" h2="We Provide Better Service For Your Business" p="Look at all the different service we provide and choose the one that fits you right and leave the rest up to us." />
                 </Col>
               </Row>
@@ -140,7 +140,7 @@ const Home = (props) => {
         <section className="section-padding portfolio-section home-section-4">
             <Container>
               <Row>
-                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-md-1">
+                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                   <HomeHeading class="home-section-4-heading clearfix" span="04. Portfolio" h2="Please check out our recent works" p="This is some of our recent work for you to check out." />
                 </Col>
               </Row>
@@ -191,7 +191,7 @@ const Home = (props) => {
         <section className="section-padding testimonial-section home-section-5">
             <Container>
               <Row>
-                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-md-1">
+                <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                   <HomeHeading class="home-section-5-heading" span="05. Testimonials" h2="What Clients Say About Us!" />
                 </Col>
               </Row>

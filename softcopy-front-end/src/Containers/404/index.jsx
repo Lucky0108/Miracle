@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import PageTitle from '../../Components/PageTitle'
+import PageTitle from '../../Components/UI/PageTitle'
 import errorImg from '../../img/404.svg'
 import { NavLink } from 'react-router-dom'
 import './Error.css'

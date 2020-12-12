@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import PageTitle from '../../Components/PageTitle';
+import PageTitle from '../../Components/UI/PageTitle';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
 import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'

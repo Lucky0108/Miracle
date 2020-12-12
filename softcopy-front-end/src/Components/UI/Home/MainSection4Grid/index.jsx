@@ -11,7 +11,7 @@ const MainSection4Grid = (props) => {
         <>
             <div className="home-section-4-grid">
                 <div className="img-holder">
-                    <img src={props.imgSrc} alt="" />
+                    <img src={props.imgSrc} alt={props.title} />
                 </div>
                 <div className="details">
                     <div className="content">
@@ -20,7 +20,7 @@ const MainSection4Grid = (props) => {
                         </h3>
                         <p>
                             {props.para}
-                      </p>
+                        </p>
                     </div>
                 </div>
             </div>

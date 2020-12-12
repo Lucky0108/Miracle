@@ -2,6 +2,7 @@
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import ReduxToastr from 'react-redux-toastr'
 import './App.css';
 
 // Components
@@ -13,7 +14,8 @@ import About from './Containers/About'
 import Footer from './Components/Footer';
 import Login from './Containers/Login';
 import Signup from './Containers/Signup';
-import ReduxToastr from 'react-redux-toastr'
+import ErrorPage from './Containers/404';
+import Team from './Containers/Team';
 
 // CSS Imports for packages
 import 'react-redux-toastr/src/styles/index.scss'
@@ -23,7 +25,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Action Import
 import { isLoggedin } from './actions';
-import ErrorPage from './Containers/404';
+
 
 function App() {
 
@@ -55,6 +57,7 @@ function App() {
         <Route exact path='/about' component={About} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
+        <Route exact path='/team' component={Team} />
         <Route component={ErrorPage} />
       </Switch>
       <Footer />

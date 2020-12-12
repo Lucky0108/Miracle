@@ -1,4 +1,5 @@
 import React from 'react'
+import './HomeHeadings.css'
 
 /**
 * @author
@@ -8,7 +9,7 @@ import React from 'react'
 const HomeHeading = (props) => {
     return (
         <>
-            <div className={props.class}>
+            <div className={`${props.class} headingDiv`}>
                 <span>{props.span} </span>
                 <h2>
                     {props.h2}

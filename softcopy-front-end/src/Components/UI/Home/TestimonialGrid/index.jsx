@@ -10,7 +10,7 @@ const TestimonialGrid = (props) => {
         <>
             <div className="grid" tabIndex="-1" style={{ width: "100%", display: "inline-block" }}>
                 <div className="testimonial-img">
-                    <img src={props.imgSrc}  alt={props.alt} />
+                    <img src={props.imgSrc}  alt={props.name} />
                 </div>
                 <p>{props.para}</p>
                 <div className="info">
