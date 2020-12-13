@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import errorImg from '../../img/404.svg'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Error.css'
 
 /**
@@ -25,7 +25,7 @@ const ErrorPage = (props) => {
                         <div className="error-message">
                             <h3>Oops! Page Not Found!</h3>
                             <p>We’re sorry but we can’t seem to find the page you requested. This might be because you have typed the web address incorrectly.</p>
-                            <NavLink to="/" className="btn-theme">Back To Home</NavLink>
+                            <Link to="/" className="btn-theme">Back To Home</Link>
                         </div>
                     </div>
                 </Col>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import footCloud from '../../img/footer-shape.jpg'
 import './Footer.css'
 import { useSelector, useDispatch } from 'react-redux'
@@ -37,22 +37,22 @@ const Footer = (props) => {
 
     //  Function To Render Icon List
     const renderIconListItems = () => {
-        return (  FooterIconListItems.map((val, index) => { return <li key={index}> <NavLink to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </NavLink> </li> }) )
+        return (  FooterIconListItems.map((val, index) => { return <li key={index}> <Link to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </Link> </li> }) )
     }
 
     // Function To Render Company List
     const renderCompanyList = () => {
-        return ( FooterCompanyList.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterCompanyList.map((val, index) => { return ( <li key={index}> <Link to={val[0]}> {val[1]} </Link> </li> ) }) )
     }
 
     // Function To Render Company List 2
     const renderCompanyList2 = () => {
-        return ( FooterCompanyList2.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterCompanyList2.map((val, index) => { return ( <li key={index}> <Link to={val[0]}> {val[1]} </Link> </li> ) }) )
     }
 
     // Function To Render Service List 
     const renderServiceList = () => {
-        return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <Link to={val[0]}> {val[1]} </Link> </li> ) }) )
     }
 
     const [email, setEmail] = useState('')
@@ -125,11 +125,11 @@ const Footer = (props) => {
                                     <form onSubmit={onNewsSubmit}>
                                         <div className="newsletter-input-div">
                                             <input type="email" className="form-control newsletter-input" placeholder="Email Address *" value={email} onChange={e => setEmail(e.target.value)} required />
-                                        </div>
-                                        <div className="submit-button-div">
+                                            {/* <div className="submit-button-div"> */}
                                             <button type="submit">
                                                 <i className="fa fa-envelope-o"></i>
                                             </button>
+                                        {/* </div>                                        */}
                                         </div>
                                     </form>
                                 </div>
@@ -147,10 +147,10 @@ const Footer = (props) => {
                                </p>
                                 <div className="extra-links">
                                     <ul>
-                                        <li><NavLink to="/about">Privacy & Policy</NavLink></li>
-                                        <li><NavLink to="/about">Terms</NavLink></li>
-                                        <li><NavLink to="/about">About Us</NavLink></li>
-                                        <li><NavLink to="/about">FAQ</NavLink></li>
+                                        <li><Link to="/about">Privacy &amp; Policy</Link></li>
+                                        <li><Link to="/about">Terms</Link></li>
+                                        <li><Link to="/about">About Us</Link></li>
+                                        <li><Link to="/about">FAQ</Link></li>
                                     </ul>
                                 </div>
                             </Col>

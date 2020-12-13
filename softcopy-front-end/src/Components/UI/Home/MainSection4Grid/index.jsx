@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /**
 * @author
@@ -16,7 +16,7 @@ const MainSection4Grid = (props) => {
                 <div className="details">
                     <div className="content">
                         <h3>
-                            <NavLink to="/"> {props.title} </NavLink>
+                            <Link to="/"> {props.title} </Link>
                         </h3>
                         <p>
                             {props.para}

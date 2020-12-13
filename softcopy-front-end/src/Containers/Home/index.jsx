@@ -1,7 +1,7 @@
 // Basic Imports
 import React, { useState } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import ModalVideo from 'react-modal-video'
 import Slider from "react-slick";
 
@@ -63,7 +63,7 @@ const Home = (props) => {
                     </p>
                   </div>
                   <div>
-                    <NavLink to="/about" className="btn-theme">More About Us</NavLink>
+                    <Link to="/about" className="btn-theme">More About Us</Link>
                   </div>
                 </Col>
               </Row>
@@ -85,7 +85,7 @@ const Home = (props) => {
                     <p>
                     Have you been thinking about starting your buisness or simply earn some extra money? We're here for to help you in all your needs. We can help you develop a professional looking website for your buisness and list them among the top results of search engine. 
                     </p>
-                    <NavLink to="/about" className="btn-theme">More About Us</NavLink>
+                    <Link to="/about" className="btn-theme">More About Us</Link>
                   </div>
                 </Col>
               </Row>
@@ -180,7 +180,7 @@ const Home = (props) => {
                     Have A Query? Feel Free To Contact With Us!
                   </h2>
                   <p>We are available here 24*7 for you to reach out to us incase you have any queries or any doubts you have regading our services or our website. We'll resolve all of your queries.</p>
-                  <NavLink className="btn-theme" to="/contact">Contact With Us</NavLink>
+                  <Link className="btn-theme" to="/contact">Contact With Us</Link>
                 </div>
               </Col>
             </Row>
