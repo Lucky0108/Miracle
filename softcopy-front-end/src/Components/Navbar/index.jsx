@@ -34,10 +34,11 @@ const NavbarComp = (props) => {
 
   useEffect(() => {
     if(auth.success) {
-      toastr.success("Yayy", "You are logged out successfully!!");
-      auth.success = false
+      toastr.success("Success", "You are logged out successfully!!");
+      auth.success = false;
+      auth.loading = false;
     }
-  },[auth, auth.success])
+  },[auth, auth.success, auth.loading])
 
   const renderLoggedinLinks = () => {
     return (

@@ -9,12 +9,16 @@ const chance = new Chance();
 exports.signup = (req,res) => {
     User.findOne({ email: req.body.email })
     .exec((err,user) => {
-        if(err) return res.status(404).json({ error: err })
-        if(user) return res.status(400).json({ message: "User Already Exist" })
+        if(err) { 
+            return res.status(404).json({ error: err }) 
+        }
+        if(user) return res.status(400).json({ 
+            message: "User Already Exist" 
+        })
 
         const { firstName, lastName, email, password } = req.body
         // Using chance to create a random username
-        const username = chance.string({ length: 8, alpha: true, numeric: true });
+        const username = chance.string({ length: 10, alpha: true, numeric: true });
 
         const _user = new User({
             firstName,
@@ -24,11 +28,19 @@ exports.signup = (req,res) => {
             userName: username.toUpperCase()
         })
 
-        _user.save((err, data) => {
-            if(err) return res.status(400).json({ message: "Something Went Wrong!", error: err })
-            if(data) return res.status(201).json({ message: "User Created Successfully!", data: data })
+        _user.save((error, data) => {
+            if(error) { 
+                return res.status(400).json({ 
+                    message: "Something Went Wrong!", error: error 
+                });
+            }
+            if(data){ 
+                return res.status(201).json({ 
+                    message: "User Created Successfully!", data: data 
+                })
+            }
         })
-    })
+    });
 }
 
 exports.signin = (req,res) => {

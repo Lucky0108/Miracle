@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import PageTitle from '../../Components/UI/PageTitle';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
 import Input from '../../Components/UI/Input'
@@ -31,23 +31,28 @@ const Signup = (props) => {
     dispatch(signup(userData))
   }
 
+  useEffect(() => {
+    if(user.loading === true){
+      toastr.info('Loading...')
+     } else if(user.loading === "Done") {
+       toastr.success('Congratulations', user.message)
+       setFirstName('')
+       setLastName('')
+       setEmail('')
+       setPassword('')
+       user.message = '';
+       user.loading = '';
+       return <Redirect to={'/login'} />
+     } else if(user.loading === "Failed") {
+       toastr.error('Error', user.error)
+       user.loading = ""
+       user.error = ""
+     }
+
+  }, [user, user.loading, user.message, user.error])
+
   if(auth.authenticate) {
    return <Redirect to={'/'} />
-  }
-
-  if(user.loading === true){
-   toastr.info('Loading...')
-  } else if(user.loading === "Done") {
-    toastr.success('Congratulations', user.message)
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setPassword('')
-    user.message = '';
-    user.loading = '';
-    return <Redirect to={'/'} />
-  } else if(user.loading === "Failed") {
-    toastr.error('Error', user.message || user.error)
   }
 
  

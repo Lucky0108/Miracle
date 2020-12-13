@@ -1,15 +1,15 @@
-import axios from "../helpers/axios"
-import { signupConstants } from "./constants"
+import axios from '../helpers/axios'
+import { newsletterConstants } from "./constants"
 
-export const signup = (user) => {
+export const newsletter = (user) => {
     return (dispatch) => {
 
-        dispatch({ type: signupConstants.SIGNUP_REQUEST });
-        const res = axios.post(`/signup`, { ...user });
+        dispatch({ type: newsletterConstants.NEWSLETTER_REQUEST })
+        const res = axios.post('/newsletter', user)
 
         res.then(response => {
             if(response.status === 201) {
-                dispatch({ type: signupConstants.SIGNUP_SUCCESS,
+                dispatch({ type: newsletterConstants.NEWSLETTER_SUCCESS,
                     payload: { message: response.data.message }
                 })
             }
@@ -18,7 +18,7 @@ export const signup = (user) => {
         res.catch((error) => {
             if(error.response) {
                 if(error.response.status === 400 || error.response.status === 404) {
-                    dispatch({ type: signupConstants.SIGNUP_FAILURE,
+                    dispatch({ type: newsletterConstants.NEWSLETTER_FAILURE,
                         payload: { error: error.response.data.message || error.response.data.error }
                     })
                 }

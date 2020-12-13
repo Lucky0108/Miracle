@@ -21,7 +21,7 @@ mongoose.connect(
     useFindAndModify: false
 })
         .then(() => {
-            console.log("Database Connected !!!")
+            console.log("Database Connected!!!")
         })
 
 

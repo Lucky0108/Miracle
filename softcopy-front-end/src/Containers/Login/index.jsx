@@ -33,7 +33,11 @@ const Login = (props) => {
     if(auth.authenticate) {
       toastr.success("Success", "Login was Success!!")
     }
-  },[auth, auth.authenticate])
+    if(auth.error) {
+      toastr.error("Error", auth.error);
+      auth.error = "";
+    }
+  },[auth, auth.authenticate, auth.loading, auth.error])
 
   if(auth.authenticate) {
     return <Redirect to={"/"} />

@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import footCloud from '../../img/footer-shape.jpg'
 import './Footer.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { newsletter } from '../../actions/newsletter.action'
+import {toastr} from 'react-redux-toastr'
+
 
 /**
 * @author
@@ -33,23 +37,48 @@ const Footer = (props) => {
 
     //  Function To Render Icon List
     const renderIconListItems = () => {
-        return (  FooterIconListItems.map((val) => { return <li> <NavLink to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </NavLink> </li> }) )
+        return (  FooterIconListItems.map((val, index) => { return <li key={index}> <NavLink to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </NavLink> </li> }) )
     }
 
     // Function To Render Company List
     const renderCompanyList = () => {
-        return ( FooterCompanyList.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterCompanyList.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
     }
 
     // Function To Render Company List 2
     const renderCompanyList2 = () => {
-        return ( FooterCompanyList2.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterCompanyList2.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
     }
 
     // Function To Render Service List 
     const renderServiceList = () => {
-        return ( FooterServiceList.map((val) => { return ( <li> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
+        return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <NavLink to={val[0]}> {val[1]} </NavLink> </li> ) }) )
     }
+
+    const [email, setEmail] = useState('')
+    const news = useSelector(state => state.news)
+
+    const dispatch = useDispatch();
+
+    const onNewsSubmit = (e) => {
+        e.preventDefault();
+       
+        dispatch(newsletter({email}))
+    }
+
+    useEffect(() => {
+        if(news.loading) {
+            toastr.info("Loading...")
+            toastr.loading = ""
+        }
+        if(news.message) {
+            toastr.success("Success", news.message)
+            news.message = ""
+        } else if(news.error) {
+            toastr.warning("Oops", news.error)
+            news.error = ""
+        }
+    }, [news, news.message, news.error, news.loading])
 
     return (
         <>
@@ -93,9 +122,9 @@ const Footer = (props) => {
                                     <p>
                                         You will be notified when somthing new will be appear.
                                     </p>
-                                    <form>
+                                    <form onSubmit={onNewsSubmit}>
                                         <div className="newsletter-input-div">
-                                            <input type="email" className="form-control newsletter-input" placeholder="Email Address *" required />
+                                            <input type="email" className="form-control newsletter-input" placeholder="Email Address *" value={email} onChange={e => setEmail(e.target.value)} required />
                                         </div>
                                         <div className="submit-button-div">
                                             <button type="submit">
