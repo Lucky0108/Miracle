@@ -41,21 +41,20 @@ const Contact = (props) => {
                   <div className="contact-form form-style">
                     <Row>
                       <Col lg={6} xs={12}>
-                        <input className="form-control" type="text" placeholder="Your Name*" id="contactName" name="contactName" value="" />
+                        <input className="form-control" type="text" placeholder="Your Name" id="contactName" name="contactName" value="" required />
                         <p></p>
                       </Col>
                       <Col className="col" lg={6}>
-                        <input className="form-control" type="number" placeholder="Phone" id="contactNumber" name="contactNumber" value="" />
+                        <input className="form-control" type="number" placeholder="Phone (10 Digits without country code)" id="contactNumber" name="contactNumber" value="" />
                         <p></p>
                       </Col>
                       <Col lg={6} xs={12}>
-                        <input className="form-control" type="email" placeholder="Your Email" id="contactEmail" name="contactEmail" value="" />
+                        <input className="form-control" type="email" placeholder="Your Email" id="contactEmail" name="contactEmail" value="" required />
                         <p></p>
                       </Col>
                       <Col className="col" lg={6}>
-                        <select className="form-control" name="contactSubject">
-                          <option disabled value="">Select Subject</option>
-                          <option value="Services">Services</option>
+                        <select className="form-control" name="contactSubject" required>
+                          <option selected disabled value="">Select Service</option>
                           <option value="Earnings">Earning Opportunity </option>
                           <option value="Website">Website Issue</option>
                           <option value="Others">Others</option>
@@ -63,7 +62,7 @@ const Contact = (props) => {
                         <p></p>
                       </Col>
                       <Col xs={12} sm={12} >
-                        <textarea className="contact-textarea form-control" placeholder="Message" name="contactDesc" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }}></textarea>
+                        <textarea className="contact-textarea form-control" placeholder="Message (upto 250 words)" name="contactDesc" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }} required />
                         <p></p>
                       </Col>
                       <Col xs={12}>

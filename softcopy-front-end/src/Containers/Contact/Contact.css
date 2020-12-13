@@ -69,6 +69,18 @@
     width: calc(100% - 30px);
 }
 
+/* Chrome, Safari, Edge, Opera */
+.contact-section form input::-webkit-outer-spin-button,
+.contact-section form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.contact-section form input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .contact-section form input, .contact-section form select, .contact-section form textarea {
     width: 100%;
     height: 55px;
