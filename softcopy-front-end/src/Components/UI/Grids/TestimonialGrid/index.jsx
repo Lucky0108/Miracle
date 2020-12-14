@@ -12,7 +12,9 @@ const TestimonialGrid = (props) => {
                 <div className="testimonial-img">
                     <img src={props.imgSrc}  alt={props.name} />
                 </div>
+                <div className="quote">
                 <p>{props.para}</p>
+                </div>
                 <div className="info">
                     <h5>{props.name} </h5>
                     <p>{props.desig} </p>

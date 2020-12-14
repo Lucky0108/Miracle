@@ -25,6 +25,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Action Import
 import { isLoggedin } from './actions';
+import FAQ from './Containers/FAQ';
+import Testimonials from './Containers/Testimonial';
 
 
 function App() {
@@ -58,6 +60,8 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/team' component={Team} />
+        <Route exact path="/faq" component={FAQ} />
+        <Route exact path="/testimonial" component={Testimonials} />
         <Route component={ErrorPage} />
       </Switch>
       <Footer />

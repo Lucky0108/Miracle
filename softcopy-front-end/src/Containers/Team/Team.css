@@ -3,7 +3,8 @@
 }
 
 .team-section .team-grids .grid {
-    width: calc(25% - 30px);
+    /* width: calc(25% - 30px); */
+    width: calc(50% - 220px);
     float: left;
     margin: 0 15px 30px;
     text-align: center;
@@ -40,6 +41,10 @@
     margin-left: 15px;
 }
 
+.team-grids .grid .fa::before {
+    font-size: 1rem;
+}
+
 @media(max-width: 550px) {
     .team-section .team-grids .grid {
         width: calc(100% - 15px) !important;
@@ -70,5 +75,17 @@
     .team-section .team-grids .grid {
         width: calc(50% - 30px);
         margin: 0 15px 60px;
+    }
+
+    /* In case of 3 Team Member */
+    .team-section .team-grids .grid:nth-child(3) {
+        width: 100%;
+    }
+}
+
+/* In case of 3 Team Member */
+@media (min-width:991px) and (max-width: 1200px){
+    .team-section .team-grids .grid {
+        width: calc(50% - 190px);
     }
 }

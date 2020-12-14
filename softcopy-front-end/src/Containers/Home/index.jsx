@@ -8,9 +8,9 @@ import Slider from "react-slick";
 // Components Import
 import MainSection3Card from '../../Components/UI/Home/MainSection3Card'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
-import HomeServiceGrid from '../../Components/UI/Home/HomeServiceGrids'
-import MainSection4Grid from '../../Components/UI/Home/MainSection4Grid'
-import TestimonialGrid from '../../Components/UI/Home/TestimonialGrid';
+import HomeServiceGrid from '../../Components/UI/Grids/HomeServiceGrids'
+import MainSection4Grid from '../../Components/UI/Grids/MainSection4Grid'
+import TestimonialGrid from '../../Components/UI/Grids/TestimonialGrid';
 
 // Css Import
 import './Home.css'
@@ -188,7 +188,7 @@ const Home = (props) => {
         </section>
 
         {/* Testimonial Section */}
-        <section className="section-padding testimonial-section home-section-5">
+        <section className="section-padding testimonial-home-section home-section-5">
             <Container>
               <Row>
                 <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">

@@ -6,6 +6,7 @@ import ContactInfoList from '../../Components/UI/ContactInfoList'
 import { useDispatch, useSelector } from 'react-redux'
 import { queryAction } from '../../actions/query.action'
 import { toastr } from 'react-redux-toastr'
+import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 
 /**
 * @author
@@ -31,15 +32,15 @@ const Contact = (props) => {
   }
 
   useEffect(() => {
-    if(query.loading) {
+    if (query.loading) {
       toastr.info("Loading...")
       query.loading = "";
     }
 
-    if(query.message) {
+    if (query.message) {
       toastr.success("Success", query.message)
       query.message = "";
-    } else if(query.error) {
+    } else if (query.error) {
       toastr.error("Error", query.error)
       query.error = "";
     }
@@ -56,20 +57,16 @@ const Contact = (props) => {
                 <ul>
 
                   <ContactInfoList iconName="fa-home" heading="Head Office" para="Near Kanota, Agra Road, Jaipur, Rajasthan 303012" />
-                  <ContactInfoList iconName="fa-envelope-o" heading="Email Address" para={ <a href="mailto:softcopyofficialteam@gmail.com"> softcopyofficialteam@gmail.com </a>} />
+                  <ContactInfoList iconName="fa-envelope-o" heading="Email Address" para={<a href="mailto:softcopyofficialteam@gmail.com"> softcopyofficialteam@gmail.com </a>} />
                   <ContactInfoList iconName="fa-phone" heading="Telephone" para={<><p><a href="tel:+919891433344">+91 9891433344</a></p> <p><a href="tel:+916375807780">+91 6375807780 </a> </p></>} />
                   <ContactInfoList iconName="fa-clock-o" heading="Office Hour" para="Mon-Sun: 9:00 Am – 10:00 Pm" />
-            
+
                 </ul>
               </div>
             </Col>
             <Col lg={8} xs={12}>
 
-              <div className="contact-section-title">
-                <span>Let's get in touch</span>
-                <h2>Need Consultancy, Let's get in touch Now!</h2>
-                <p>We are available here 24*7 for you to reach out to us incase you have any queries or any doubts you have regading our services or our website. We'll resolve all of your queries. </p>
-              </div>
+              <HomeHeading class="contact-section-title" span="Let's get in touch" h2="Need Consultancy, Let's get in touch Now!" p="We are available here 24*7 for you to reach out to us incase you have any queries or any doubts you have regading our services or our website. We'll resolve all of your queries. " />
 
               <div className="contact-form">
                 <form onSubmit={querySubmit}>

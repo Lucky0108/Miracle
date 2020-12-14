@@ -45,6 +45,7 @@
 }
 
 .contact-section-title {
+    text-align: left !important;
     margin-bottom: 50px;
 }
 
@@ -53,7 +54,6 @@
     background-color: rgba(252,110,54,.1);
     padding: 5px 15px;
     border-radius: 50px;
-    margin-bottom: 10px;
 }
 
 .contact-section form {
@@ -119,10 +119,6 @@
     .contact-info {
         margin-bottom: 60px !important;
         margin-top: 50px !important;
-    }
-
-    .contact-section-title > h2 {
-        font-size: 2rem;
     }
 
 }

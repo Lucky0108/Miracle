@@ -1,6 +1,7 @@
 /* FOOTER SECTION */
 .site-footer{
     background-color: #1d41aa;
+    position: relative;
   }
 
   .site-footer p {
