@@ -1,15 +1,15 @@
 import axios from "../helpers/axios"
-import { contactConstants } from "./constants"
+import { queryConstants } from "./constants"
 
-export const contactAction = (details) => {
+export const queryAction = (details) => {
     return (dispatch) => {
 
-        dispatch({ type: contactConstants.CONTACT_REQUEST })
-        const res = axios.post('/contact', { ...details })
+        dispatch({ type: queryConstants.QUERY_REQUEST })
+        const res = axios.post('/query', { ...details })
 
         res.then(response => {
             if (response.status === 201) {
-            dispatch({ type: contactConstants.CONTACT_SUCCESS,
+            dispatch({ type: queryConstants.QUERY_SUCCESS,
                 payload:{ message: response.data.message } 
             })
             }
@@ -18,7 +18,7 @@ export const contactAction = (details) => {
         res.catch((error) => {
             if(error.response) {
                 if(error.response.status === 400) {
-                    dispatch({ type: contactConstants.CONTACT_FAILURE,
+                    dispatch({ type: queryConstants.QUERY_FAILURE,
                         payload: { message: error.response.data.message || error.response.data.error }
                     })
                 }

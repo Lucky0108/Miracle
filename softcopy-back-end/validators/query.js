@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator');
 
-exports.validateContact = [
+exports.validateQuery = [
     check('name')
     .notEmpty()
     .isLength({min: 2, max:20})
@@ -16,6 +16,6 @@ exports.validateContact = [
     .withMessage("Please Select A service"),
     check("message")
     .notEmpty()
-    .isLength({min: 40, max:250})
-    .withMessage("Please Enter Your Message (40-250 Words)")
+    .isLength({min: 40, max:500})
+    .withMessage("Please Enter Your Message (40-500 Words)")
 ]

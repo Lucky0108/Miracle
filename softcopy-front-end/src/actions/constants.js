@@ -19,8 +19,8 @@ export const newsletterConstants = {
     NEWSLETTER_FAILURE: "NEWSLETTER_FAILURE"
 }
 
-export const contactConstants = {
-    CONTACT_REQUEST: "CONTACT_REQUEST",
-    CONTACT_SUCCESS: "CONTACT_SUCCESS",
-    CONTACT_FAILURE: "CONTACT_FAILURE"
+export const queryConstants = {
+    QUERY_REQUEST: "QUERY_REQUEST",
+    QUERY_SUCCESS: "QUERY_SUCCESS",
+    QUERY_FAILURE: "QUERY_FAILURE"
 }

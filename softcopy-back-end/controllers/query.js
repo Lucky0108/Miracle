@@ -1,9 +1,9 @@
-const Contact = require('../models/contact')
+const Query = require('../models/query')
 
-exports.sendContactMessage = (req,res) => {
-    const _newContact = new Contact(req.body)
+exports.sendQueryMessage = (req,res) => {
+    const _newQuery = new Query(req.body)
 
-    _newContact.save((err,data) => {
+    _newQuery.save((err,data) => {
         if(err) return res.status(400).json({ message: "Something Went Wrong! Try Again Later!", error: err })
         if(data) {
             return res.status(201).json({ message:"Your Request Is Succesfully Registered!", data: data })
@@ -11,8 +11,8 @@ exports.sendContactMessage = (req,res) => {
     })
 }
 
-exports.getAllContactMessages = (req,res) => {
-    Contact.find({})
+exports.getAllQueryMessages = (req,res) => {
+    Query.find({})
     .exec((err,result) => {
         if(err) return res.status(400).json({ message: err })
         if(result) {

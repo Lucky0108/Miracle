@@ -4,7 +4,7 @@ import PageTitle from '../../Components/UI/PageTitle'
 import './Contact.css'
 import ContactInfoList from '../../Components/UI/ContactInfoList'
 import { useDispatch, useSelector } from 'react-redux'
-import { contactAction } from '../../actions/contact.action'
+import { queryAction } from '../../actions/query.action'
 import { toastr } from 'react-redux-toastr'
 
 /**
@@ -15,7 +15,7 @@ import { toastr } from 'react-redux-toastr'
 const Contact = (props) => {
 
   const dispatch = useDispatch();
-  const contact = useSelector(state => state.contact)
+  const query = useSelector(state => state.query)
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,27 +23,27 @@ const Contact = (props) => {
   const [service, setService] = useState('');
   const [message, setMessage] = useState('');
 
-  const contactSubmit = (e) => {
+  const querySubmit = (e) => {
     e.preventDefault();
 
     const details = { name, phone, email, service, message }
-    dispatch(contactAction(details));
+    dispatch(queryAction(details));
   }
 
   useEffect(() => {
-    if(contact.loading) {
+    if(query.loading) {
       toastr.info("Loading...")
-      contact.loading = "";
+      query.loading = "";
     }
 
-    if(contact.message) {
-      toastr.success("Success", contact.message)
-      contact.message = "";
-    } else if(contact.error) {
-      toastr.error("Error", contact.error)
-      contact.error = "";
+    if(query.message) {
+      toastr.success("Success", query.message)
+      query.message = "";
+    } else if(query.error) {
+      toastr.error("Error", query.error)
+      query.error = "";
     }
-  }, [contact, contact.loading, contact.message, contact.error])
+  }, [query, query.loading, query.message, query.error])
 
   return (
     <>
@@ -72,7 +72,7 @@ const Contact = (props) => {
               </div>
 
               <div className="contact-form">
-                <form onSubmit={contactSubmit}>
+                <form onSubmit={querySubmit}>
                   <div className="contact-form form-style">
                     <Row>
                       <Col lg={6} xs={12}>

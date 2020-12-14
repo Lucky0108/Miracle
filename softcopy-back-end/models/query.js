@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const contactSchema = new mongoose.Schema({
+const QuerySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -30,4 +30,4 @@ const contactSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("Queries", contactSchema)
+module.exports = mongoose.model("Queries", QuerySchema)

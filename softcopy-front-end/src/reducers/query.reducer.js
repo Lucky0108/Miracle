@@ -1,4 +1,4 @@
-import { contactConstants } from "../actions/constants"
+import { queryConstants } from "../actions/constants"
 
 /* eslint-disable import/no-anonymous-default-export */
 const initState = {
@@ -9,14 +9,14 @@ const initState = {
 
 export default (state = initState, action) => {
     switch(action.type) {
-        case contactConstants.CONTACT_REQUEST: 
+        case queryConstants.QUERY_REQUEST: 
             state = {
                 ...state,
                 loading: true
             }
         break;
 
-        case contactConstants.CONTACT_SUCCESS:
+        case queryConstants.QUERY_SUCCESS:
             state = {
                 ...state,
                 message: action.payload.message,
@@ -24,7 +24,7 @@ export default (state = initState, action) => {
             }
         break;
 
-        case contactConstants.CONTACT_FAILURE:
+        case queryConstants.QUERY_FAILURE:
             state = {
                 ...initState,
                 error: action.payload.message,
