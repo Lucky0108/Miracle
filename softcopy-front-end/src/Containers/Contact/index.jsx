@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import './Contact.css'
 import ContactInfoList from '../../Components/UI/ContactInfoList'
+import { useDispatch, useSelector } from 'react-redux'
+import { contactAction } from '../../actions/contact.action'
+import { toastr } from 'react-redux-toastr'
 
 /**
 * @author
@@ -10,6 +13,38 @@ import ContactInfoList from '../../Components/UI/ContactInfoList'
 **/
 
 const Contact = (props) => {
+
+  const dispatch = useDispatch();
+  const contact = useSelector(state => state.contact)
+
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [service, setService] = useState('');
+  const [message, setMessage] = useState('');
+
+  const contactSubmit = (e) => {
+    e.preventDefault();
+
+    const details = { name, phone, email, service, message }
+    dispatch(contactAction(details));
+  }
+
+  useEffect(() => {
+    if(contact.loading) {
+      toastr.info("Loading...")
+      contact.loading = "";
+    }
+
+    if(contact.message) {
+      toastr.success("Success", contact.message)
+      contact.message = "";
+    } else if(contact.error) {
+      toastr.error("Error", contact.error)
+      contact.error = "";
+    }
+  }, [contact, contact.loading, contact.message, contact.error])
+
   return (
     <>
       <PageTitle title="Contact Us" para="Confused About Something Or Having A Query? Don't Hesitate, Just Reach Out To Us And We'll Help You Out With All Of Your Problems." />
@@ -37,23 +72,23 @@ const Contact = (props) => {
               </div>
 
               <div className="contact-form">
-                <form>
+                <form onSubmit={contactSubmit}>
                   <div className="contact-form form-style">
                     <Row>
                       <Col lg={6} xs={12}>
-                        <input className="form-control" type="text" placeholder="Your Name" id="contactName" name="contactName" value="" required />
+                        <input className="form-control" type="text" placeholder="Your Name" id="contactName" name="contactName" value={name} onChange={e => setName(e.target.value)} required />
                         <p></p>
                       </Col>
                       <Col className="col" lg={6}>
-                        <input className="form-control" type="number" placeholder="Phone (10 Digits without country code)" id="contactNumber" name="contactNumber" value="" />
+                        <input className="form-control" type="number" placeholder="Phone (10 Digits without country code)" id="contactNumber" name="contactNumber" value={phone} onChange={e => setPhone(e.target.value)} />
                         <p></p>
                       </Col>
                       <Col lg={6} xs={12}>
-                        <input className="form-control" type="email" placeholder="Your Email" id="contactEmail" name="contactEmail" value="" required />
+                        <input className="form-control" type="email" placeholder="Your Email" id="contactEmail" name="contactEmail" value={email} onChange={e => setEmail(e.target.value)} required />
                         <p></p>
                       </Col>
                       <Col className="col" lg={6}>
-                        <select className="form-control" name="contactSubject" required>
+                        <select className="form-control" name="contactSubject" value={service} onChange={e => setService(e.target.value)} required>
                           <option selected disabled value="">Select Service</option>
                           <option value="Earnings">Earning Opportunity </option>
                           <option value="Website">Website Issue</option>
@@ -62,7 +97,7 @@ const Contact = (props) => {
                         <p></p>
                       </Col>
                       <Col xs={12} sm={12} >
-                        <textarea className="contact-textarea form-control" placeholder="Message (upto 250 words)" name="contactDesc" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }} required />
+                        <textarea className="contact-textarea form-control" placeholder="Message (upto 250 words)" name="contactDesc" minLength="20" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }} value={message} onChange={e => setMessage(e.target.value)} required />
                         <p></p>
                       </Col>
                       <Col xs={12}>

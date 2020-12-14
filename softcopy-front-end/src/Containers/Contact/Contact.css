@@ -96,7 +96,7 @@
     border-color: #FC6E36!important;
 }
 
-.contact-section form input::placeholder, .contact-section form textarea::placeholder, .contact-section form select { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.contact-section form input::placeholder, .contact-section form textarea::placeholder, .contact-section form select{ /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #9D9C9C !important;
     opacity: 1 !important; /* Firefox */
 }

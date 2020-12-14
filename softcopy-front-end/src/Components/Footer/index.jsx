@@ -125,11 +125,9 @@ const Footer = (props) => {
                                     <form onSubmit={onNewsSubmit}>
                                         <div className="newsletter-input-div">
                                             <input type="email" className="form-control newsletter-input" placeholder="Email Address *" value={email} onChange={e => setEmail(e.target.value)} required />
-                                            {/* <div className="submit-button-div"> */}
                                             <button type="submit">
                                                 <i className="fa fa-envelope-o"></i>
                                             </button>
-                                        {/* </div>                                        */}
                                         </div>
                                     </form>
                                 </div>

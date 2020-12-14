@@ -16,5 +16,6 @@ exports.validateContact = [
     .withMessage("Please Select A service"),
     check("message")
     .notEmpty()
-    .withMessage("Please Enter Your Message")
+    .isLength({min: 40, max:250})
+    .withMessage("Please Enter Your Message (40-250 Words)")
 ]
