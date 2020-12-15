@@ -8,7 +8,7 @@ import Slider from "react-slick";
 // Components Import
 import MainSection3Card from '../../Components/UI/Home/MainSection3Card'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
-import HomeServiceGrid from '../../Components/UI/Grids/HomeServiceGrids'
+import ServiceGrid from '../../Components/UI/Grids/ServiceGrid'
 import MainSection4Grid from '../../Components/UI/Grids/MainSection4Grid'
 import TestimonialGrid from '../../Components/UI/Grids/TestimonialGrid';
 
@@ -18,7 +18,8 @@ import './Home.css'
 // Images Import
 import sec1 from '../../img/cloud.png'
 import home2img from '../../img/home-section-2.jpg'
-import vidImg from '../../img/video-img.jpg'
+// import vidImg from '../../img/video-img.jpg'
+import vidImg from '../../img/customer_service.svg'
 import port1 from '../../img/img-1.jpg'
 import port2 from '../../img/img-2.jpg'
 import port3 from '../../img/img-3.jpg'
@@ -54,7 +55,7 @@ const Home = (props) => {
               <Row>
                 <Col md={8}>
                   <div className="slide-heading">
-                    <h2>Soft Copy</h2>
+                    <h2>Miracle Solutions</h2>
                     <span>Best Place To Work</span>
                   </div>
                   <div className="slide-text">
@@ -75,7 +76,13 @@ const Home = (props) => {
         <section className="section-padding about-us-section home-section-1">
             <Container>
               <Row>
-                <HomeServiceGrid lg={6} xs={12} completeGridsClass="feature-grids clearfix" gridClass="grid" extraFontClass="font-icon" />
+                <Col lg={6} xs={12}>
+                <div className="feature-grids clearfix">
+                <ServiceGrid gridClass="grid" FontClass="fa fa-code font-icon" heading="Web Development" para="Get Yourself a Professional Website Developed." />
+                <ServiceGrid gridClass="grid" FontClass="fa fa-users font-icon" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
+                <ServiceGrid gridClass="grid" FontClass="fa fa-star font-icon" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
+               </div>
+                </Col>
                 <Col className="col" lg={6} xs={12}>
                   <HomeHeading class="home-section-1-heading" span="01. About Us" h2="Build Your Business with Our All In One Agency" />
                   <div className="home-section-1-details">
@@ -106,13 +113,19 @@ const Home = (props) => {
                     <img src={home2img} alt="" className="home-section-2-img" />
                   </div>
                 </Col>
-                <HomeServiceGrid lg={6} xs={12} md={6} sm={12} extraFontClass="" completeGridsClass="about-us-grids" iconDiv="icon" gridClass="about-grid" />
+                <Col lg={6} xs={12} md={6} sm={12}>
+                  <div className="about-us-grids clearfix">
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-code" heading="Web Development" para="Get Yourself a Professional Website Developed." />
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-users" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-star" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
+                  </div>
+                </Col>
               </Row>
             </Container>
         </section>
 
         {/* Services Section */}
-        <section className="section-padding services-section home-section-3">
+        <section className="section-padding services-home-section home-section-3">
             <Container>
               <Row>
                 <Col className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
@@ -164,11 +177,15 @@ const Home = (props) => {
           <Container>
             <Row>
               <Col className="col-xs-12">
-                <div className="img-holder">
+                <div className="video-img-holder img-holder">
                   <img src={vidImg} alt="" />
                   <div className="video-btn">
                     <div>
-                      <ModalVideo openMessage="You Just Opened Our Special Video" dismissBtnMessage="Close the video by clicking here" channel='youtube' autoplay={1} controls={0} showinfo="0" mute={1} isOpen={isOpen} videoId="vbYB4rddM-8" onClose={() => setOpen(false)} />
+                      <ModalVideo openMessage="You Just Opened Our Special Video" dismissBtnMessage="Close the video by clicking here" channel='youtube' autoplay={1} controls={0} showinfo="0" mute={1} isOpen={isOpen} 
+                        // videoId="vbYB4rddM-8"
+                        videoId="TVShZg9X5V0" 
+                        onClose={() => setOpen(false)} 
+                      />
                     </div>
                     <button onClick={() => setOpen(true)} className="wrap">
                       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMjk0Ljg0MyAyOTQuODQzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOTQuODQzIDI5NC44NDM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGQ9Ik0yNzguNTI3LDc5Ljk0NmMtMTAuMzI0LTIwLjAyMy0yNS4zOC0zNy43MDQtNDMuNTM4LTUxLjEzMmMtMi42NjUtMS45Ny02LjQyMS0xLjQwNy04LjM5MiwxLjI1N3MtMS40MDcsNi40MjEsMS4yNTcsOC4zOTINCgkJYzE2LjY4NywxMi4zNCwzMC41MjEsMjguNTg2LDQwLjAwOCw0Ni45ODNjOS45NCwxOS4yNzcsMTQuOTgsNDAuMTI4LDE0Ljk4LDYxLjk3NmMwLDc0LjY3MS02MC43NSwxMzUuNDIxLTEzNS40MjEsMTM1LjQyMQ0KCQlTMTIsMjIyLjA5MywxMiwxNDcuNDIxUzcyLjc1LDEyLDE0Ny40MjEsMTJjMy4zMTMsMCw2LTIuNjg3LDYtNnMtMi42ODctNi02LTZDNjYuMTMzLDAsMCw2Ni4xMzMsMCwxNDcuNDIxDQoJCXM2Ni4xMzMsMTQ3LjQyMSwxNDcuNDIxLDE0Ny40MjFzMTQ3LjQyMS02Ni4xMzMsMTQ3LjQyMS0xNDcuNDIxQzI5NC44NDIsMTIzLjk3NywyODkuMjAxLDEwMC42NDUsMjc4LjUyNyw3OS45NDZ6Ii8+DQoJPHBhdGggZD0iTTEwOS42OTksNzguOTY5Yy0xLjg3NiwxLjA2Ny0zLjAzNSwzLjA1OS0zLjAzNSw1LjIxNnYxMzEuNjc0YzAsMy4zMTQsMi42ODcsNiw2LDZzNi0yLjY4Niw2LTZWOTQuNzRsODguODMzLDUyLjg4Mw0KCQlsLTY1LjMyNCw0Mi4wODdjLTIuNzg1LDEuNzk1LTMuNTg5LDUuNTA4LTEuNzk0LDguMjkzYzEuNzk2LDIuNzg2LDUuNTA4LDMuNTksOC4yOTQsMS43OTRsNzMuNDY1LTQ3LjMzMw0KCQljMS43NDYtMS4xMjUsMi43ODYtMy4wNzMsMi43NDktNS4xNWMtMC4wMzctMi4wNzctMS4xNDUtMy45ODctMi45My01LjA1TDExNS43MzMsNzkuMDI5DQoJCUMxMTMuODc3LDc3LjkyNiwxMTEuNTc1LDc3LjkwMiwxMDkuNjk5LDc4Ljk2OXoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" alt="" />
@@ -204,7 +221,7 @@ const Home = (props) => {
                         <TestimonialGrid 
                           // imgSrc="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkZFODVCQ0U0RTEzMTFFQTg5QzRDQTBBRDE3NENGN0YiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkZFODVCQ0Y0RTEzMTFFQTg5QzRDQTBBRDE3NENGN0YiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RkU4NUJDQzRFMTMxMUVBODlDNENBMEFEMTc0Q0Y3RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RkU4NUJDRDRFMTMxMUVBODlDNENBMEFEMTc0Q0Y3RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYI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" 
                           imgSrc={test2}
-                          para='"This is my testimonial for Softcopy Website Which has the best service and the very best customer service and great team members who are really nice"' 
+                          para='"This is my testimonial for Miracle Website Which has the best service and the very best customer service and great team members who are really nice"' 
                           name="Lakshay Yadav" 
                           desig="Happy Client"  
                         />

@@ -7,7 +7,7 @@ body {
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif !important;
-  overflow-x: hidden !important;
+  font-family: 80% !important;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -39,6 +39,10 @@ a:hover {
 img {
   max-width: 100%;
 }
+
+
+
+/* .slick-list, .slick-track { touch-action:pan-y; } */
 
 .optionDiv {
   height: 100vh;
@@ -83,19 +87,20 @@ img {
   padding: 100px 0;
 }
 
+@media (max-width: 577px) {
+  .slick-initialized {
+    overflow: hidden;
+  }
+
+  .slick-track {
+    padding-bottom: 50px;
+  }
+}
+
 @media (max-width: 991px){
   
   body {
     font-size: 90% !important;
-  }
-
-  .slide-text > p {
-    font-size: 1.002rem;
-    margin-bottom: 40px;
-  }
-
-  .slide-heading > h2{
-    font-size: 3.2rem !important;
   }
 
   .widget {

@@ -130,7 +130,7 @@
     color: white !important;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .widget {
       margin-top: 30px;
     }

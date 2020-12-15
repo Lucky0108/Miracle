@@ -36,10 +36,6 @@
     text-align: left;
 }
 
-.testimonial-section .slick-dots {
-    bottom: -31px;
-}
-
 .testimonial-section .slick-dots li {
     margin: 0 10px;
 }
@@ -77,5 +73,11 @@
 @media (max-width: 991px) {
     .testimonial-section .testimonials-area{
         margin-top: 50px;
+    }
+}
+
+@media (max-width: 577px) {
+    .testimonial-section .slick-dots {
+        bottom: 10px;
     }
 }

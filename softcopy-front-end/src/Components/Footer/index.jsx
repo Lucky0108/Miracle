@@ -27,7 +27,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Company List 2 having links and Respective Name
     const FooterCompanyList2 = [
-        ["/policy", "Privacy & Policy"], ["/testimonial", "Testimonials"], ["/news", "News"], ["/faq", "FAQ"]
+        ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/news", "News"], ["/faq", "FAQ"]
     ]
 
     // 2-D Array for Footer Service List  having links and Service Name
@@ -88,7 +88,7 @@ const Footer = (props) => {
                         <Row>
                             <Col lg={3} md={6} sm={12} xs={12}>
                                 <div className="footer-about-section">
-                                    <h3 style={{ marginTop: '-12px' }} className="site-brand widget-title">Softcopy<span style={{ color: '#FC6E36', fontSize: '2.5rem' }}>.</span></h3>
+                                    <h3 style={{ marginTop: '-12px' }} className="site-brand widget-title">Miracle<span style={{ color: '#FC6E36', fontSize: '2.5rem' }}>.</span></h3>
                                     <p>Anand International College of Engineering, Near Kanota, Agra Road, Jaipur, Rajasthan 303012</p>
                                     <div className="social-icons">
                                         <ul>
@@ -145,8 +145,8 @@ const Footer = (props) => {
                                </p>
                                 <div className="extra-links">
                                     <ul>
-                                        <li><Link to="/about">Privacy &amp; Policy</Link></li>
-                                        <li><Link to="/about">Terms</Link></li>
+                                        <li><Link to="/policy">Privacy Policy</Link></li>
+                                        <li><Link to="/terms">Terms</Link></li>
                                         <li><Link to="/about">About Us</Link></li>
                                         <li><Link to="/faq">FAQ</Link></li>
                                     </ul>

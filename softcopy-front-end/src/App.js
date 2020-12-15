@@ -12,10 +12,13 @@ import Home from './Containers/Home';
 import Contact from './Containers/Contact'
 import About from './Containers/About'
 import Footer from './Components/Footer';
-import Login from './Containers/Login';
-import Signup from './Containers/Signup';
+// import Login from './Containers/Login';
+// import Signup from './Containers/Signup';
 import ErrorPage from './Containers/404';
 import Team from './Containers/Team';
+import FAQ from './Containers/FAQ';
+import Testimonials from './Containers/Testimonial';
+import Policy from './Containers/Policy';
 
 // CSS Imports for packages
 import 'react-redux-toastr/src/styles/index.scss'
@@ -25,8 +28,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Action Import
 import { isLoggedin } from './actions';
-import FAQ from './Containers/FAQ';
-import Testimonials from './Containers/Testimonial';
+import Terms from './Containers/Terms';
+
 
 
 function App() {
@@ -57,11 +60,13 @@ function App() {
         <Route exact path='/service' component={Services} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
+        {/* <Route exact path='/login' component={Login} /> */}
+        {/* <Route exact path='/signup' component={Signup} /> */}
         <Route exact path='/team' component={Team} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/testimonial" component={Testimonials} />
+        <Route exact path="/policy" component={Policy} />
+        <Route exact path="/terms" component={Terms} />
         <Route component={ErrorPage} />
       </Switch>
       <Footer />
