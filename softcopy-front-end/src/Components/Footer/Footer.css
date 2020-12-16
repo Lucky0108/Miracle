@@ -110,6 +110,10 @@
     outline: none !important;
   }
 
+  .newsletter-input-div > button i:hover {
+    color: #FC6E36;
+  } 
+
   .newsletter-input:focus {
     background: transparent !important;
     color: #fff !important;

@@ -75,7 +75,7 @@ img {
   
 }
 
-.activeNavLink, .fa:hover, .navLink:hover, .btn-theme, .upper-footer  ul > li > a:hover {
+.activeNavLink, .navLink:hover, .btn-theme, .upper-footer  ul > li > a:hover {
   color: #FC6E36;
 }
 

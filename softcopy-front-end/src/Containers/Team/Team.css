@@ -41,8 +41,12 @@
     margin-left: 15px;
 }
 
-.team-grids .grid .fa::before {
+.team-grids .grid .fab::before {
     font-size: 1rem;
+}
+
+.team-grids .grid .fab:hover {
+    color: #fc6e36;
 }
 
 @media(max-width: 550px) {

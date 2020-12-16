@@ -24,7 +24,7 @@ const Policy = (props) => {
 
                             <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
 
-                            <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Soft Copy. This policy is not applicable to any information collected offline or via channels other than this website. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator</a> and the <a href="https://www.privacypolicyonline.com">Free Privacy Policy Generator</a>.</p>
+                            <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in Soft Copy. This policy is not applicable to any information collected offline or via channels other than this website. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info" target="_blank" rel="noopener noreferrer">Privacy Policy Generator</a> and the <a href="https://www.privacypolicyonline.com" target="_blank" rel="noopener noreferrer">Free Privacy Policy Generator</a>.</p>
 
                             <p className="h2">Consent</p>
 
@@ -58,11 +58,11 @@ const Policy = (props) => {
 
                             <p>Like any other website, Soft Copy uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
 
-                            <p>For more general information on cookies, please read <a href="https://www.cookieconsent.com/what-are-cookies/">"What Are Cookies" from Cookie Consent</a>.</p>
+                            <p>For more general information on cookies, please read <a href="https://www.cookieconsent.com/what-are-cookies/" target="_blank" rel="noopener noreferrer">"What Are Cookies" from Cookie Consent</a>.</p>
 
                             <h2>Google DoubleClick DART Cookie</h2>
 
-                            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
+                            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
 
                             <h2>Our Advertising Partners</h2>
 
@@ -71,7 +71,7 @@ const Policy = (props) => {
                             <ul>
                                 <li>
                                     <p>Google</p>
-                                    <p><a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
+                                    <p><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
                                 </li>
                             </ul>
 

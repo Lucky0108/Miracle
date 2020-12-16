@@ -16,7 +16,6 @@ import TestimonialGrid from '../../Components/UI/Grids/TestimonialGrid';
 import './Home.css'
 
 // Images Import
-import sec1 from '../../img/cloud.png'
 import home2img from '../../img/home-section-2.jpg'
 // import vidImg from '../../img/video-img.jpg'
 import vidImg from '../../img/customer_service.svg'
@@ -28,6 +27,9 @@ import port5 from '../../img/img-5.jpg'
 import port6 from '../../img/img-6.jpg'
 import test1 from '../../img/f1.jpg'
 import test2 from '../../img/f2.jpg'
+// import heroVec from '../../img/10140.jpg'
+// import heroVec from '../../img/hero-vec.png'
+import heroVec from '../../img/hero.png'
 
 /**
 * @author
@@ -50,7 +52,6 @@ const Home = (props) => {
 
         {/* Hero Section */}
         <section className="hero-section">
-          <div className="home-section-0" style={{ background: `url(${sec1}) 80px 125px/auto no-repeat local` }}>
             <div className="container hero-container">
               <Row>
                 <Col md={8}>
@@ -69,18 +70,20 @@ const Home = (props) => {
                 </Col>
               </Row>
             </div>
-          </div>
+            <div className="hero-vec">
+              <img src={heroVec} alt="Hero Vector" />
+            </div>
         </section>
 
         {/* About Us Section */}
-        <section className="section-padding about-us-section home-section-1">
+        <section className="section-padding about-us-home-section home-section-1">
             <Container>
               <Row>
                 <Col lg={6} xs={12}>
                 <div className="feature-grids clearfix">
-                <ServiceGrid gridClass="grid" FontClass="fa fa-code font-icon" heading="Web Development" para="Get Yourself a Professional Website Developed." />
-                <ServiceGrid gridClass="grid" FontClass="fa fa-users font-icon" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
-                <ServiceGrid gridClass="grid" FontClass="fa fa-star font-icon" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
+                <ServiceGrid gridClass="grid" FontClass="fas fa-laptop-code font-icon" heading="Web Development" para="Get Yourself a Professional Website Developed." />
+                <ServiceGrid gridClass="grid" FontClass="fas fa-users font-icon" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
+                <ServiceGrid gridClass="grid" FontClass="fas fa-search-dollar font-icon" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
                </div>
                 </Col>
                 <Col className="col" lg={6} xs={12}>
@@ -115,9 +118,9 @@ const Home = (props) => {
                 </Col>
                 <Col lg={6} xs={12} md={6} sm={12}>
                   <div className="about-us-grids clearfix">
-                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-code" heading="Web Development" para="Get Yourself a Professional Website Developed." />
-                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-users" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
-                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fa fa-star" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fas fa-laptop-code" heading="Web Development" para="Get Yourself a Professional Website Developed." />
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fas fa-users" heading="Marketing" para="Earn Some Money With Us Doing Marketing Campaigns." />
+                  <ServiceGrid iconDiv="icon" gridClass="about-grid" FontClass="fas fa-search-dollar" heading="SEO Optimization" para="List Your Website In Top Pages With An Expert." />
                   </div>
                 </Col>
               </Row>
@@ -135,14 +138,14 @@ const Home = (props) => {
               <Row>
                 <div className="home-section-3-grids">
                   <MainSection3Card icon="fa-code" iconBg="#f2dcd3" extraClass="card1" title="Web Development" para="A Professional Website Developed For Your Buisness." />
-                  <MainSection3Card icon="fa-file-text-o" iconBg="#d4d6f8" extraClass="card2" title="SEO Optimization" para="List Your Website Aming The Top Results Of Search Engine." />
-                  <MainSection3Card icon="fa-envelope-o" iconBg="#c2dfcd" extraClass="card3" title="Marketing Campaigns" para="Make Money With Us In Our Marketing Campaigns." />
+                  <MainSection3Card icon="fa-search" iconBg="#d4d6f8" extraClass="card2" title="SEO Optimization" para="List Your Website Aming The Top Results Of Search Engine." />
+                  <MainSection3Card icon="fa-credit-card" iconBg="#c2dfcd" extraClass="card3" title="GST & ITR Solutions" para="Make Money With Us In Our Marketing Campaigns." />
                 </div>
               </Row>
               <Row>
                 <div className="home-section-3-grids">
-                  <MainSection3Card icon="fa-thumbs-o-up" iconBg="#e0e8c9" extraClass="card4" title="Social Media Managing" para="Let Us Increase Your Reach On Your Social Media Handles." />
-                  <MainSection3Card icon="fa-star-o" iconBg="#f2dcd3" extraClass="card5" title="PPC Marketing" para="Get Paid For Doing Some PPC Marketing Campaign." />
+                  <MainSection3Card icon="fa-thumbs-up" iconBg="#e0e8c9" extraClass="card4" title="Social Media Managing" para="Let Us Increase Your Reach On Your Social Media Handles." />
+                  <MainSection3Card icon="fa-star" iconBg="#f2dcd3" extraClass="card5" title="PPC Marketing" para="Get Paid For Doing Some PPC Marketing Campaign." />
                   <MainSection3Card icon="fa-link" iconBg="#efc9d5" extraClass="card6" title="Link Building" para="Get Yourself A Better Search Engine Ranking." />
                 </div>
               </Row>

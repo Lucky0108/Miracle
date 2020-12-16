@@ -16,8 +16,8 @@ import {toastr} from 'react-redux-toastr'
 const Footer = (props) => {
     // 2-D Array for Footer Icons having links and icon names
     const FooterIconListItems = [
-        ["https://facebook.com/softcopy_official", "fa-facebook"], ["https://twitter.com/softcopy_official", "fa-twitter"],
-        ["https://instagram.com/softcopy_official", "fa-instagram"], ["https://linkedin.com/softcopy_official", "fa-linkedin"]
+        ["https://facebook.com/softcopy_official", "fa-facebook-f"], ["https://twitter.com/softcopy_official", "fa-twitter"],
+        ["https://instagram.com/softcopy_official", "fa-instagram"], ["https://linkedin.com/softcopy_official", "fa-linkedin-in"]
     ]
 
     // 2-D Array for Footer Company List having links and Respective Name
@@ -37,7 +37,7 @@ const Footer = (props) => {
 
     //  Function To Render Icon List
     const renderIconListItems = () => {
-        return (  FooterIconListItems.map((val, index) => { return <li key={index}> <Link to={val[0]}> <i className={`fa ${val[1]}`} aria-hidden="true"></i> </Link> </li> }) )
+        return (  FooterIconListItems.map((val, index) => { return <li key={index}> <a href={val[0]} target="_blank" rel="noopener noreferrer"> <i className={`fab ${val[1]}`} aria-hidden="true"></i> </a> </li> }) )
     }
 
     // Function To Render Company List
@@ -126,7 +126,7 @@ const Footer = (props) => {
                                         <div className="newsletter-input-div">
                                             <input type="email" className="form-control newsletter-input" placeholder="Email Address *" value={email} onChange={e => setEmail(e.target.value)} required />
                                             <button type="submit">
-                                                <i className="fa fa-envelope-o"></i>
+                                                <i className="far fa-envelope"></i>
                                             </button>
                                         </div>
                                     </form>
@@ -141,7 +141,7 @@ const Footer = (props) => {
                             <div className="seperator"></div>
                             <Col xs={12}>
                                 <p className="copyright">
-                                    Copyright © 2020 Soft Copy. All rights reserved.
+                                    Copyright © 2020 Miracle Solutions. All rights reserved.
                                </p>
                                 <div className="extra-links">
                                     <ul>

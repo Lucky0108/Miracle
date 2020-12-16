@@ -1,16 +1,16 @@
 .contact-info {
     margin-top: 130px ;
 }
-.contact-info .fa::before {
+.contact-info i::before {
     font-size: 2.7rem;
     color: #FC6E36;
 }
 
-.contact-info .fa {
-    margin-right: 3rem;
+.contact-info i  {
+    margin-right: 2rem;
 }
 
-.contact-info ul:nth-child(3) li .fa {
+.contact-info ul:nth-child(3) li i {
     margin-right: 4rem !important;
 }
 
@@ -22,7 +22,7 @@
     margin-top: 50px;
 }
 
-.contact-info .fa {
+.contact-info i {
     align-self: center;
 }
 

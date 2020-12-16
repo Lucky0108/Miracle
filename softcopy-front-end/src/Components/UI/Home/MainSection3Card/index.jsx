@@ -15,7 +15,7 @@ const MainSection3Card = (props) => {
                     <Card.Body>
                         <div className="d-flex">
                             <div className="home-section-3-icon">
-                            <i className={`fa ${props.icon} ${props.extraClass}`} style={{backgroundColor: `${props.iconBg}`}} aria-hidden="true" />
+                            <i className={`fas ${props.icon} ${props.extraClass}`} style={{backgroundColor: `${props.iconBg}`}} aria-hidden="true" />
                             </div>
                             <div style={{ flexDirection: "column" }}>
                                 <h3><Link to="/" className="cardNavLink"> {props.title} </Link></h3>

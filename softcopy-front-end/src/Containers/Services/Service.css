@@ -15,7 +15,7 @@
 
 .service-section .service-grids .grid {
     position: relative;
-    padding-left: 75px;
+    padding-left: 80px;
 }
 
 .service-section .service-grids h3 {
@@ -42,7 +42,7 @@
     top: 11px;
 }
 
-.service-section .service-grids .icon .fa {
+.service-section .service-grids .icon .fas::before, .service-section .service-grids .icon .far::before {
     font-size: 3.33333rem;
     color: #fc6e36;
     /* color: #5447C9; */
@@ -51,6 +51,10 @@
 @media (max-width: 500px) {
     .service-section .service-grids {
         margin-top: 70px;
+    }
+
+    .service-section .service-grids .icon .fas::before, .service-section .service-grids .icon .far::before {
+        font-size: 3rem;
     }
 }
 
@@ -82,7 +86,7 @@
 
     .service-section .right-align .grid {
         position: relative;
-        padding-right: 75px;
+        padding-right: 80px;
         padding-left: 0;
     }
 

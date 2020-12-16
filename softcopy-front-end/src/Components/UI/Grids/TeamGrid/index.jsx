@@ -16,10 +16,10 @@ const TeamGrid = (props) => {
                     <h4>{props.name}</h4>
                     <p>{props.desig}</p>
                     <ul className="clearfix">
-                        <li><a href={props.instaLink}><i className="fa fa-instagram" aria-hidden="true" /> </a> </li>
-                        <li><a href={props.facebookLink}><i className="fa fa-facebook" aria-hidden="true" /> </a> </li>
-                        <li><a href={props.twitterLink}><i className="fa fa-twitter" aria-hidden="true" /> </a> </li>
-                        <li><a href={props.linkedinLink}><i className="fa fa-linkedin" aria-hidden="true" /> </a> </li>
+                        <li><a href={props.instaLink} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /> </a> </li>
+                        <li><a href={props.facebookLink} target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook" aria-hidden="true" /> </a> </li>
+                        <li><a href={props.twitterLink} target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" aria-hidden="true" /> </a> </li>
+                        <li><a href={props.linkedinLink} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" aria-hidden="true" /> </a> </li>
                     </ul>
                 </div>
             </div>
