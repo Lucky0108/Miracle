@@ -1,6 +1,11 @@
 /* FOOTER SECTION */
 .site-footer{
     background-color: #1d41aa;
+    position: relative;
+  }
+
+  .site-footer p {
+    color: #fff;
   }
   
   .site-footer ul{
@@ -83,42 +88,37 @@
     margin-top: 25px;
     position: relative;
   }
-  
-  .newsletter-input-div > input {
-    background: transparent;
-    height: 50px;
-    width: 100%;
-    color: #fff;
-    padding: 6px 20px;
-    border-radius: 0;
+
+  .newsletter-input-div {
+    display: flex;
+    align-items: center;
     border: 1px #fff solid;
   }
-  
+
+  .newsletter-input-div > input {
+    color: #fff!important;
+    background: transparent;
+    border: 0;
+  }
+
+  .newsletter-input-div > button {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 21px;
+    padding-right: 15px;
+    outline: none !important;
+  }
+
+  .newsletter-input-div > button i:hover {
+    color: #FC6E36;
+  } 
+
   .newsletter-input:focus {
     background: transparent !important;
     color: #fff !important;
     outline: 0 !important;
     box-shadow: none !important;
-    border-color: white !important;
-  }
-  
-  .submit-button-div > button {
-    background: transparent;
-    outline: 0;
-    border: 0;
-    color: #fff;
-    position: relative;
-    margin-top: -2px;
-    font-size: 21px;
-    right: -5px;
-  }
-  
-  .submit-button-div {
-    position: absolute;
-    right: 20px;
-    top: 55%;
-    -webkit-transform: translate(-50%);
-    transform: translateY(-50%);
   }
   
   .newsletter-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -132,4 +132,10 @@
   
   .newsletter-input::-ms-input-placeholder { /* Microsoft Edge */
     color: white !important;
+  }
+
+  @media (max-width: 767px) {
+    .widget {
+      margin-top: 30px;
+    }
   }

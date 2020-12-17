@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Card } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 /**
 * @author
@@ -15,10 +15,10 @@ const MainSection3Card = (props) => {
                     <Card.Body>
                         <div className="d-flex">
                             <div className="home-section-3-icon">
-                            <i className={`fa ${props.icon} ${props.extraClass}`} style={{backgroundColor: `${props.iconBg}`}} aria-hidden="true" />
+                            <i className={`fas ${props.icon} ${props.extraClass}`} style={{backgroundColor: `${props.iconBg}`}} aria-hidden="true" />
                             </div>
                             <div style={{ flexDirection: "column" }}>
-                                <h3><NavLink to="/" className="cardNavLink"> {props.title} </NavLink></h3>
+                                <h3><Link to="/" className="cardNavLink"> {props.title} </Link></h3>
                                 <p>{props.para} </p>
                             </div>
                         </div>

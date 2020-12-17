@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PageTitle from '../../Components/PageTitle'
+import PageTitle from '../../Components/UI/PageTitle'
 import './Login.css'
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap'
 import Input from '../../Components/UI/Input'
@@ -33,7 +33,11 @@ const Login = (props) => {
     if(auth.authenticate) {
       toastr.success("Success", "Login was Success!!")
     }
-  },[auth, auth.authenticate])
+    if(auth.error) {
+      toastr.error("Error", auth.error);
+      auth.error = "";
+    }
+  },[auth, auth.authenticate, auth.loading, auth.error])
 
   if(auth.authenticate) {
     return <Redirect to={"/"} />

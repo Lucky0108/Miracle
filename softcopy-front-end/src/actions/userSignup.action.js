@@ -2,27 +2,27 @@ import axios from "../helpers/axios"
 import { signupConstants } from "./constants"
 
 export const signup = (user) => {
-    return async (dispatch) => {
+    return (dispatch) => {
 
         dispatch({ type: signupConstants.SIGNUP_REQUEST });
-        const res = await axios.post(`/signup`, { ...user });
+        const res = axios.post(`/signup`, { ...user });
 
-        console.log(res)
-        if(res.status === 201) {
-            dispatch({ type: signupConstants.SIGNUP_SUCCESS,
-                payload: { message: res.data.message }
-            })
-        }
-        if(res.status === 400) {
-            dispatch({ type: signupConstants.SIGNUP_FAILURE })
-        }
-        // } else {
-        //     console.log("hello")
-        //     if(res.status === 400) {
-        //         dispatch({ type: signupConstants.SIGNUP_FAILURE,
-        //             payload: { error: res.data.error, message: res.data.message }
-        //         })
-        //     }
-        // }
+        res.then(response => {
+            if(response.status === 201) {
+                dispatch({ type: signupConstants.SIGNUP_SUCCESS,
+                    payload: { message: response.data.message }
+                })
+            }
+        })
+
+        res.catch((error) => {
+            if(error.response) {
+                if(error.response.status === 400 || error.response.status === 404) {
+                    dispatch({ type: signupConstants.SIGNUP_FAILURE,
+                        payload: { error: error.response.data.message || error.response.data.error }
+                    })
+                }
+            }
+        })
     }
 }
