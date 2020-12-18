@@ -16,8 +16,8 @@ import {toastr} from 'react-redux-toastr'
 const Footer = (props) => {
     // 2-D Array for Footer Icons having links and icon names
     const FooterIconListItems = [
-        ["https://facebook.com/softcopy_official", "fa-facebook-f"], ["https://twitter.com/softcopy_official", "fa-twitter"],
-        ["https://instagram.com/softcopy_official", "fa-instagram"], ["https://linkedin.com/softcopy_official", "fa-linkedin-in"]
+        ["https://facebook.com/miracle_official", "fa-facebook-f"], ["https://twitter.com/miracle_official", "fa-twitter"],
+        ["https://instagram.com/miracle_official", "fa-instagram"], ["https://linkedin.com/miracle_official", "fa-linkedin-in"]
     ]
 
     // 2-D Array for Footer Company List having links and Respective Name
@@ -62,21 +62,21 @@ const Footer = (props) => {
 
     const onNewsSubmit = (e) => {
         e.preventDefault();
-       
-        dispatch(newsletter({email}))
+        setEmail('');
+        dispatch(newsletter({email}));
     }
 
     useEffect(() => {
         if(news.loading) {
-            toastr.info("Loading...")
-            toastr.loading = ""
+            toastr.info("Loading...");
+            toastr.loading = "";
         }
         if(news.message) {
-            toastr.success("Success", news.message)
-            news.message = ""
+            toastr.success("Success", news.message);
+            news.message = "";
         } else if(news.error) {
-            toastr.warning("Oops", news.error)
-            news.error = ""
+            toastr.warning("Oops", news.error);
+            news.error = "";
         }
     }, [news, news.message, news.error, news.loading])
 

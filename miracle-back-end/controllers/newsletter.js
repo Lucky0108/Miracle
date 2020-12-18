@@ -20,7 +20,7 @@ exports.newsletter = (req,res) => {
             if(error) return res.status(400).json({ message: "Something Went Wrong"})
             if(result) {
                 transporter.sendMail({ 
-                    from: 'softcopyofficialteam@gmail.com',
+                    from: 'miracleofficialteam@gmail.com',
                     to: result.email,
                     subject: 'Welcome Message From Miracle Solutions',
                     text: 'Successfully Subscribed to Miracle Solutions Newsletter'

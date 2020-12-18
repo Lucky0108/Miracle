@@ -1,12 +1,13 @@
 {
-  "name": "softcopy-v1",
+  "name": "miracle-v1",
   "version": "1.0.0",
   "description": "One place stop for all your needs",
-  "main": "./softcopy-back-end/server.js",
+  "main": "./miracle-back-end/server.js",
   "scripts": {
-    "start": "node ./softcopy-back-end/server.js",
-    "server": "nodemon ./softcopy-back-end/server.js",
-    "client": "npm start --prefix softcopy-front-end cd",
+    "start": "node ./miracle-back-end/server.js",
+    "server": "nodemon ./miracle-back-end/server.js",
+    "demo_client": "npm start --prefix miracle-front-end cd",
+    "client": "cd miracle-front-end && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Lakshay Yadav & Umashankar Sarswat",

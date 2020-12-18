@@ -57,7 +57,7 @@ const Contact = (props) => {
                 <ul>
 
                   <ContactInfoList iconName="fas fa-home" heading="Head Office" para="Near Kanota, Agra Road, Jaipur, Rajasthan 303012" />
-                  <ContactInfoList iconName="far fa-envelope" heading="Email Address" para={<a href="mailto:softcopyofficialteam@gmail.com"> softcopyofficialteam@gmail.com </a>} />
+                  <ContactInfoList iconName="far fa-envelope" heading="Email Address" para={<a href="mailto:miracleofficialteam@gmail.com"> miracleofficialteam@gmail.com </a>} />
                   <ContactInfoList iconName="fas fa-phone-alt" heading="Telephone" para={<><p><a href="tel:+919891433344">+91 9891433344</a></p> <p><a href="tel:+916375807780">+91 6375807780 </a> </p></>} />
                   <ContactInfoList iconName="far fa-clock" heading="Office Hour" para="Mon-Sun: 9:00 Am – 10:00 Pm" />
 
@@ -86,7 +86,7 @@ const Contact = (props) => {
                       </Col>
                       <Col className="col" lg={6}>
                         <select className="form-control" name="contactSubject" value={service} onChange={e => setService(e.target.value)} required>
-                          <option selected disabled value="">Select Service</option>
+                          <option defaultValue disabled value="">Select Service</option>
                           <option value="Earnings">Earning Opportunity </option>
                           <option value="Website">Website Issue</option>
                           <option value="Others">Others</option>

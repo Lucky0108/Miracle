@@ -11,7 +11,7 @@ const FaqGrid = (props) => {
             <div className="grid">
                 <div className="info">
                     <h3>
-                        <span class="odometer" data-count={props.dataCount}>{props.dataCount}</span>{ props.plus ? "+" : '' }
+                        <span className="odometer" data-count={props.dataCount}>{props.dataCount}</span>{ props.plus ? "+" : '' }
                     </h3>
                     <p>{props.para}</p>
                 </div>

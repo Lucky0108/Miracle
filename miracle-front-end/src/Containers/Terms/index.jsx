@@ -21,7 +21,7 @@ const Terms = (props) => {
 
                                 <p>Welcome to Soft Copy!</p>
 
-                                <p>These terms and conditions outline the rules and regulations for the use of Soft Copy's Website, located at https://softcopy.tech.</p>
+                                <p>These terms and conditions outline the rules and regulations for the use of Soft Copy's Website, located at https://miracle.tech.</p>
 
                                 <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Soft Copy if you do not agree to take all of the terms and conditions stated on this page.</p>
 

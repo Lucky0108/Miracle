@@ -20,7 +20,7 @@ const Policy = (props) => {
                         <Card.Text>
                             <p className="h2">Privacy Policy for Soft Copy</p>
 
-                            <p>At Soft Copy, accessible from https://softcopy.tech, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Soft Copy and how we use it.</p>
+                            <p>At Soft Copy, accessible from https://miracle.tech, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Soft Copy and how we use it.</p>
 
                             <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
 
