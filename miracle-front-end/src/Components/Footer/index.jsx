@@ -32,7 +32,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Service List  having links and Service Name
     const FooterServiceList = [
-        ["/service", "Web Development"], ["/service", "SEO Optimization"], ["/service", "Earning Tricks"], ["/service", "Notes"]
+        ["https://softcopy.tech", "Notes"], ["http://filingsolutions.live/classic/", "GST/ITR Filing"], ["/service", "Web Development"], ["/service", "Earning Tricks"] 
     ]
 
     //  Function To Render Icon List
@@ -52,7 +52,7 @@ const Footer = (props) => {
 
     // Function To Render Service List 
     const renderServiceList = () => {
-        return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <Link to={val[0]}> {val[1]} </Link> </li> ) }) )
+        return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <a href={val[0]} target="_blank" rel="noopener noreferrer"> {val[1]} </a> </li> ) }) )
     }
 
     const [email, setEmail] = useState('')

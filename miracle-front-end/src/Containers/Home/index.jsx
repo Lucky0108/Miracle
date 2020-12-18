@@ -28,8 +28,8 @@ import port6 from '../../img/img-6.jpg'
 import test1 from '../../img/f1.jpg'
 import test2 from '../../img/f2.jpg'
 // import heroVec from '../../img/10140.jpg'
-// import heroVec from '../../img/hero-vec.png'
-import heroVec from '../../img/hero.png'
+import heroVec from '../../img/hero-vec.png'
+// import heroVec from '../../img/hero.png'
 
 /**
 * @author

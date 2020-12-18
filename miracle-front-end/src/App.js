@@ -29,6 +29,7 @@ import "slick-carousel/slick/slick-theme.css";
 // Action Import
 import { isLoggedin } from './actions';
 import Terms from './Containers/Terms';
+import Rocket from './Components/Rocket';
 
 
 
@@ -54,6 +55,7 @@ function App() {
 
   return (
     <div className="App">
+    
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
@@ -70,6 +72,7 @@ function App() {
         <Route component={ErrorPage} />
       </Switch>
       <Footer />
+      <Rocket />
       <ReduxToastr 
         newestOnTop={false}
         preventDuplicates
