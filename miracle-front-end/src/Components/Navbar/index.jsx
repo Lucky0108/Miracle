@@ -69,6 +69,7 @@ const NavbarComp = (props) => {
             <NavLink exact to="/" className="navLink" activeClassName="activeNavLink">Home</NavLink>
             <NavLink to="/about" className="navLink" activeClassName="activeNavLink">About Us</NavLink>
             <NavLink to="/service" className="navLink" activeClassName="activeNavLink">Services</NavLink>
+            <NavLink to="/blog" className="navLink" activeClassName="activeNavLink">Blog</NavLink>
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink">Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>

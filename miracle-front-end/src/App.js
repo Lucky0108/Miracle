@@ -30,6 +30,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { isLoggedin } from './actions';
 import Terms from './Containers/Terms';
 import Rocket from './Components/Rocket';
+import Blog from './Containers/Blog';
 
 
 
@@ -69,6 +70,7 @@ function App() {
         <Route exact path="/testimonial" component={Testimonials} />
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/terms" component={Terms} />
+        <Route exact path="/blog" component={Blog} />
         <Route component={ErrorPage} />
       </Switch>
       <Footer />
