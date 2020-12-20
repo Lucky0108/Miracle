@@ -16,19 +16,19 @@ import TestimonialGrid from '../../Components/UI/Grids/TestimonialGrid';
 import './Home.css'
 
 // Images Import
-import home2img from '../../img/home-section-2.jpg'
+import home2img from '../../img/home-section-2.webp'
 // import vidImg from '../../img/video-img.jpg'
 import vidImg from '../../img/customer_service.svg'
 import port1 from '../../img/img-1.jpg'
 import port2 from '../../img/img-2.jpg'
-import port3 from '../../img/img-3.jpg'
+import port3 from '../../img/img-3.webp'
 import port4 from '../../img/img-4.jpg'
 import port5 from '../../img/img-5.jpg'
-import port6 from '../../img/img-6.jpg'
-import test1 from '../../img/f1.jpg'
-import test2 from '../../img/f2.jpg'
+import port6 from '../../img/img-6.webp'
+import test1 from '../../img/f1.webp'
+import test2 from '../../img/f2.webp'
 // import heroVec from '../../img/10140.jpg'
-import heroVec from '../../img/hero-vec.png'
+import heroVec from '../../img/hero-vec.webp'
 // import heroVec from '../../img/hero.png'
 
 /**

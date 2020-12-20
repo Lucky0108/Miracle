@@ -13,7 +13,7 @@
 
 .hero-section {
     /* background: url("../../img/cloud.png") 80px 125px/auto no-repeat local; */
-    background: url("../../img//hero-bg.png") bottom/cover no-repeat local;
+    background: url("../../img/hero-bg.webp") bottom/cover no-repeat local;
     /* background-color: #1d41aa; */
     height: 100vh;
     display: flex;
@@ -76,7 +76,7 @@
 /* Home Section 1 */
 
 .home-section-1 {
-    background: url('../../img/common-section-bg.png') top/cover no-repeat local;
+    background: url('../../img/common-section-bg.webp') top/cover no-repeat local;
 }
 
 .feature-grids {
