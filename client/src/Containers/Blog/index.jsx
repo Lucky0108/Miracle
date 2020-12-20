@@ -23,7 +23,7 @@ const Blog = (props) => {
                                           <img src={blogImg} alt= "Blog Head" />
                                       </div>
                                       <div className="date-entry-meta">
-                                      <div class="entry-meta">
+                                      <div className="entry-meta">
                                         <span>Feb 13, 2020</span>
                                         <span>By: <a href="/blog">Admim</a> </span>
                                       </div>

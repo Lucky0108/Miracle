@@ -7,7 +7,6 @@ body {
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif !important;
-  font-size: 80% !important;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -94,6 +93,12 @@ img {
 
   .slick-track {
     padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 772px) {
+  body {
+    font-size: 80% !important;
   }
 }
 
