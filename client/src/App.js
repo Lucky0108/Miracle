@@ -72,10 +72,9 @@ function App() {
 
   return (
     <div className="App">
-    
       <Navbar />
       <Suspense fallback={
-        <div class="divLoader">
+        <div className="divLoader">
             <img src={loadingImg} alt=" " />
         </div>}>
       <Switch>
