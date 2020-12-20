@@ -39,9 +39,15 @@ img {
   max-width: 100%;
 }
 
-
-
-/* .slick-list, .slick-track { touch-action:pan-y; } */
+.divLoader {
+  background-color: #E74C3C;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
 
 .optionDiv {
   height: 100vh;

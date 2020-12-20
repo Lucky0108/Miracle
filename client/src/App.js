@@ -1,24 +1,31 @@
 // Basic Imports
+import { useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import ReduxToastr from 'react-redux-toastr'
 import './App.css';
+import loadingImg from './img/ball-triangle.svg'
 
 // Components
 import Navbar from './Components/Navbar';
-import Services from './Containers/Services'
 import Home from './Containers/Home';
-import Contact from './Containers/Contact'
-import About from './Containers/About'
 import Footer from './Components/Footer';
+
+// Using Lazy loading for this
+// import Services from './Containers/Services'
+// import Contact from './Containers/Contact'
+// import About from './Containers/About'
+// import ErrorPage from './Containers/404';
+// import Team from './Containers/Team';
+// import FAQ from './Containers/FAQ';
+// import Testimonials from './Containers/Testimonial';
+// import Policy from './Containers/Policy';
+// import Blog from './Containers/Blog';
+
+// COmmented to use later
 // import Login from './Containers/Login';
 // import Signup from './Containers/Signup';
-import ErrorPage from './Containers/404';
-import Team from './Containers/Team';
-import FAQ from './Containers/FAQ';
-import Testimonials from './Containers/Testimonial';
-import Policy from './Containers/Policy';
+
 
 // CSS Imports for packages
 import 'react-redux-toastr/src/styles/index.scss'
@@ -30,8 +37,17 @@ import "slick-carousel/slick/slick-theme.css";
 import { isLoggedin } from './actions';
 import Terms from './Containers/Terms';
 import Rocket from './Components/Rocket';
-import Blog from './Containers/Blog';
 
+// Lazy Load Component
+const ErrorPage = lazy(() => import('./Containers/404'));
+const Team = lazy(() => import('./Containers/Team'));
+const FAQ = lazy(() => import('./Containers/FAQ'));
+const Testimonials = lazy(() => import('./Containers/Testimonial'));
+const Policy = lazy(() => import('./Containers/Policy'))
+const About = lazy(() => import('./Containers/About'));
+const Contact = lazy(() => import('./Containers/Contact'));
+const Services = lazy(() => import('./Containers/Services'));
+const Blog = lazy(() => import('./Containers/Blog'))
 
 
 function App() {
@@ -58,6 +74,10 @@ function App() {
     <div className="App">
     
       <Navbar />
+      <Suspense fallback={
+        <div class="divLoader">
+            <img src={loadingImg} alt=" " />
+        </div>}>
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/service' component={Services} />
@@ -73,6 +93,7 @@ function App() {
         <Route exact path="/blog" component={Blog} />
         <Route component={ErrorPage} />
       </Switch>
+      </Suspense>
       <Footer />
       <Rocket />
       <ReduxToastr 
