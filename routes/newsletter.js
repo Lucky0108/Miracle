@@ -1,5 +1,5 @@
 const express = require('express');
-const { newsletter, getNewsletter, sendEmail } = require('../controllers/newsletter');
+const { newsletter, getNewsletter } = require('../controllers/newsletter');
 const { isRequestValidated } = require('../validators/auth');
 const { validateNewsletterEmail } = require('../validators/newsletter');
 const router = express.Router();

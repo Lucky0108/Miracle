@@ -3,6 +3,7 @@ const app = express();
 const env = require('dotenv');
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 
 // Routes
 const authRoutes = require('./routes/auth')
@@ -43,7 +44,8 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
+const port = process.env.PORT || 4000;
 
-app.listen(4000,() => {
-    console.log(`Server is running on port 4000`)
+app.listen(port,() => {
+    console.log(`Server is running on port ${port}`)
 })
