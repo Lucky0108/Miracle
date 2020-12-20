@@ -152,7 +152,7 @@
     text-align: center;
 }
 
-.home-section-2-img {
+.home-section-2 .img-div .img-holder img {
     width: 100%;
     height: 50%;
 }
