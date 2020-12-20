@@ -12,3 +12,17 @@
     text-align: center;
     margin-bottom: 50px;
 }
+
+@media (max-width: 772px) {
+    .policy-section .card, .terms-section .card {
+         padding: 0.9rem;
+    }
+
+    .policy-section .card-title, .terms-section .card-title {
+        font-size: 2rem;
+    }
+
+    .policy-section .h2, .terms-section .h2 {
+        font-size: 1.5rem;
+    }
+}

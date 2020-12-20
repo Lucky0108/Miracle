@@ -11,7 +11,7 @@ const Terms = (props) => {
     return (
         <>
             <PageTitle title="Terms & Conditions" para="This Page Contains The Terms & Conditions Of The Usage Of Our Website. Please Read All Of It Carefully." />
-            <div className="terms-section section-padding">
+            <section className="terms-section section-padding">
                 <Container>
                     <Card>
                         <Card.Body>
@@ -144,7 +144,7 @@ const Terms = (props) => {
                         </Card.Body>
                     </Card>
                 </Container>
-            </div>
+            </section>
         </>
     )
 }

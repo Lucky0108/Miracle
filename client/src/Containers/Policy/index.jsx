@@ -12,7 +12,7 @@ const Policy = (props) => {
     return (
         <>
             <PageTitle title="Privacy & Policy" para="This Page Contains The Privacy & Policy Information Regarding Our Website. Please Read All Of It Carefully." />
-            <div className="policy-section section-padding">
+            <section className="policy-section section-padding">
                 <Container>
                 <Card>
                     <Card.Body>
@@ -117,7 +117,7 @@ const Policy = (props) => {
                     </Card.Body>
                 </Card>
                 </Container>
-            </div>
+            </section>
         </>
     )
 }
