@@ -22,9 +22,12 @@ mongoose.connect(
     useCreateIndex:true,
     useFindAndModify: false
 })
-        .then(() => {
-            console.log("Database Connected!!!")
-        })
+    .then(() => {
+        console.log("Database Connected!!!")
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
 
 // Route Setup

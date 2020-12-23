@@ -5,6 +5,6 @@ const { validateNewsletterEmail } = require('../validators/newsletter');
 const router = express.Router();
 
 router.post('/newsletter', validateNewsletterEmail, isRequestValidated, newsletter )
-router.get('/getnewsletter', getNewsletter)
+router.post('/getnewsletter', getNewsletter)
 
 module.exports = router;
