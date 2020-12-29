@@ -35,19 +35,21 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Action Import
 import { isLoggedin } from './actions';
-import Terms from './Containers/Terms';
 import Rocket from './Components/Rocket';
 
 // Lazy Load Component
 const ErrorPage = lazy(() => import('./Containers/404'));
 const Team = lazy(() => import('./Containers/Team'));
 const FAQ = lazy(() => import('./Containers/FAQ'));
+const Terms = lazy(() => import('./Containers/Terms'));
 const Testimonials = lazy(() => import('./Containers/Testimonial'));
 const Policy = lazy(() => import('./Containers/Policy'))
 const About = lazy(() => import('./Containers/About'));
 const Contact = lazy(() => import('./Containers/Contact'));
 const Services = lazy(() => import('./Containers/Services'));
 const Blog = lazy(() => import('./Containers/Blog'))
+const BlogPg = lazy(() => import('./Containers/BlogPg'))
+
 
 
 function App() {
@@ -90,6 +92,7 @@ function App() {
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/terms" component={Terms} />
         <Route exact path="/blog" component={Blog} />
+        <Route exact path="/blogpg" component={BlogPg} />
         <Route component={ErrorPage} />
       </Switch>
       </Suspense>

@@ -9,6 +9,7 @@ const path = require('path')
 const authRoutes = require('./routes/auth')
 const newsletterRoutes = require('./routes/newsletter')
 const queryRoutes = require('./routes/query')
+const blogCommentRoutes = require('./routes/blogComment')
 
 // Environment Variable Config
 env.config()
@@ -36,6 +37,7 @@ app.use(express.json())
 app.use('/api', authRoutes)
 app.use('/api', newsletterRoutes)
 app.use('/api', queryRoutes)
+app.use('/api', blogCommentRoutes)
 
 // Serve static assets if in production
 if(process.env.NODE_ENV === 'production') {
