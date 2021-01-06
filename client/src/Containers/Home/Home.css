@@ -142,7 +142,7 @@
     margin: 0 0 1em;
 }
 
-.home-section-1 .home-section-1-details .btn-theme, .video-cta-area .content .btn-theme, .error-section .error-message .btn-theme, .contact-form form button {
+.home-section-1 .home-section-1-details .btn-theme, .video-cta-area .content .btn-theme, .error-section .error-message .btn-theme, .contact-form form button, .quote-form form button {
     background: #FC6E36;
     color: snow;
 }

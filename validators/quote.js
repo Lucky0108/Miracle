@@ -1,11 +1,11 @@
 const { check } = require('express-validator');
 
-exports.validateQuery = [
+exports.validateQuote = [
     check('name')
     .isLength({min: 2, max:20})
     .withMessage("Please Enter Your Name"),
     check('phone')
-    .isMobilePhone("en-IN")
+    .isMobilePhone("en-IN", "en-US")
     .withMessage("Please Enter A Valid Indian Contact Number"),
     check('email')
     .isEmail()
@@ -15,5 +15,5 @@ exports.validateQuery = [
     .withMessage("Please Select A service"),
     check("message")
     .isLength({min: 40, max:500})
-    .withMessage("Please Enter Your Message (40-500 Words)")
+    .withMessage("Please Enter A Description Of Your Request (40-500 Words)")
 ]

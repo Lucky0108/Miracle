@@ -24,3 +24,9 @@ export const queryConstants = {
     QUERY_SUCCESS: "QUERY_SUCCESS",
     QUERY_FAILURE: "QUERY_FAILURE"
 }
+
+export const quoteConstants = {
+    QUOTE_REQUEST: "QUOTE_REQUEST",
+    QUOTE_SUCCESS: "QUOTE_SUCCESS",
+    QUOTE_FAILURE: "QUOTE_FAILURE"
+}

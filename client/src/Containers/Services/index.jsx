@@ -20,9 +20,9 @@ const Services = (props) => {
         <Row>
           <Col lg={4} className="col-12">
             <div className="service-grids right-align">
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-code" heading="Web Development" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-search" heading="Seo Optimization" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-credit-card" heading="GST & ITR Solutions" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-code" heading="Web Development" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-search" heading="Seo Optimization" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-credit-card" heading="Finance Solutions" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
             </div>
           </Col>
           <Col lg={4} className="col-12">
@@ -32,9 +32,9 @@ const Services = (props) => {
           </Col>
           <Col lg={4} className="col-12">
           <div className="service-grids right-col">
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="far fa-thumbs-up" heading="Social Media Marketing" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="far fa-file-alt" heading="Graphic Designing" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
-             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-link" heading="Link Building" link="/" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="far fa-thumbs-up" heading="Social Media Marketing" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="far fa-file-alt" heading="Graphic Designing" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
+             <ServiceGrid gridClass="grid" iconDiv="icon" FontClass="fas fa-link" heading="Link Building" link="/quote" para="Magazine and housed in a gilded in frame. It showed a lady fitted" />
           </div>
           </Col>
         </Row>

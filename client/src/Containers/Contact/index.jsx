@@ -94,7 +94,7 @@ const Contact = (props) => {
                         <p></p>
                       </Col>
                       <Col xs={12} sm={12} >
-                        <textarea className="contact-textarea form-control" placeholder="Message (upto 250 words)" name="contactDesc" minLength="20" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }} value={message} onChange={e => setMessage(e.target.value)} required />
+                        <textarea className="contact-textarea form-control" placeholder="Message (upto 500 words)" name="contactDesc" minLength="20" spellCheck="false" style={{ marginTop: "0px", marginBottom: "0px", height: "149px" }} value={message} onChange={e => setMessage(e.target.value)} required />
                         <p></p>
                       </Col>
                       <Col xs={12}>

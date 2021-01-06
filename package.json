@@ -24,12 +24,17 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-validator": "^6.7.0",
+    "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
     "mammoth-colors": "^1.0.2",
     "mongoose": "^5.10.18",
+    "multer": "^1.4.2",
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6",
-    "redux-devtools-extension": "^2.13.8"
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "redux-devtools-extension": "^2.13.8",
+    "shortid": "^2.2.16",
+    "slugify": "^1.4.6"
   }
 }

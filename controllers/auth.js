@@ -25,7 +25,7 @@ exports.signup = (req,res) => {
             lastName,
             email,
             password,
-            userName: username.toUpperCase()
+            user_name: username.toUpperCase()
         })
 
         _user.save((error, data) => {
@@ -49,12 +49,12 @@ exports.signin = (req,res) => {
         if(user) {
             if(user.authenticate(req.body.password)) {
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d'})
-                const { _id, firstName, lastName, userName, email, fullName } = user
+                const { _id, firstName, lastName, user_name, email, fullName } = user
                 res.cookie("token", token, { expiresIn: '1d' })
                 res.status(200).json({
-                    token,
+                    token: `Bearer ${token}`,
                     user: {
-                        _id, firstName, lastName, email, userName, fullName
+                        _id, firstName, lastName, email, user_name, fullName
                     },
                 })
             } else {

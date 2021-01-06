@@ -22,9 +22,9 @@ import Footer from './Components/Footer';
 // import Policy from './Containers/Policy';
 // import Blog from './Containers/Blog';
 
-// COmmented to use later
-// import Login from './Containers/Login';
-// import Signup from './Containers/Signup';
+// Commented to use later
+import Login from './Containers/Login';
+import Signup from './Containers/Signup';
 
 
 // CSS Imports for packages
@@ -47,8 +47,9 @@ const Policy = lazy(() => import('./Containers/Policy'))
 const About = lazy(() => import('./Containers/About'));
 const Contact = lazy(() => import('./Containers/Contact'));
 const Services = lazy(() => import('./Containers/Services'));
-const Blog = lazy(() => import('./Containers/Blog'))
-const BlogPg = lazy(() => import('./Containers/BlogPg'))
+const Blog = lazy(() => import('./Containers/Blog'));
+const BlogPg = lazy(() => import('./Containers/BlogPg'));
+const Quote = lazy(() => import('./Containers/Quote'));
 
 
 
@@ -84,8 +85,8 @@ function App() {
         <Route exact path='/service' component={Services} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
-        {/* <Route exact path='/login' component={Login} /> */}
-        {/* <Route exact path='/signup' component={Signup} /> */}
+        <Route exact path='/admin/login' component={Login} />
+        <Route exact path='/admin/signup' component={Signup} />
         <Route exact path='/team' component={Team} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/testimonial" component={Testimonials} />
@@ -93,6 +94,7 @@ function App() {
         <Route exact path="/terms" component={Terms} />
         <Route exact path="/blog" component={Blog} />
         <Route exact path="/blogpg" component={BlogPg} />
+        <Route exact path="/quote" component={Quote} />
         <Route component={ErrorPage} />
       </Switch>
       </Suspense>

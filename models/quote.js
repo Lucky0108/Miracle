@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const QuerySchema = new mongoose.Schema({
+const QuoteSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -26,8 +26,7 @@ const QuerySchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 10,
-        max: 500
     }
 })
 
-module.exports = mongoose.model("Queries", QuerySchema)
+module.exports = mongoose.model("Quote", QuoteSchema)

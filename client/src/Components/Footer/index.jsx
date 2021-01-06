@@ -27,7 +27,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Company List 2 having links and Respective Name
     const FooterCompanyList2 = [
-        ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/news", "News"], ["/faq", "FAQ"]
+        ["/admin/login", "Admins"], ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/faq", "FAQ"]
     ]
 
     // 2-D Array for Footer Service List  having links and Service Name
