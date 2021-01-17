@@ -80,6 +80,10 @@ img {
   .slick-track {
     padding-bottom: 50px;
   }
+
+  .extra-links {
+    padding-bottom: 50px;
+  }
 }
 
 @media (max-width: 772px) {
