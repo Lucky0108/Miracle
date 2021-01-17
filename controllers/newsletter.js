@@ -32,7 +32,7 @@ exports.newsletter = (req, res) => {
             from: 'miracleofficialteam@gmail.com',
             to: result.email,
             subject: 'Welcome Message From Miracle Solutions',
-            text: 'Successfully Subscribed to Miracle Solutions Newsletter'
+            text: "Congratulations! You're Successfully Subscribed to Miracle Solutions Newsletter. You'll start receiving our newsletters very soon."
           }, function (errorMsg, info) {
             if (errorMsg) {
               console.log(errorMsg);

@@ -22,9 +22,9 @@ const About = (props) => {
         <Row>
           <Col className="col-xs-12">
             <div className="feature-grids clearfix">
-              <ServiceGrid gridClass="grid"  FontClass="fas fa-gem" heading="Market Research" para="Samsa was a travelling salesman and above it there hung a picture that he had recently cut out of an illustrated magazine valuealb" />
-              <ServiceGrid gridClass="grid"  FontClass="fas fa-bullseye" heading="Keyword Targeting" para="Samsa was a travelling salesman and above it there hung a picture that he had recently cut out of an illustrated magazine valuealb" />
-              <ServiceGrid gridClass="grid"  FontClass="fas fa-envelope-open-text" heading="Email Marketing" para="Samsa was a travelling salesman and above it there hung a picture that he had recently cut out of an illustrated magazine valuealb" />
+              <ServiceGrid gridClass="grid"  FontClass="fas fa-gem" heading="Digital Marketing" para="We help our clients with Digital Marketing content. We help to grow their social presence and gain a great amount of genuine audience." />
+              <ServiceGrid gridClass="grid"  FontClass="fas fa-bullseye" heading="Web Development" para="We provide our clients with a mobile friendly and seo optimized website ready for their online presence at a very affordable price." />
+              <ServiceGrid gridClass="grid"  FontClass="fas fa-envelope-open-text" heading="Earning Opportunity" para="We provide everyone amazing opportunities to earn some little side income with us so that everyone has a benefit while working with us." />
             </div>
           </Col>
         </Row>
