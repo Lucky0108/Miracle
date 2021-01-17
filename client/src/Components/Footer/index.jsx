@@ -148,7 +148,7 @@ const Footer = (props) => {
                                         <li><Link to="/policy">Privacy Policy</Link></li>
                                         <li><Link to="/terms">Terms</Link></li>
                                         <li><Link to="/about">About Us</Link></li>
-                                        <li><Link to="/faq">FAQ</Link></li>
+                                        {/* <li><Link to="/faq">FAQ</Link></li> */}
                                     </ul>
                                 </div>
                             </Col>
