@@ -21,17 +21,17 @@ const FAQ = (props) => {
                         <Col lg={6} className="col-12">
                             <HomeHeading class="faq-heading" span="04. FAQ" h2="You can get question answer from here!" p="Here are some of our Frequently asked questions. Please Have A Look!" />
                             <Accordion defaultActiveKey="0">
-                                <AccordionCard title="1. Question number one, get answer form here" eventKey="0" para="Had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that." />
-                                <AccordionCard title="2. Question number two, get answer form here" eventKey="1" para="Had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that." />
-                                <AccordionCard title="3. Question number three, get answer form here" eventKey="2" para="Had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that." />
+                                <AccordionCard title="1. What is The Miracle Solutions?" eventKey="0" para="We are a Web Digital Agency which means we provide you with different kinds of services like webiste development, graphic designing, financial solutions etc. but we are not limited to that we also provide our customers to earn with us. To know More Go To About Us Section." />
+                                <AccordionCard title="2. Okay, I want a service from you, Where do I go?" eventKey="1" para="You can go to our services section then choose any service you want us to do for you then fill the form with required information and hit the Get A Quote Button then our team will contact you at the earliest." />
+                                <AccordionCard title="3. My Question is not listed here, What to do now?" eventKey="2" para="You can go to contact us section and submit the contact form or you can contact us directly on whatsapp regarding any query." />
                             </Accordion>
                         </Col>
                         <Col lg={6} className="col-12">
                             <div className="faq-grids clearfix">
-                                <FaqGrid dataCount="550" para="Happy Clients" plus />
-                                <FaqGrid dataCount="50" para="Team Members" plus />
-                                <FaqGrid dataCount="125" para="Projects" />
-                                <FaqGrid dataCount="15" para="Awards" />
+                                <FaqGrid dataCount="200" para="Happy Clients" plus />
+                                <FaqGrid dataCount="10" para="Team Members" plus />
+                                <FaqGrid dataCount="50" para="Projects" />
+                                <FaqGrid dataCount="15" para="Achievements" />
                             </div>
                         </Col>
                     </Row>

@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
 import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { signup } from '../../actions/userSignup.action';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import {toastr} from 'react-redux-toastr'
 
 /**
@@ -112,6 +112,7 @@ const Signup = (props) => {
                       Submit
                   </Button>
                   </Form>
+                  <div className="confirmDiv"> Already a user? <NavLink to="/admin/login"> Login </NavLink></div>
                 </Card.Body>
               </Card>
             </Col>

@@ -70,7 +70,7 @@ const NavbarComp = (props) => {
             <NavLink exact to="/" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Home</NavLink>
             <NavLink to="/about" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>About Us</NavLink>
             <NavLink to="/service" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Services</NavLink>
-            <NavLink to="/blog" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Blog</NavLink>
+            {/* <NavLink to="/blog" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Blog</NavLink> */}
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>

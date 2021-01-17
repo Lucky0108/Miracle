@@ -35,10 +35,10 @@ const About = (props) => {
       <Container>
         <Row>
           <Col lg={6} xs={12} className="col about-us-data">
-            <HomeHeading class="about-us-heading" span="About us" h2="Build Your Business with Our SEO Agency" />
+            <HomeHeading class="about-us-heading" span="About us" h2="Build Your Business with Our All In One Agency" />
             <div className="about-details">
-              <h5>Samsa was a travelling salesman and above it there hung a picture that he had recently cut out of an illustrated</h5>
-              <p>Picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered llustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy</p>
+              <h5>Get Ready To Get Your Buisness A Great Jump Start With Our Agency.</h5>
+              <p>Have you been thinking about starting your buisness or simply earn some extra money? We're here for to help you in all your needs. We can help you develop a professional looking website for your buisness and list them among the top results of search engine.</p>
             </div>
           </Col>
           <Col lg={6} xs={12}>
@@ -54,11 +54,11 @@ const About = (props) => {
       <Container>
         <Row>
           <Col className="col" lg={6} md={12} xs={12}>
-          <HomeHeading class="why-us-heading" span="We are the best" h2="Why Choose Us" p="Samsa was a travelling salesman and above it there hung a picture that he had recently cut out of an illustrated magazine and housed" />
+          <HomeHeading class="why-us-heading" span="We are the best" h2="Why Choose Us" p="We not only provide you with different types of excellent services but we also provide you with an opportunity to earn extra side income with us." />
           <div className="why-us-grids">
-              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="fas fa-rocket" heading="First Working Prosses" para="Magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright" />
-              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="fas fa-gem" heading="High-End Anaylizing" para="Magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright" />
-              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="far fa-file-alt" heading="Dedicate Team" para="Magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright" />
+              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="fas fa-rocket" heading="Fast Working Process" para="We make sure that our clients get fastest response from our side regarding any query." />
+              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="fas fa-gem" heading="Affordable Services" para="We make sure that our client gets best and affordable services." />
+              <ServiceGrid gridClass="grid" iconDiv="icon"  FontClass="far fa-file-alt" heading="Dedicated and Friendly Team" para="Our team is highly dedicated and co-operative with all our clients." />
             </div>
           </Col>
           <Col className="col" lg={6} md={12} xs={12}>

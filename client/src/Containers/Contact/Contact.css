@@ -115,6 +115,10 @@
     border: 0;
 }
 
+.discordLink, .discordLink:hover {
+    color: #FC6E36;
+}
+
 @media (max-width: 991px) {
     .contact-info {
         margin-bottom: 60px !important;

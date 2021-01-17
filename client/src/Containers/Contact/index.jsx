@@ -110,6 +110,11 @@ const Contact = (props) => {
 
             </Col>
           </Row>
+          <Col lg={12} sm={12} xs={12} className="mt-5">
+            <div className="text-center">
+              Join Us On Our Discord Server <a className="discordLink" href="https://discord.gg/FDSGrX2r4S" target="_blank" rel="noopener noreferrer">Here!</a>
+            </div>
+          </Col>
         </Container>
       </section>
 

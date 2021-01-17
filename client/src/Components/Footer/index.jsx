@@ -16,8 +16,8 @@ import {toastr} from 'react-redux-toastr'
 const Footer = (props) => {
     // 2-D Array for Footer Icons having links and icon names
     const FooterIconListItems = [
-        ["https://facebook.com/miracle_official", "fa-facebook-f"], ["https://twitter.com/miracle_official", "fa-twitter"],
-        ["https://instagram.com/miracle_official", "fa-instagram"], ["https://linkedin.com/miracle_official", "fa-linkedin-in"]
+        ["https://instagram.com/the_miracle_solutions", "fa-facebook-f"], ["https://instagram.com/the_miracle_solutions", "fa-twitter"],
+        ["https://instagram.com/the_miracle_solutions", "fa-instagram"], ["https://instagram.com/the_miracle_solutions", "fa-linkedin-in"]
     ]
 
     // 2-D Array for Footer Company List having links and Respective Name
@@ -32,7 +32,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Service List  having links and Service Name
     const FooterServiceList = [
-        ["https://softcopy.tech", "Notes"], ["http://filingsolutions.live/classic/", "GST/ITR Filing"], ["/service", "Web Development"], ["/service", "Earning Tricks"] 
+        ["https://softcopy.tech", "Notes"], ["/service", "GST/ITR Filing"], ["/service", "Web Development"], ["/service", "Earning Tricks"] 
     ]
 
     //  Function To Render Icon List
@@ -141,7 +141,7 @@ const Footer = (props) => {
                             <div className="seperator"></div>
                             <Col xs={12}>
                                 <p className="copyright">
-                                    Copyright © 2020 Miracle Solutions. All rights reserved.
+                                    Copyright © 2021 <span style={{color:"#FC6E36"}}> The Miracle Solutions. </span> All rights reserved.
                                </p>
                                 <div className="extra-links">
                                     <ul>

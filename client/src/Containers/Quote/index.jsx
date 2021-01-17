@@ -77,9 +77,9 @@ const Quotes = (props) => {
                           <option value="Web Development"> Web Development </option>
                           <option value="Seo Optimization"> Seo Optimization </option>
                           <option value="Finance Solutions"> Finance Solutions </option>
-                          <option value="Social Media Marketing"> Social Media Marketing </option>
-                          <option value="Graphic Designing"> Graphic Designing </option>
-                          <option value="Link Building"> Link Building </option>
+                          <option value="Digital Marketing"> Digital Marketing </option>
+                          <option value="Earning Opportunity"> Earning Opportunity </option>
+                          <option value="OTT Accounts"> OTT Accounts </option>
                         </select>
                         <p></p>
                       </Col>
@@ -89,7 +89,7 @@ const Quotes = (props) => {
                       </Col>
                       <Col xs={12}>
                         <button type="submit" className="btn-theme">
-                          Submit Query
+                          Get A Quote
                       </button>
                       </Col>
                     </Row>

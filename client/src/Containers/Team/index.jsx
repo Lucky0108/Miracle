@@ -3,8 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import './Team.css'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
-import img1 from '../../img/img-team.jpg'
+// import img1 from '../../img/img-team.jpg'
 import TeamGrid from '../../Components/UI/Grids/TeamGrid'
+import team1 from '../../img/lakshay.webp'
+import team2 from '../../img/uma.webp'
+import team3 from '../../img/nipun2.jpg'
 
 /**
 * @author
@@ -25,9 +28,9 @@ const Team = (props) => {
                 <Row>
                     <Col className="col-xs-12">
                         <div className="team-grids">
-                            <TeamGrid imgSrc={img1} name="Lakshay Yadav" desig="Managing Director" instaLink="https://instagram.com/lakshayy.yyadav" facebookLink="https://facebook.com/xxLakshayxx" twitterLink="https://twitter.com/lxkshay" linkedinLink="https://linkedin.com/in/lakshay-yadav" />
-                            <TeamGrid imgSrc={img1} name="Umashankar Sarswat" desig="Managing Director" instaLink="https://instagram.com/anti_gravity_machine" facebookLink="https://facebook.com/wizard.OO7" twitterLink="https://twitter.com/123rahulsarswat" linkedinLink="https://instagram.com/anti_gravity_machine" />
-                            <TeamGrid imgSrc={img1} name="Nipun Goyal" desig="SEO Specialist" instaLink="https://instagram.com/nipun.__.goyal" facebookLink="https://facebook.com/nipun.goyal.585" twitterLink="https://instagram.com/nipun.__.goyal" linkedinLink="https://linkedin.com/in/nipun-goyal-49a27218a" />
+                            <TeamGrid imgSrc={team1} name="Lakshay Yadav" desig="Managing Director" instaLink="https://instagram.com/lakshayy.yyadav" facebookLink="https://facebook.com/xxLakshayxx" twitterLink="https://twitter.com/lxkshay" linkedinLink="https://linkedin.com/in/lakshay-yadav" />
+                            <TeamGrid imgSrc={team2} name="Umashankar Sarswat" desig="Managing Director" instaLink="https://instagram.com/anti_gravity_machine" facebookLink="https://facebook.com/wizard.OO7" twitterLink="https://twitter.com/123rahulsarswat" linkedinLink="https://instagram.com/anti_gravity_machine" />
+                            <TeamGrid imgSrc={team3} name="Nipun Goyal" desig="SEO Specialist" instaLink="https://instagram.com/nipun.__.goyal" facebookLink="https://facebook.com/nipun.goyal.585" twitterLink="https://instagram.com/nipun.__.goyal" linkedinLink="https://linkedin.com/in/nipun-goyal-49a27218a" />
                             {/* <TeamGrid imgSrc={img1} name="Janck Meker" desig="Empty Designation" instaLink="https://instagram.com/instagram" facebookLink="https://instagram.com/instagram" twitterLink="https://instagram.com/instagram" linkedinLink="https://instagram.com/instagram" /> */}
                         </div>
                     </Col>

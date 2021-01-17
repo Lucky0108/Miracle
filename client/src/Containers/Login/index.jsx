@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap'
 import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../../actions/auth.action'
-import { Redirect } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import {toastr} from 'react-redux-toastr'
 
 /**
@@ -75,6 +75,7 @@ const Login = (props) => {
                       Submit
                   </Button>
                   </Form>
+                 {/* <div className="confirmDiv"> Not a user yet? <NavLink to="/admin/signup"> Sign up </NavLink></div> */}
                 </Card.Body>
               </Card>
             </Col>

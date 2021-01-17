@@ -2,6 +2,10 @@
     margin: 0 -15px;
 }
 
+.team-grids img {
+    border-radius: 50%;
+}
+
 .team-section .team-grids .grid {
     /* width: calc(25% - 30px); */
     width: calc(50% - 220px);
