@@ -1,19 +1,14 @@
 {
-  "short_name": "Soft Copy",
+  "short_name": "The Miracle SOlutions",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "fav.pnh",
+      "src": "fav.png",
       "type": "image/png",
       "sizes": "128x128"
     }
   ],
  
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#2842B1",
   "background_color": "#ffffff"
 }
