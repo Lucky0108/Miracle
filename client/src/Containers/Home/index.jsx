@@ -186,13 +186,13 @@ const Home = (props) => {
                 <div className="video-img-holder img-holder">
                   <img src={vidImg} alt="video vector" />
                   <div className="video-btn">
-                    {/* <div>
+                    <div>
                       <ModalVideo openMessage="You Just Opened Our Special Video" dismissBtnMessage="Close the video by clicking here" channel='youtube' autoplay={1} controls={0} showinfo="0" mute={1} isOpen={isOpen} 
-                        // videoId="vbYB4rddM-8"
-                        videoId="TVShZg9X5V0" 
+                        // videoId="TVShZg9X5V0" 
+                        videoId="HwLW8s03BGA"
                         onClose={() => setOpen(false)} 
                       />
-                    </div> */}
+                    </div>
                     <button onClick={() => setOpen(true)} className="wrap">
                       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMjk0Ljg0MyAyOTQuODQzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyOTQuODQzIDI5NC44NDM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGQ9Ik0yNzguNTI3LDc5Ljk0NmMtMTAuMzI0LTIwLjAyMy0yNS4zOC0zNy43MDQtNDMuNTM4LTUxLjEzMmMtMi42NjUtMS45Ny02LjQyMS0xLjQwNy04LjM5MiwxLjI1N3MtMS40MDcsNi40MjEsMS4yNTcsOC4zOTINCgkJYzE2LjY4NywxMi4zNCwzMC41MjEsMjguNTg2LDQwLjAwOCw0Ni45ODNjOS45NCwxOS4yNzcsMTQuOTgsNDAuMTI4LDE0Ljk4LDYxLjk3NmMwLDc0LjY3MS02MC43NSwxMzUuNDIxLTEzNS40MjEsMTM1LjQyMQ0KCQlTMTIsMjIyLjA5MywxMiwxNDcuNDIxUzcyLjc1LDEyLDE0Ny40MjEsMTJjMy4zMTMsMCw2LTIuNjg3LDYtNnMtMi42ODctNi02LTZDNjYuMTMzLDAsMCw2Ni4xMzMsMCwxNDcuNDIxDQoJCXM2Ni4xMzMsMTQ3LjQyMSwxNDcuNDIxLDE0Ny40MjFzMTQ3LjQyMS02Ni4xMzMsMTQ3LjQyMS0xNDcuNDIxQzI5NC44NDIsMTIzLjk3NywyODkuMjAxLDEwMC42NDUsMjc4LjUyNyw3OS45NDZ6Ii8+DQoJPHBhdGggZD0iTTEwOS42OTksNzguOTY5Yy0xLjg3NiwxLjA2Ny0zLjAzNSwzLjA1OS0zLjAzNSw1LjIxNnYxMzEuNjc0YzAsMy4zMTQsMi42ODcsNiw2LDZzNi0yLjY4Niw2LTZWOTQuNzRsODguODMzLDUyLjg4Mw0KCQlsLTY1LjMyNCw0Mi4wODdjLTIuNzg1LDEuNzk1LTMuNTg5LDUuNTA4LTEuNzk0LDguMjkzYzEuNzk2LDIuNzg2LDUuNTA4LDMuNTksOC4yOTQsMS43OTRsNzMuNDY1LTQ3LjMzMw0KCQljMS43NDYtMS4xMjUsMi43ODYtMy4wNzMsMi43NDktNS4xNWMtMC4wMzctMi4wNzctMS4xNDUtMy45ODctMi45My01LjA1TDExNS43MzMsNzkuMDI5DQoJCUMxMTMuODc3LDc3LjkyNiwxMTEuNTc1LDc3LjkwMiwxMDkuNjk5LDc4Ljk2OXoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" alt="Play Button" />
                     </button>
