@@ -59,7 +59,7 @@ const Contact = (props) => {
                   <ContactInfoList iconName="fas fa-home" heading="Head Office" para="Near Kanota, Agra Road, Jaipur, Rajasthan 303012" />
                   <ContactInfoList iconName="far fa-envelope" heading="Email Address" para={<a href="mailto:miracleofficialteam@gmail.com"> miracleofficialteam@gmail.com </a>} />
                   <ContactInfoList iconName="fas fa-phone-alt" heading="Telephone" para={<><a href="tel:+919891433344">+91 9891433344</a> <br /> <a href="tel:+916375807780">+91 6375807780 </a> </> } />
-                  <ContactInfoList iconName="far fa-clock" heading="Office Hour" para="Mon-Sun: 9:00 Am – 10:00 Pm" />
+                  <ContactInfoList iconName="far fa-clock" heading="Office Hour" para="Mon-Sun: 9:00 AM – 10:00 PM" />
 
                 </ul>
               </div>
