@@ -121,7 +121,7 @@ const Contact = (props) => {
       <section className="contact-map-section section-padding">
         <Container>
           <div style={{ width: "100%" }}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7118.561001082242!2d75.95198552509873!3d26.862827832596192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db990d4cf6555%3A0xb8bcbd8565da2f62!2sKanota%2C%20Rajasthan%20303012!5e0!3m2!1sen!2sin!4v1607442098617!5m2!1sen!2sin" width="100%" height="600" frameBorder="0" style={{ border: "0" }} allowFullScreen title="Our Office" aria-hidden="false" tabIndex="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.2963635694264!2d75.96874781478856!3d26.862323683149413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db8be74c25e59%3A0x675325c0c46956fc!2sAnand%20International%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1615231580838!5m2!1sen!2sin" width="100%" height="600" frameBorder="0" style={{ border: "0" }} allowFullScreen title="Our Office" aria-hidden="false" tabIndex="0"></iframe>
           </div>
         </Container>
       </section>

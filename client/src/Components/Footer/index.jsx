@@ -32,7 +32,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Service List  having links and Service Name
     const FooterServiceList = [
-        ["https://softcopy.tech", "Notes"], ["/service", "GST/ITR Filing"], ["/service", "Web Development"], ["/service", "Earning Tricks"] 
+        ["http://softcopy.tech", "Notes"], ["/service", "GST/ITR Filing"], ["/service", "Web Development"], ["https://earnloots.blogspot.com", "Earning Tricks"] 
     ]
 
     //  Function To Render Icon List
