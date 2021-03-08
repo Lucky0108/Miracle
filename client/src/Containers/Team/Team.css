@@ -7,8 +7,8 @@
 }
 
 .team-section .team-grids .grid {
-    /* width: calc(25% - 30px); */
-    width: calc(50% - 220px);
+    width: calc(25% - 30px);
+    /* width: calc(50% - 220px); */
     float: left;
     margin: 0 15px 30px;
     text-align: center;
