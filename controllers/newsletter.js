@@ -36,7 +36,8 @@ exports.newsletter = (req, res) => {
           }, function (errorMsg, info) {
             if (errorMsg) {
               console.log(errorMsg);
-              return res.status(400).json({ message: errorMsg })
+              Mail.findOneAndDelete({ email: result.email })
+              return res.status(400).json({ message: errorMsg || "Something Went Wrong" })
             } else {
               console.log('Email sent: ' + info.response);
               return res.status(201).json({ message: "Welcome Aboard To Our Newsletter" })
