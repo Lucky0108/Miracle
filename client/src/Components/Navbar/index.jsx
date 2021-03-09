@@ -76,7 +76,7 @@ const NavbarComp = (props) => {
         </Navbar.Collapse>
         <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto"> 
-          <NavLink to="/login" className="navLink" activeClassName="activeNavLink" style={{fontSize:"20px"}}>Store</NavLink>
+          <a href="http://miraclesolutions.epizy.com" className="navLink" target="_blank" rel="noopener noreferrer" style={{fontSize:"20px"}}>Store</a>
         </Nav>
         </Navbar.Collapse>
         {/* <Navbar.Collapse id="basic-navbar-nav">
