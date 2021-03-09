@@ -27,7 +27,7 @@ const Footer = (props) => {
 
     // 2-D Array for Footer Company List 2 having links and Respective Name
     const FooterCompanyList2 = [
-        ["/admin/login", "Admins"], ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/faq", "FAQ"]
+        ["/admin/login", "Products"], ["/policy", "Privacy Policy"], ["/testimonial", "Testimonials"], ["/faq", "FAQ"]
     ]
 
     // 2-D Array for Footer Service List  having links and Service Name
@@ -75,7 +75,7 @@ const Footer = (props) => {
             toastr.success("Success", news.message);
             news.message = "";
         } else if(news.error) {
-            toastr.warning("Oops", news.error);
+            toastr.warning("Oops", news.error || news.message);
             news.error = "";
         }
     }, [news, news.message, news.error, news.loading])
