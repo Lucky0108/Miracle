@@ -74,6 +74,11 @@ const NavbarComp = (props) => {
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
+        <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto"> 
+          <NavLink to="/login" className="navLink" activeClassName="activeNavLink" style={{fontSize:"20px"}}>Store</NavLink>
+        </Nav>
+        </Navbar.Collapse>
         {/* <Navbar.Collapse id="basic-navbar-nav">
             {auth.authenticate ? renderLoggedinLinks() : renderNonLoggedinLinks() }
         </Navbar.Collapse> */}
