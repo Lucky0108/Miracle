@@ -4,18 +4,17 @@ const env = require('dotenv');
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
-const passport = require('passport')
-
-// Routes
-const authRoutes = require('./routes/auth')
-const newsletterRoutes = require('./routes/newsletter')
-const queryRoutes = require('./routes/query')
-const blogCommentRoutes = require('./routes/blogComment')
-const blogRoutes = require('./routes/blog')
-const quoteRoutes = require('./routes/quote')
 
 // Environment Variable Config
 env.config()
+
+// Routes
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+const newsletterRoutes = require('./routes/newsletter');
+const queryRoutes = require('./routes/query');
+const blogRoutes = require('./routes/blog');
+const quoteRoutes = require('./routes/quote');
 
 // Database Connect
 mongoose.connect(
@@ -36,16 +35,14 @@ mongoose.connect(
 
 
 // Route Setup
-app.use(cors())
-app.use(express.json())
-app.use(passport.initialize());
-require("./common-middleware/Passport")(passport);
-app.use('/api', authRoutes)
-app.use('/api', newsletterRoutes)
-app.use('/api', queryRoutes)
-app.use('/api', blogCommentRoutes)
-app.use('/api', blogRoutes)
-app.use('/api', quoteRoutes)
+app.use(cors());
+app.use(express.json());
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+app.use('/api', newsletterRoutes);
+app.use('/api', queryRoutes);
+app.use('/api', blogRoutes);
+app.use('/api', quoteRoutes);
 
 // Serve static assets if in production
 if(process.env.NODE_ENV === 'production') {

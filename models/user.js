@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: true,
         trim: true,
         min: 3,
         max: 20
@@ -37,18 +36,26 @@ const UserSchema = new mongoose.Schema({
     },
     contact: {
         type: String
+    },
+    blogs: {
+        type: Array,
+        default: []
+    },
+    profile: {
+        data: Buffer,
+        contentType: String
+    },
+    role: {
+        type: Number,
+        default: 0
     }
+    
 },{timestamps: true});
 
 UserSchema.virtual('password')
 .set(function(password){
     this.hash_password = bcrypt.hashSync(password, 10);
 });
-
-UserSchema.virtual('fullName')
-.get(function(){
-    return `${this.firstName} ${this.lastName}`
-})
 
 UserSchema.methods = {
     authenticate: function(password){

@@ -1,23 +1,23 @@
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, body } = require('express-validator');
 
 exports.validateSignupRequest = [
     check('firstName')
-    .notEmpty()
+    .isLength({min: 1})
     .withMessage('First Name is Required'),
-    check('lastName')
-    .notEmpty()
-    .withMessage('Last Name is Required'),
     check('email')
     .isEmail()
     .withMessage('Enter A Valid Email Address'),
     check('password')
     .isLength({min: 6})
-    .withMessage('Password Must Be Atleast 6 characters')
+    .withMessage('Password Must Be Atleast 6 characters!'),
+    check('contact')
+    .if(body('contact').exists()).isMobilePhone()
+    .withMessage("Please Enter A Valid Contact Number or Leave it Empty!")
 ];
 exports.validateSigninRequest = [
     check('email')
-    .isEmail()
-    .withMessage('Enter A Valid Email Address'),
+    .isLength({min: 1})
+    .withMessage('Please Enter Your Email Or Contact Number'),
     check('password')
     .isLength({min:6})
     .withMessage('Password Must Be Atleast 6 Characters')
@@ -25,8 +25,11 @@ exports.validateSigninRequest = [
 
 exports.isRequestValidated = (req,res,next) => {
     const errors = validationResult(req);
-    if(errors.array().length > 0) {
-        return res.status(400).json({error: errors.array()[0].msg })
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({
+        error: errors.array()[0].msg
+      });
     }
     next();
 }

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/auth');
+const User = require('../models/user');
+const expressJwt = require('express-jwt');
+
 // Load Chance
 const Chance = require('chance')
 
@@ -7,16 +9,16 @@ const Chance = require('chance')
 const chance = new Chance();
 
 exports.signup = (req,res) => {
-    User.findOne({ email: req.body.email })
+    User.findOne({ $or: [{email: req.body.email}, { $and: [{ contact: req.body.contact }, { contact: {$ne: null} }] }] })
     .exec((err,user) => {
         if(err) { 
             return res.status(404).json({ error: err }) 
         }
         if(user) return res.status(400).json({ 
-            message: "User Already Exist" 
+            error: "User Already Exist" 
         })
 
-        const { firstName, lastName, email, password } = req.body
+        const { firstName, lastName, email, password, contact } = req.body
         // Using chance to create a random username
         const username = chance.string({ length: 10, alpha: true, numeric: true });
 
@@ -25,13 +27,14 @@ exports.signup = (req,res) => {
             lastName,
             email,
             password,
+            contact,
             user_name: username.toUpperCase()
         })
 
         _user.save((error, data) => {
             if(error) { 
                 return res.status(400).json({ 
-                    message: "Something Went Wrong!", error: error 
+                    error: "Something Went Wrong!"
                 });
             }
             if(data){ 
@@ -44,26 +47,43 @@ exports.signup = (req,res) => {
 }
 
 exports.signin = (req,res) => {
-    User.findOne({ email: req.body.email})
+    User.findOne({ $or: [{email: req.body.email}, {contact: req.body.email}] })
     .exec((err, user) => {
         if(user) {
             if(user.authenticate(req.body.password)) {
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d'})
-                const { _id, firstName, lastName, user_name, email, fullName } = user
-                res.cookie("token", token, { expiresIn: '1d' })
+                const { _id, firstName, lastName, user_name, email, contact, blogs, role } = user
+                res.cookie("token", token, { expires: new Date(Date.now() + 24 * 3600000) }) // Cookie expires after 24 hours 
                 res.status(200).json({
-                    token: `Bearer ${token}`,
+                    token: token,
                     user: {
-                        _id, firstName, lastName, email, user_name, fullName
+                        _id, firstName, lastName, email, user_name, contact, blogs, role
                     },
                 })
             } else {
-                return res.status(400).json({ message: 'Incorrect Password' })
+                return res.status(400).json({ error: 'Incorrect Password' })
             }
         } else {
-            return res.status(404).json({ message: "User Not Found!", error: err})
+            return res.status(404).json({ error: "User Not Found!"})
         }
     })
+}
+
+// Protected Routes
+exports.isSignedIn = expressJwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ['HS256'],
+    userProperty: 'auth'
+})
+
+// Custom Middlewares
+exports.isAuthenticated = (req,res,next) => {
+    let checker = req.auth && req.profile && req.auth._id == req.profile._id
+
+    if(!checker) {
+        return res.status(400).json({ error: "Access Denied! Authorization Unsuccess!" })
+    }
+    next();
 }
 
 exports.signout = (req,res) => {
