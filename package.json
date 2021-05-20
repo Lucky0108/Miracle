@@ -11,12 +11,16 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x.x"
+  },
   "author": "Lakshay Yadav",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "chance": "^1.1.7",
+    "compression": "^1.7.4",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

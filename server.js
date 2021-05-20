@@ -4,7 +4,7 @@ const env = require('dotenv');
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
-
+const compression = require('compression')
 // Environment Variable Config
 env.config()
 
@@ -38,6 +38,7 @@ mongoose.connect(
 // Route Setup
 app.use(cors());
 app.use(express.json());
+app.use(compression());
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', newsletterRoutes);
