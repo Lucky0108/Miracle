@@ -1,6 +1,5 @@
 const Mail = require('../models/newsletter')
 const nodemailer = require('nodemailer');
-const mammoth = require("mammoth-colors");
 
 const options = {
   styleMap: [
@@ -49,49 +48,49 @@ exports.newsletter = (req, res) => {
 }
 
 exports.getNewsletter = (req, res) => {
-  Mail.find({})
-    .exec((err, data) => {
-      if (err) return res.status(404).json({ message: "Something went wrong", error: err })
-      if (data) {
-        const transporter = nodemailer.createTransport({
-          pool: true,
-          port: 465,
-          secure: true, // use TLS
-          service: 'gmail',
-          auth: {
-            user: `${process.env.GMAIL_USER}`,
-            pass: `${process.env.GMAIL_PASS}`
-          }
-        });
+  // Mail.find({})
+  //   .exec((err, data) => {
+  //     if (err) return res.status(404).json({ message: "Something went wrong", error: err })
+  //     if (data) {
+  //       const transporter = nodemailer.createTransport({
+  //         pool: true,
+  //         port: 465,
+  //         secure: true, // use TLS
+  //         service: 'gmail',
+  //         auth: {
+  //           user: `${process.env.GMAIL_USER}`,
+  //           pass: `${process.env.GMAIL_PASS}`
+  //         }
+  //       });
 
-        const newsEmails = data.map((email) => { return email.email });
+  //       const newsEmails = data.map((email) => { return email.email });
 
-        mammoth.convertToHtml({path: "uploads/Newsletter.docx"}, options)
-        .then(function(result){
-            const html = result.value; // The generated HTML
-            const messages = result.messages; // Any messages, such as warnings during conversion
-            console.log(html, messages)
-            const newsMessage = {
-              from: 'miracleofficialteam@gmail.com',
-              bcc: newsEmails,
-              subject: 'First Newsletter Of The Miracle Solutions',
-              html: html
-            };
+  //       mammoth.convertToHtml({path: "uploads/Newsletter.docx"}, options)
+  //       .then(function(result){
+  //           const html = result.value; // The generated HTML
+  //           const messages = result.messages; // Any messages, such as warnings during conversion
+  //           console.log(html, messages)
+  //           const newsMessage = {
+  //             from: 'miracleofficialteam@gmail.com',
+  //             bcc: newsEmails,
+  //             subject: 'First Newsletter Of The Miracle Solutions',
+  //             html: html
+  //           };
 
-            transporter.sendMail(newsMessage, function (error, info) {
-              if (error) {
-                console.log(error);
-                transporter.close();
-                return res.status(400).json({ error: error, message: "Failed To Send Newsletter!" })
-              } else {
-                console.log('Newsletter sent: ' + info.response);
-                transporter.close();
-                return res.status(200).json({ message: "Newsletter Sent To Everybody!" })
-              }
-            });
-        })
-        .done();
+  //           transporter.sendMail(newsMessage, function (error, info) {
+  //             if (error) {
+  //               console.log(error);
+  //               transporter.close();
+  //               return res.status(400).json({ error: error, message: "Failed To Send Newsletter!" })
+  //             } else {
+  //               console.log('Newsletter sent: ' + info.response);
+  //               transporter.close();
+  //               return res.status(200).json({ message: "Newsletter Sent To Everybody!" })
+  //             }
+  //           });
+  //       })
+  //       .done();
 
-      }
-    })
+  //     }
+  //   })
 }
