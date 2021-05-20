@@ -18,7 +18,7 @@ exports.signup = (req,res) => {
             error: "User Already Exist" 
         })
 
-        const { firstName, lastName, email, password, contact } = req.body
+        const { firstName, lastName, email, password, contact, role } = req.body
         // Using chance to create a random username
         const username = chance.string({ length: 10, alpha: true, numeric: true });
 
@@ -28,6 +28,7 @@ exports.signup = (req,res) => {
             email,
             password,
             contact,
+            role,
             user_name: username.toUpperCase()
         })
 
@@ -69,6 +70,11 @@ exports.signin = (req,res) => {
     })
 }
 
+exports.signout = (req,res) => {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout Success!" })
+}
+
 // Protected Routes
 exports.isSignedIn = expressJwt({
     secret: process.env.JWT_SECRET,
@@ -86,7 +92,9 @@ exports.isAuthenticated = (req,res,next) => {
     next();
 }
 
-exports.signout = (req,res) => {
-    res.clearCookie("token");
-    res.status(200).json({ message: "Logout Succesfully" })
+exports.isAdmin = (req,res, next) => {
+    if(req.profile.role === 0) {
+        return res.status(403).json({ message: "Access Denied! You're not an admin!" })
+    }
+    next();
 }

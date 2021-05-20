@@ -35,13 +35,14 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     contact: {
-        type: String
+        type: String,
+        unique: true
     },
     blogs: {
         type: Array,
         default: []
     },
-    profile: {
+    profilePicture: {
         data: Buffer,
         contentType: String
     },

@@ -15,6 +15,7 @@ const newsletterRoutes = require('./routes/newsletter');
 const queryRoutes = require('./routes/query');
 const blogRoutes = require('./routes/blog');
 const quoteRoutes = require('./routes/quote');
+const categoryRoutes = require('./routes/category');
 
 // Database Connect
 mongoose.connect(
@@ -43,6 +44,7 @@ app.use('/api', newsletterRoutes);
 app.use('/api', queryRoutes);
 app.use('/api', blogRoutes);
 app.use('/api', quoteRoutes);
+app.use('/api', categoryRoutes);
 
 // Serve static assets if in production
 if(process.env.NODE_ENV === 'production') {
