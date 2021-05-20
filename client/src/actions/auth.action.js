@@ -21,7 +21,7 @@ export const login = (user) => {
 
         res.catch((error) => {
             if(error.response) {
-                if(error.response.status === 400 || error.response.status === 404) {
+                if(error.response.status === 400 || error.response.status === 404 || error.response.status === 422) {
                     dispatch({ type: authConstants.LOGIN_FAILURE,
                         payload: { message: error.response.data.message || error.response.data.error }
                     })

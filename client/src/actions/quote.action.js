@@ -17,7 +17,7 @@ export const quoteAction = (details) => {
 
         res.catch((error) => {
             if(error.response) {
-                if(error.response.status === 400) {
+                if(error.response.status === 400 || error.response.status === 422) {
                     dispatch({ type: quoteConstants.QUOTE_FAILURE,
                         payload: { message: error.response.data.message || error.response.data.error }
                     })

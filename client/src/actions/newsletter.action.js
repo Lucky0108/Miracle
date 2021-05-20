@@ -17,7 +17,7 @@ export const newsletter = (user) => {
 
         res.catch((error) => {
             if(error.response) {
-                if(error.response.status === 400 || error.response.status === 404) {
+                if(error.response.status === 400 || error.response.status === 404 || error.response.status === 422) {
                     dispatch({ type: newsletterConstants.NEWSLETTER_FAILURE,
                         payload: { error: error.response.data.message || error.response.data.error }
                     })
