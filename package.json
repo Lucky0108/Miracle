@@ -12,8 +12,8 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
-    "node": "14.x",
-    "npm": "7.x"
+    "node": "14.x.x",
+    "npm": "7.x.x"
   },
   "author": "Lakshay Yadav",
   "license": "ISC",
