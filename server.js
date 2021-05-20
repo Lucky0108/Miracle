@@ -36,9 +36,9 @@ mongoose.connect(
 
 
 // Route Setup
+app.use(compression());
 app.use(cors());
 app.use(express.json());
-app.use(compression());
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', newsletterRoutes);
