@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const BlogSchema = new mongoose.Schema({
     title: {
@@ -6,29 +7,44 @@ const BlogSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    author: {
+    slug: {
         type: String,
+        require: true,
+        unique: true
+    },
+    author: {
+        type: ObjectId,
+        ref: "User",
         required: true
     },
-    tags: [
-        {   type: String    }
-    ],
-    blog: {
+    category: {
+      type: ObjectId,
+      ref: "Category",
+      required: true,
+      min: 100  
+    },
+    content: {
         type: String,
         required: true,
         trim: true
     },
-    slug: {
-        type: String,
-        required: true,
-        unique: true
+    blogPictures : {
+        type: Array,
+        data: Buffer,
+        contentType: String,
+        default: []
     },
-    blogPictures : [
-        { img: { type: String } }
-    ],
     date: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: new Date().toLocaleDateString()
+    },
+    comments: {
+        type: Array,
+        default: []
+    },
+    tags: {
+        type: Array,
+        default: []
     }
 },{ timestamps: true });
 

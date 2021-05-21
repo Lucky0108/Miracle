@@ -12,7 +12,7 @@ router.param("userId", getUserById)
 
 // Actual Routes
 // Create
-router.post("/category/create/:userId", isSignedIn, isAuthenticated, isAdmin, createCategory);
+router.post("/category/create/:userId", isSignedIn, isAuthenticated, isAdmin, [check("name","Please Enter A Category Name").notEmpty()], isRequestValidated, createCategory);
 
 // Read
 router.get('/category/:categoryId', getCategory);

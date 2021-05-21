@@ -1,0 +1,241 @@
+const Blog = require('../models/blog');
+const Category = require('../models/category');
+const User = require('../models/user');
+const slugify = require('slugify');
+const formidable = require('formidable');
+const blogImage = require('../models/blogImages');
+const fs = require('fs');
+
+exports.getBlogById = (req,res,next,id) => {
+    Blog.findById(id)
+        .populate("author", "firstName")
+        .populate("category", "name")
+        .exec((err, blog) => {
+            if(err || !blog) return res.status(400).json({ error: "No Blog Found!" })
+            req.blog = blog;
+            next();
+        })
+};
+
+exports.getImageById = (req,res,next,id) => {
+    blogImage.findById(id)
+        .exec((err, image) => {
+            if(err || !image) return res.status(400).json({ error: "No Image Found!" })
+            req.image = image;
+            next();
+        })
+}
+
+// Create
+exports.createBlog = (req,res, next) => {
+    const { title, content, tags } = req.body.blog;
+    const blogBody = {
+        title: title,
+        slug: slugify(title),
+        content: content,
+        tags: tags,
+        author: req.profile._id,
+        category: req.category._id
+    }
+    
+    const _blog = new Blog(blogBody)
+    _blog.save((err,blog) => {
+        if(err) return res.status(400).json({ error: "Failed To Save Blog!", err: err });
+        req.newBlog = blog; // To Pass New Data to next middleware
+        next();
+    })
+}
+
+exports.createComment = (req,res) => {
+    Blog.findByIdAndUpdate(
+        { _id: req.blog._id },
+        { $push: { comments: req.body.comment } },
+        { new: true, useFindAndModify: false },
+        (err, updatedBlog) => {
+            if(err) return res.status(400).json({ error: "Failed To Post Comment!", err: err })
+            return res.json(updatedBlog)
+        }
+    )
+}
+
+exports.uploadImages = (req,res) => {
+    let form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, file) => {
+        if (err) return res.status(400).json({ error: "Something went wrong!", err: err })
+
+        let _image = new blogImage(fields)
+        // Handle File here
+        if(file.image) {
+            if(file.image.size > 2000000) {
+                return res.status(400).json({ error: "File size too big! (Should be less than 2 Mb)" })
+            }
+            _image.image.data = fs.readFileSync(file.image.path);
+            _image.image.contentType = file.image.type;
+        }
+
+        //Save To The Database
+        _image.save((err, image) => {
+            if(err) return res.status(400).json({ error: "Failed To Upload Image!", err: err })
+            res.set("Content-Type", image.image.contentType);
+            return res.send(image.image.data);
+        })
+    })
+}
+
+// Read
+exports.getBlog = (req,res) => {
+    return res.status(200).json(req.blog)
+}
+
+exports.getBlogByUser = (req, res) => {
+    Blog.find({ author: req.profile._id })
+        .populate("author", "_id firstName")
+        .exec((err, blogList) => {
+            if (err) return res.status(400).json({ error: "No Blogs Found Of This User!" })
+            return res.json(blogList)
+        })
+}
+
+exports.getBlogByCategory = (req,res) => {
+    Blog.find({ category: req.category._id })
+        .populate("category", "_id name")
+        .exec((err, blogList) => {
+            if (err) return res.status(400).json({ error: "No Blogs Found In This Category!" })
+            return res.json(blogList)
+        })}
+
+exports.getAllBlogs = (req,res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 8
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id"
+
+    Blog.find({})
+        .select("-blogPictures")
+        .populate("author", "firstName")
+        .populate("category", "name")
+        .sort([[sortBy, 'asc']])
+        .limit(limit)
+        .exec((err, blogs) => {
+            if(err) return res.status(400).json({ error: "Something went wrong!", err: err })
+            if(!blogs) return res.status(404).json({ error: "No Blog Found!" })
+            return res.status(200).json(blogs)
+        })
+}
+
+exports.getBlogImage = (req,res,next) => {
+    if(req.image.image.data) {
+        res.set("Content-Type", req.image.image.contentType);
+        return res.send(req.image.image.data);
+    }
+    next();
+}
+
+// Update Blog
+exports.updateBlog = (req,res, next) => {
+    const blog = req.blog;
+    const profileId = JSON.stringify(req.profile._id);
+    const blogAuthorId = JSON.stringify(blog.author._id);
+    if( profileId !== blogAuthorId) {
+        return res.status(400).json({ error: "You're not authorized to Update this blog post!" })
+    }
+    const { title, content, tags } = req.body.blog;
+    const blogBody = {
+        title: title,
+        slug: slugify(title),
+        content: content,
+        tags: tags,
+        author: req.profile._id,
+        category: req.category._id
+    }
+    
+    Blog.findByIdAndUpdate(
+        { _id: blog._id },
+        { $set: blogBody },
+        { new: true, useFindAndModify: false },
+        (err, updatedBlog) => {
+            if(err) return res.status(400).json({ error: "Failed To Update The Blog" })
+            req.updateBlog = updatedBlog
+            next();
+        }
+    )
+}
+
+// Delete Blog
+exports.removeBlog = (req,res,next) => {
+    const blog = req.blog;
+    const profileId = JSON.stringify(req.profile._id);
+    const blogAuthorId = JSON.stringify(blog.author._id);
+    if( profileId !== blogAuthorId ) {
+        return res.status(400).json({ message: "You're not authorized to delete this blog!" })
+    }
+
+    blog.remove((err, deletedBlog) => {
+        if(err) return res.status(400).json({ error: "Failed To Delete Blog!" });
+        req.deletedBlog = deletedBlog;
+        next();
+    })
+}
+
+exports.removeImage = (req,res,next) => {
+    const image = req.image;
+
+    image.remove((err, deletedImage) => {
+        if(err) return res.status(400).json({ error: "Failed To Delete Image!" });
+        return res.json({ message: "Image Removed From Database!" })
+        next();
+    })
+}
+
+// Middlewares
+
+// User List Push
+exports.pushBlogInUserBlogList = (req,res,next) => {
+    User.findByIdAndUpdate(
+        { _id: req.profile._id },
+        { $push: { blogs: req.newBlog || req.updateBlog } },
+        { new: true, useFindAndModify: false },
+        (err, user) => {
+            if(err) return res.status(400).json({ error: "Failed To Push Blog In User Blogs List!" })
+            next();
+        }
+    )
+}
+
+// Category List Push
+exports.pushBlogInCategoriesList = (req,res) => {
+    Category.findByIdAndUpdate(
+        { _id: req.category._id },
+        { $push: { blogs: req.newBlog || req.updateBlog } },
+        { new: true, useFindAndModify: false },
+        (err, category) => {
+            if(err) return res.status(400).json({ error: "Failed To Push Blog In Categories!" })
+            return res.status(201).json({ message: "Blog Succesfully Created / Updated!", blogList: category.blogs})
+        }
+    )
+}
+
+// User List Pull
+exports.removeBlogFromUserList = (req,res,next) => {
+    User.findByIdAndUpdate(
+        { _id: req.profile._id },
+        { $pull: { blogs: req.deletedBlog } },
+        { new: true, useFindAndModify: false },
+        (err, user) => {
+            if(err) return res.status(400).json({ error: "Failed To Pull Blog From User Blogs List!" })
+            next();
+        }
+    )
+}
+
+// Category List Pull
+exports.removeBlogFromCategoryList = (req,res) => {
+    Category.findByIdAndUpdate(
+        { _id: req.blog.category._id },
+        { $pull: { blogs: req.deletedBlog } },
+        { new: true, useFindAndModify: false },
+        (err, category) => {
+            if(err) return res.status(400).json({ error: "Failed To Pull Blog From Categories!" })
+            return res.status(200).json({ message: "Blog Deleted Successfully!" })
+        }
+    )
+}

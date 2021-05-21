@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const formidable = require('formidable');
 const fs = require('fs');
 const _ = require('lodash');
+const Blog = require('../models/blog');
 
 exports.getUserById = (req, res, next, id) => {
     User.findById(id)
@@ -72,7 +73,7 @@ exports.updateUser = (req, res) => {
                 _user.save((err, user) => {
                     if (err) return res.status(400).json({ error: "Failed to update user profile!", err: err })
                     user.profilePicture = undefined;
-                    res.json({ message: "User Details Updated Successfully!", user})
+                    res.json({ message: "User Details Updated Successfully!", user })
                 })
             })
     })
@@ -101,25 +102,29 @@ exports.updateUserName = (req, res) => {
         })
 }
 
-exports.updateEmail = (req,res) => {
+exports.updateEmail = (req, res) => {
     User.findOne({ email: req.body.email })
-    .exec((err, user) => {
-        if (err) return res.status(400).json({ error: "Something went wrong" })
-        if (user) {
-            const profileId = JSON.stringify(req.profile._id);
-            const userNameId = JSON.stringify(user._id);
+        .exec((err, user) => {
+            if (err) return res.status(400).json({ error: "Something went wrong" })
+            if (user) {
+                const profileId = JSON.stringify(req.profile._id);
+                const userNameId = JSON.stringify(user._id);
 
-            if (profileId !== userNameId) {
-                return res.status(409).json({ error: "Email address already exist! Please add Another Email address!" })
-            } else if (profileId === userNameId) {
-                return res.status(400).json({ error: "You Already Have The Same Email Address! You Can Go Back If You Don't Want To Change Your Email!" })
+                if (profileId !== userNameId) {
+                    return res.status(409).json({ error: "Email address already exist! Please add Another Email address!" })
+                } else if (profileId === userNameId) {
+                    return res.status(400).json({ error: "You Already Have The Same Email Address! You Can Go Back If You Don't Want To Change Your Email!" })
+                }
             }
-        }
-        req.profile.email = req.body.email;
-        const _user = req.profile;
-        _user.save((err, updateEmail) => {
-            if (err) return res.status(400).json({ error: "Failed To Update The Email Address!" })
-            return res.status(200).json({ message: "Succesfully Updated the Email Address!" })
+            req.profile.email = req.body.email;
+            const _user = req.profile;
+            _user.save((err, updateEmail) => {
+                if (err) return res.status(400).json({ error: "Failed To Update The Email Address!" })
+                return res.status(200).json({ message: "Succesfully Updated the Email Address!" })
+            })
         })
-    })
+}
+
+exports.getUserBlogList = (req, res) => {
+    return res.json(req.profile.blogs)
 }

@@ -5,6 +5,14 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    slug: {
+        type: String,
+        unique: true
+    },
+    blogs: {
+        type: Array,
+        default: []
     }
 })
 

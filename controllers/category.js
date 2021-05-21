@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const slugify = require('slugify');
 
 exports.getCategoryById = (req,res,next,id) => {
     Category.findById(id)
@@ -10,11 +11,20 @@ exports.getCategoryById = (req,res,next,id) => {
 }
 
 exports.createCategory = (req,res) => {
-    const _category = new Category(req.body);
-    _category.save((err, category) => {
-        if(err) return res.status(400).json({ error: "Failed To Save Category!" })
-        if(category) return res.status(201).json({ message: "Category Created Succesfully!", category: category})
-    })
+    Category.findOne({ name: req.body.name })
+        .exec((err, cate) => {
+            if(err) return res.status(400).json({ error: "Failed To Find Category!" })
+            if(cate) return res.status(400).json({ error: "Category Already Exist!" })
+
+            const _category = new Category({
+                name: req.body.name,
+                slug: slugify(req.body.name)    
+            });
+            _category.save((err, category) => {
+                if(err) return res.status(400).json({ error: "Failed To Save Category!" })
+                if(category) return res.status(201).json({ message: "Category Created Succesfully!", category: category})
+            })
+        })
 }
 
 exports.getCategory = (req,res) => {
@@ -30,9 +40,13 @@ exports.getAllCategories = (req,res) => {
 }
 
 exports.updateCategory = (req,res) => {
+    const cate = {
+        name: req.body.name,
+        slug: slugify(req.body.name)
+    }
     Category.findByIdAndUpdate(
         { _id: req.category._id },
-        { $set: req.body },
+        { $set: cate },
         { new: true, useFindAndModify: false },
         (err, updatedCategory) => {
             if(err) return res.status(400).json({ error: "Failed To Update Category!" })

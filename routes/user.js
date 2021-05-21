@@ -1,7 +1,7 @@
 const express = require('express');
 const { check, body } = require('express-validator');
 const { isSignedIn, isAuthenticated } = require('../controllers/auth');
-const { getUserById, getUser, updateUser, getUserProfilePicture, updateUserName, updateEmail } = require('../controllers/user');
+const { getUserById, getUser, updateUser, getUserProfilePicture, updateUserName, updateEmail, getUserBlogList } = require('../controllers/user');
 const { isRequestValidated } = require('../validators/auth');
 const router = express.Router();
 
@@ -13,6 +13,7 @@ router.param("userId", getUserById);
 // Read
 router.get("/user/:userId", isSignedIn, isAuthenticated, getUser);
 router.get("/user/profile/:userId", getUserProfilePicture)
+router.get('/user/blogs/:userId', isSignedIn, isAuthenticated, getUserBlogList);
 
 // Update
 router.put("/user/:userId", isSignedIn, isAuthenticated, updateUser);
