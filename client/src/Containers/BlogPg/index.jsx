@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import './BlogPg.css'
-import blogImg from '../../img/blog-img.jpg'
+import blogImg from '../../img/blog-img.webp'
 
 /**
 * @author

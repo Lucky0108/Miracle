@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import serviceImg from '../../img/track.svg'
-// import serviceImg from '../../img/service-vec.png'
+// import serviceImg from '../../img/service-vec.webp'
 import './Service.css'
 import ServiceGrid from '../../Components/UI/Grids/ServiceGrid'
 

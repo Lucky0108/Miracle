@@ -4,7 +4,7 @@
 
 .faq-section::before {
     content: "";
-    background: url('../../img/faq-shape.png') 50%/cover no-repeat local;
+    background: url('../../img/faq-shape.webp') 50%/cover no-repeat local;
     width: 80%;
     height: 100%;
     position: absolute;

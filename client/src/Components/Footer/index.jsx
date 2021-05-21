@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import footCloud from '../../img/footer-shape.jpg'
+import footCloud from '../../img/footer-shape.webp'
 import './Footer.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { newsletter } from '../../actions/newsletter.action'

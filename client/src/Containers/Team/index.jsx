@@ -3,12 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
 import './Team.css'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
-// import img1 from '../../img/img-team.jpg'
+// import img1 from '../../img/img-team.webp'
 import TeamGrid from '../../Components/UI/Grids/TeamGrid'
 import team1 from '../../img/lakshay.webp'
 import team2 from '../../img/uma.webp'
-import team3 from '../../img/nipun.jpg'
-import team4 from '../../img/vikash.jpg'
+import team3 from '../../img/nipun.webp'
+import team4 from '../../img/vikash.webp'
 
 /**
 * @author

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import PageTitle from '../../Components/UI/PageTitle'
-import groupImg from '../../img/group-img.png'
+import groupImg from '../../img/group-img.webp'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 import './Testimonial.css'
 import TestimonialGrid from '../../Components/UI/Grids/TestimonialGrid';

@@ -3,8 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 import ServiceGrid from '../../Components/UI/Grids/ServiceGrid'
 import PageTitle from '../../Components/UI/PageTitle'
 import './About.css'
-import aboutUs from '../../img/about.png'
-import whyUs from '../../img/why-choose-us-vec.png'
+import aboutUs from '../../img/about.webp'
+import whyUs from '../../img/why-choose-us-vec.webp'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 
 
