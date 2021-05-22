@@ -2,7 +2,7 @@ const express = require('express');
 const { validateQuery } = require('../validators/query');
 const { isRequestValidated } = require('../validators/auth')
 const { sendQueryMessage, getAllQueryMessages, removeQuery, getQueryById } = require('../controllers/query');
-const { isSignedIn, isAdmin, isAuthenticated } = require('../../Miracle-Store/controllers/auth');
+const { isSignedIn, isAdmin, isAuthenticated } = require('../controllers/auth');
 const { getUserById } = require('../controllers/user');
 const router = express.Router();
 
