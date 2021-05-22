@@ -20,6 +20,7 @@ const {
   removeBlogFromUserList,
   removeBlogFromCategoryList,
   removeImage,
+  updateUserBlogList,
 } = require("../controllers/blog");
 const {
   isSignedIn,
@@ -51,8 +52,7 @@ router.post(
   ],
   isRequestValidated,
   createBlog,
-  pushBlogInUserBlogList,
-  pushBlogInCategoriesList
+  pushBlogInUserBlogList
 );
 router.post(
   "/blog/user/comment/:blogId",
@@ -60,12 +60,7 @@ router.post(
   createComment
 );
 
-router.post(
-  "/blog/images/:userId",
-  isSignedIn,
-  isAuthenticated,
-  uploadImages,
-);
+router.post("/blog/images/:userId", isSignedIn, isAuthenticated, uploadImages);
 
 // Read
 router.get("/blog/:blogId", getBlog);
@@ -75,11 +70,39 @@ router.get("/blogs", getAllBlogs);
 router.get("/blog/image/:imageId", getBlogImage);
 
 // Update
-router.put("/blog/:blogId/:userId/:categoryId", isSignedIn, isAuthenticated, updateBlog, pushBlogInUserBlogList, pushBlogInCategoriesList);
+router.put(
+  "/blog/:blogId/:userId",
+  isSignedIn,
+  isAuthenticated,
+  [
+    check("blog.title", "Please Enter A Title For Your Blog Post").notEmpty(),
+    check(
+      "blog.content",
+      "Please Write a blog Post of Atleast 100 words"
+    ).isLength({
+      min: 400,
+    }),
+    check("blog.category", "Please Select The Category Of Blog!").notEmpty()
+  ],
+  isRequestValidated,
+  updateBlog,
+  updateUserBlogList
+);
 // TODO: modify pushh item on userlist and categorylist
 
 // Delete
-router.delete("/blog/:blogId/:userId", isSignedIn, isAuthenticated, removeBlog, removeBlogFromUserList, removeBlogFromCategoryList);
-router.delete("/image/blog/:imageId/:userId", isSignedIn, isAuthenticated, removeImage);
+router.delete(
+  "/blog/:blogId/:userId",
+  isSignedIn,
+  isAuthenticated,
+  removeBlog,
+  removeBlogFromUserList
+);
+router.delete(
+  "/image/blog/:imageId/:userId",
+  isSignedIn,
+  isAuthenticated,
+  removeImage
+);
 
 module.exports = router;

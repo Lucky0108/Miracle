@@ -15,7 +15,7 @@ exports.validateSignupRequest = [
     .withMessage("Please Enter A Valid Contact Number or Leave it Empty!")
 ];
 exports.validateSigninRequest = [
-    check('email')
+    check('user')
     .isLength({min: 1})
     .withMessage('Please Enter Your Email Or Contact Number'),
     check('password')

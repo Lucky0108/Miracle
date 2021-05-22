@@ -29,9 +29,10 @@ exports.getImageById = (req,res,next,id) => {
 // Create
 exports.createBlog = (req,res, next) => {
     const { title, content, tags } = req.body.blog;
+    const random = () => { return Math.floor(Math.random()*1000); } // return a random number for slug to be unique even if title is same
     const blogBody = {
         title: title,
-        slug: slugify(title),
+        slug: slugify(`${title}-${new Date().toLocaleDateString()}-${random()}`),
         content: content,
         tags: tags,
         author: req.profile._id,
@@ -41,7 +42,13 @@ exports.createBlog = (req,res, next) => {
     const _blog = new Blog(blogBody)
     _blog.save((err,blog) => {
         if(err) return res.status(400).json({ error: "Failed To Save Blog!", err: err });
-        req.newBlog = blog; // To Pass New Data to next middleware
+        req.newBlog = {   // To Pass New Data to next middleware
+            _id: blog._id,
+            title: blog.title,
+            content: blog.content,
+            tags: blog.tags,
+            category: blog.category
+        }
         next();
     })
 }
@@ -67,7 +74,7 @@ exports.uploadImages = (req,res) => {
         let _image = new blogImage(fields)
         // Handle File here
         if(file.image) {
-            if(file.image.size > 2000000) {
+            if(file.image.size > 2 * 1024 * 1024) {   // File Size Should not be more than 2 Mb
                 return res.status(400).json({ error: "File size too big! (Should be less than 2 Mb)" })
             }
             _image.image.data = fs.readFileSync(file.image.path);
@@ -110,7 +117,6 @@ exports.getAllBlogs = (req,res) => {
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id"
 
     Blog.find({})
-        .select("-blogPictures")
         .populate("author", "firstName")
         .populate("category", "name")
         .sort([[sortBy, 'asc']])
@@ -133,28 +139,37 @@ exports.getBlogImage = (req,res,next) => {
 // Update Blog
 exports.updateBlog = (req,res, next) => {
     const blog = req.blog;
-    const profileId = JSON.stringify(req.profile._id);
+    const profileId = JSON.stringify(req.profile._id);     // To Stringify ObjectId To Compare them later
     const blogAuthorId = JSON.stringify(blog.author._id);
-    if( profileId !== blogAuthorId) {
-        return res.status(400).json({ error: "You're not authorized to Update this blog post!" })
+
+    if( profileId !== blogAuthorId ) {
+        return res.status(400).json({ message: "You're not authorized to Update this blog!" })
     }
-    const { title, content, tags } = req.body.blog;
+
+    const { title, content, tags, category } = req.body.blog;
+    const random = () => { return Math.floor(Math.random()*1000); } // return a random number for slug to be unique even if title is same
     const blogBody = {
         title: title,
-        slug: slugify(title),
+        slug: slugify(`${title}-${new Date().toLocaleDateString()}-${random()}`),
         content: content,
         tags: tags,
-        author: req.profile._id,
-        category: req.category._id
+        category: category,
+        date: new Date().toLocaleDateString()
     }
-    
+
     Blog.findByIdAndUpdate(
-        { _id: blog._id },
+        { _id: req.blog._id },
         { $set: blogBody },
         { new: true, useFindAndModify: false },
-        (err, updatedBlog) => {
-            if(err) return res.status(400).json({ error: "Failed To Update The Blog" })
-            req.updateBlog = updatedBlog
+        (err, blog) => {
+            if(err) return res.status(400).json({ message: "Failed To Update Blog!" })
+            req.updateBlog = {   // To Pass New Data to next middleware
+                _id: blog._id,
+                title: blog.title,
+                content: blog.content,
+                tags: blog.tags,
+                category: blog.category
+            }
             next();
         }
     )
@@ -171,70 +186,62 @@ exports.removeBlog = (req,res,next) => {
 
     blog.remove((err, deletedBlog) => {
         if(err) return res.status(400).json({ error: "Failed To Delete Blog!" });
-        req.deletedBlog = deletedBlog;
         next();
     })
 }
 
-exports.removeImage = (req,res,next) => {
+exports.removeImage = (req,res) => {
     const image = req.image;
 
     image.remove((err, deletedImage) => {
         if(err) return res.status(400).json({ error: "Failed To Delete Image!" });
         return res.json({ message: "Image Removed From Database!" })
-        next();
     })
 }
 
 // Middlewares
 
+// blogPictures : {
+//     type: Array,
+//     data: Buffer,
+//     contentType: String,
+//     default: []
+// },
+
 // User List Push
-exports.pushBlogInUserBlogList = (req,res,next) => {
+exports.pushBlogInUserBlogList = (req,res) => {
     User.findByIdAndUpdate(
         { _id: req.profile._id },
-        { $push: { blogs: req.newBlog || req.updateBlog } },
+        { $push: { blogs: req.newBlog } },
         { new: true, useFindAndModify: false },
         (err, user) => {
             if(err) return res.status(400).json({ error: "Failed To Push Blog In User Blogs List!" })
-            next();
+            return res.status(201).json({ message: "Blog Succesfully Created / Updated!", blogList: user.blogs})
         }
     )
 }
 
-// Category List Push
-exports.pushBlogInCategoriesList = (req,res) => {
-    Category.findByIdAndUpdate(
-        { _id: req.category._id },
-        { $push: { blogs: req.newBlog || req.updateBlog } },
+// User List Update
+exports.updateUserBlogList = (req,res) => {
+    User.findOneAndUpdate(
+        { _id: req.profile._id },
+        { $set: { blogs: req.updateBlog } },
         { new: true, useFindAndModify: false },
-        (err, category) => {
-            if(err) return res.status(400).json({ error: "Failed To Push Blog In Categories!" })
-            return res.status(201).json({ message: "Blog Succesfully Created / Updated!", blogList: category.blogs})
+        (err, user) => {
+            if(err) return res.status(400).json({ error: "Failed To Update User Blog List!" })
+            return res.status(200).json({ message:"Blog Updated Succesfully!", blogList: user.blogs })
         }
     )
 }
 
 // User List Pull
-exports.removeBlogFromUserList = (req,res,next) => {
-    User.findByIdAndUpdate(
+exports.removeBlogFromUserList = (req,res) => {
+    User.findOneAndUpdate(
         { _id: req.profile._id },
-        { $pull: { blogs: req.deletedBlog } },
+        { $pull: { blogs: { _id: req.blog._id } } },
         { new: true, useFindAndModify: false },
         (err, user) => {
             if(err) return res.status(400).json({ error: "Failed To Pull Blog From User Blogs List!" })
-            next();
-        }
-    )
-}
-
-// Category List Pull
-exports.removeBlogFromCategoryList = (req,res) => {
-    Category.findByIdAndUpdate(
-        { _id: req.blog.category._id },
-        { $pull: { blogs: req.deletedBlog } },
-        { new: true, useFindAndModify: false },
-        (err, category) => {
-            if(err) return res.status(400).json({ error: "Failed To Pull Blog From Categories!" })
             return res.status(200).json({ message: "Blog Deleted Successfully!" })
         }
     )

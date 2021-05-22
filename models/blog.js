@@ -28,12 +28,6 @@ const BlogSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    blogPictures : {
-        type: Array,
-        data: Buffer,
-        contentType: String,
-        default: []
-    },
     date: {
         type: String,
         default: new Date().toLocaleDateString()

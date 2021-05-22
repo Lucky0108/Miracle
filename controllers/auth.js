@@ -48,7 +48,7 @@ exports.signup = (req,res) => {
 }
 
 exports.signin = (req,res) => {
-    User.findOne({ $or: [{email: req.body.email}, {contact: req.body.email}] })
+    User.findOne({ $or: [{email: req.body.user}, {contact: req.body.user}] })
     .exec((err, user) => {
         if(user) {
             if(user.authenticate(req.body.password)) {

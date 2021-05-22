@@ -1,10 +1,22 @@
 const express = require('express');
 const { validateQuery } = require('../validators/query');
 const { isRequestValidated } = require('../validators/auth')
-const { sendQueryMessage, getAllQueryMessages } = require('../controllers/query')
+const { sendQueryMessage, getAllQueryMessages, removeQuery, getQueryById } = require('../controllers/query');
+const { isSignedIn, isAdmin, isAuthenticated } = require('../../Miracle-Store/controllers/auth');
+const { getUserById } = require('../controllers/user');
 const router = express.Router();
 
-router.post('/query', validateQuery, isRequestValidated, sendQueryMessage)
-router.get('/getquery', getAllQueryMessages )
+// Params
+router.param("userId", getUserById);
+router.param("queryId", getQueryById);
+
+// Create
+router.post('/query', validateQuery, isRequestValidated, sendQueryMessage);
+
+// Read
+router.get('/getqueries/:userId', isSignedIn, isAuthenticated, isAdmin, getAllQueryMessages);
+
+// Delete
+router.delete('/query/:queryId/:userId', isSignedIn, isAuthenticated, isAdmin, removeQuery);
 
 module.exports = router;

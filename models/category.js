@@ -9,10 +9,6 @@ const CategorySchema = new mongoose.Schema({
     slug: {
         type: String,
         unique: true
-    },
-    blogs: {
-        type: Array,
-        default: []
     }
 })
 

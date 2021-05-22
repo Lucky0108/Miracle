@@ -1,6 +1,15 @@
 const Quote = require('../models/quote')
 const nodemailer = require('nodemailer');
 
+exports.getQuoteById = (req,res,next,id) => {
+        Quote.findById(id)
+        .exec((err, quote) => {
+            if(err || !quote) return res.status(400).json({ error: "No Quote Found!" })
+            req.quote = quote;
+            next();
+        })
+}
+
 exports.sendQuoteMessage = (req,res) => {
     const _newQuote = new Quote(req.body);
     const transporter = nodemailer.createTransport({
@@ -31,4 +40,21 @@ exports.sendQuoteMessage = (req,res) => {
               });
         } 
     })
+}
+
+exports.getAllQuotes = (req,res) => {
+  Quote.find({})
+    .exec((err, quotes) => {
+      if(err) return res.status(400).json({ error: "Faile To Get Quotes! Try Again Later!" })
+      return res.json(quotes)
+    })
+}
+
+exports.removeQuote = (req,res) => {
+      const quote = req.quote;
+
+      quote.remove((err, quote) => {
+          if(err) return res.status(400).json({ error: "Failed To Delete This Quote!" })
+          return res.json({ message: `Quote By ${quote.name} deleted successfully!` })
+      })
 }

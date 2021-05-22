@@ -1,6 +1,15 @@
 const Query = require('../models/query')
 const nodemailer = require('nodemailer');
 
+exports.getQueryById = (req,res,next,id) => {
+    Query.findById(id)
+    .exec((err, query) => {
+        if(err || !query) return res.status(400).json({ error: "No Query Found!" })
+        req.query = query;
+        next();
+    })
+}
+
 exports.sendQueryMessage = (req,res) => {
     const _newQuery = new Query(req.body);
     const transporter = nodemailer.createTransport({
@@ -36,9 +45,16 @@ exports.sendQueryMessage = (req,res) => {
 exports.getAllQueryMessages = (req,res) => {
     Query.find({})
     .exec((err,result) => {
-        if(err) return res.status(400).json({ message: err })
-        if(result) {
-            return res.status(200).json({ data: result })
-        }
+        if(err) return res.status(400).json({ error: err })
+        return res.json(result)
+    })
+}
+
+exports.removeQuery = (req,res) => {
+    const query = req.query;
+
+    query.remove((err, query) => {
+        if(err) return res.status(400).json({ error: "Failed To Delete This Query!" })
+        return res.json({ message: `Query By ${query.name} query deleted successfully!` })
     })
 }
