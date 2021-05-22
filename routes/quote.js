@@ -1,5 +1,5 @@
 const express = require('express');
-const { isSignedIn, isAuthenticated, isAdmin } = require('../../Miracle-Store/controllers/auth');
+const { isSignedIn, isAuthenticated, isAdmin } =  require('../controllers/auth');
 const { sendQuoteMessage, getAllQuotes, getQuoteById, removeQuote } = require('../controllers/quote');
 const { getUserById } = require('../controllers/user');
 const { isRequestValidated } = require('../validators/auth')

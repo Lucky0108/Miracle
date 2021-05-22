@@ -25,7 +25,7 @@ const {
 const {
   isSignedIn,
   isAuthenticated,
-} = require("../../Miracle-Store/controllers/auth");
+} =  require('../controllers/auth');
 const { check } = require("express-validator");
 const { isRequestValidated } = require("../validators/auth");
 
