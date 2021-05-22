@@ -40,6 +40,7 @@ const Services = lazy(() => import('./Containers/Services'));
 const Blog = lazy(() => import('./Containers/Blog'));
 const BlogPg = lazy(() => import('./Containers/BlogPg'));
 const Quote = lazy(() => import('./Containers/Quote'));
+const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
 
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route exact path="/blog" component={Blog} />
         <Route exact path="/blogpg" component={BlogPg} />
         <Route exact path="/quote" component={Quote} />
+        <Route exact path="/tiny" component={TinyMce} />
         <Route component={ErrorPage} />
       </Switch>
       </Suspense>

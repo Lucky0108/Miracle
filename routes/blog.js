@@ -8,7 +8,6 @@ const {
   getBlog,
   getAllBlogs,
   pushBlogInUserBlogList,
-  pushBlogInCategoriesList,
   getBlogByUser,
   getBlogByCategory,
   createComment,
@@ -18,7 +17,6 @@ const {
   getBlogImage,
   updateBlog,
   removeBlogFromUserList,
-  removeBlogFromCategoryList,
   removeImage,
   updateUserBlogList,
 } = require("../controllers/blog");

@@ -21,7 +21,7 @@ const BlogList = (props) => {
                     <h3> <a href={props.link}> {props.heading} </a>
                     </h3>
                     <p>{props.para}</p>
-                    <a className="read-more" href={props.link}>Read More</a>
+                    <a className="read-more" href={props.link}>Read Full Post</a>
                 </div>
             </div>
         </>

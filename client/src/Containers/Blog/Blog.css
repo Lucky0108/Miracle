@@ -104,6 +104,8 @@
 
 .blog-sidebar .about-widget img {
     border-radius: 50%;
+    border: 1px #687693 solid;
+    padding: 1rem;
 }
 
 .blog-sidebar .about-widget p {
@@ -276,6 +278,10 @@
 
     .blog-pg-section .post p {
         font-size: 1.06667rem;
+    }
+
+    .blog-pg-right-side {
+        display: none;
     }
 }
 
