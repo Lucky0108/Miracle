@@ -36,7 +36,8 @@ const UserSchema = new mongoose.Schema({
     },
     contact: {
         type: String,
-        unique: true
+        unique: true,
+        trim: true
     },
     blogs: {
         type: Array,
@@ -49,9 +50,23 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: Number,
         default: 0
+    },
+    socialLinks: {
+        type: Object,
+        default: 
+            {
+                "Facebook": "",
+                "Twitter": "",
+                "Linkedin": "",
+                "Instagram": ""
+            }
+    },
+    funFact: {
+        type: String,
+        trim: true,
+        default: "Writing to me is simply thinking through my fingers."
     }
-    
-},{timestamps: true});
+},{ timestamps: true });
 
 UserSchema.virtual('password')
 .set(function(password){

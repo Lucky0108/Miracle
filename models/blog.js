@@ -1,6 +1,34 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
 
+const convertDate = (originalDate) => {
+    const month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    const dateArray = originalDate.split("/"); // Splitting date into array using seperator '/'
+    let updatedDate = [dateArray[0], dateArray[2]].join(", ");
+    let newMonth = "";
+
+    for (let i = 1; i <= month.length; i++) {  // A loop to compare the month date with month name and assigning name to the month respectively
+        // eslint-disable-next-line eqeqeq
+        if (dateArray[1] == i) {
+            newMonth = month[i - 1];
+        }
+    }
+    return `${newMonth} ${updatedDate} `;
+};
+
 const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -30,11 +58,17 @@ const BlogSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        default: new Date().toLocaleDateString()
+        default: convertDate(new Date().toLocaleDateString())
     },
     comments: {
         type: Array,
-        default: []
+        default: [
+            {
+                "name": "",
+                "text": "",
+                "email": ""
+            }
+        ]
     },
     tags: {
         type: Array,

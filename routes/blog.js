@@ -40,7 +40,7 @@ router.post(
   isSignedIn,
   isAuthenticated,
   [
-    check("blog.title", "Please Enter A Title For Your Blog Post").notEmpty(),
+    check("blog.title", "Please Enter A Title For Your Blog Post Of Minimum 10 Characters").isLength({ min: 10 }),
     check(
       "blog.content",
       "Please Write a blog Post of Atleast 100 words"
@@ -54,7 +54,8 @@ router.post(
 );
 router.post(
   "/blog/user/comment/:blogId",
-  [check("comment", "You can't post an empty comment!").notEmpty()],
+  [check("comment.text", "You can't post an empty comment!").notEmpty()],
+  isRequestValidated,
   createComment
 );
 

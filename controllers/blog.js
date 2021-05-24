@@ -1,3 +1,5 @@
+// ToDo: At the end add new Id's to the database and expose that to client
+
 const Blog = require('../models/blog');
 const Category = require('../models/category');
 const User = require('../models/user');
@@ -8,10 +10,12 @@ const fs = require('fs');
 
 exports.getBlogById = (req,res,next,id) => {
     Blog.findById(id)
-        .populate("author", "firstName")
+        .populate("author", "firstName lastName socialLinks funFact")
         .populate("category", "name")
         .exec((err, blog) => {
             if(err || !blog) return res.status(400).json({ error: "No Blog Found!" })
+            blog.createdAt = undefined;
+            blog.updatedAt = undefined;
             req.blog = blog;
             next();
         })
@@ -60,7 +64,7 @@ exports.createComment = (req,res) => {
         { new: true, useFindAndModify: false },
         (err, updatedBlog) => {
             if(err) return res.status(400).json({ error: "Failed To Post Comment!", err: err })
-            return res.json(updatedBlog)
+            return res.status(201).json({ message: "Comment Posted Successfully", updatedBlog })
         }
     )
 }
@@ -109,7 +113,8 @@ exports.getBlogByCategory = (req,res) => {
         .exec((err, blogList) => {
             if (err) return res.status(400).json({ error: "No Blogs Found In This Category!" })
             return res.json(blogList)
-        })}
+        })
+}
 
 exports.getAllBlogs = (req,res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 8

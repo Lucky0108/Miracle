@@ -5,23 +5,23 @@ import React from 'react'
 * @function BlogList
 **/
 
-const BlogList = (props) => {
+const BlogList = ({ blogImg, heading, date, link, author, content, tags, id }) => {
     return (
         <>
             <div className="post standard-format">
                 <div className="entry-media">
-                    <img src={props.blogImg} alt={props.heading} />
-                    <div className="cat">{props.cat}</div>
+                    <img src={blogImg} alt={heading} />
+                    <div className="cat"> {tags} </div>
                 </div>
                 <div className="entry-meta">
-                    <span>{props.date}</span>
-                    <span>By: <a href={props.link}>{props.author}</a></span>
+                    <span>{date}</span>
+                    <span>By: <a href={link}>{author}</a></span>
                 </div>
                 <div className="entry-details">
-                    <h3> <a href={props.link}> {props.heading} </a>
+                    <h3> <a href={link}> {heading} </a>
                     </h3>
-                    <p>{props.para}</p>
-                    <a className="read-more" href={props.link}>Read Full Post</a>
+                    <p key={id}>{content}</p>
+                    <a className="read-more" href={link}>Read Full Post</a>
                 </div>
             </div>
         </>

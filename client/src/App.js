@@ -37,8 +37,8 @@ const Policy = lazy(() => import('./Containers/Policy'))
 const About = lazy(() => import('./Containers/About'));
 const Contact = lazy(() => import('./Containers/Contact'));
 const Services = lazy(() => import('./Containers/Services'));
-const Blog = lazy(() => import('./Containers/Blog'));
-const BlogPg = lazy(() => import('./Containers/BlogPg'));
+const Blog = lazy(() => import('./Containers/Blogs/Blog'));
+const BlogPg = lazy(() => import('./Containers/Blogs/BlogPg'));
 const Quote = lazy(() => import('./Containers/Quote'));
 const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
 
@@ -84,7 +84,8 @@ function App() {
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/terms" component={Terms} />
         <Route exact path="/blog" component={Blog} />
-        <Route exact path="/blogpg" component={BlogPg} />
+        <Route exact path="/blog/:blogId/:blogslug" component={BlogPg} />
+        <Route exact path="/blogs/user/:userId" component={BlogPg} />
         <Route exact path="/quote" component={Quote} />
         <Route exact path="/tiny" component={TinyMce} />
         <Route component={ErrorPage} />

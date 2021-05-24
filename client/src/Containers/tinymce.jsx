@@ -36,7 +36,6 @@ const TinyMce = (props) => {
         })
         .then((res) => {
             success(res.data.location)
-            // console.log(res);
         })
         .catch((err) => failure(err.response.data.error))
     }
@@ -46,7 +45,7 @@ const TinyMce = (props) => {
       <PageTitle title="Testimonials" para="This is where you can see what our clients has to say about our services." />
         <div className="section-padding">
         <Editor
-          apiKey='kz7vwl0v3gpu9rqz46cpe6o5oqulyefd5qcumyy3afidif2f'
+          apiKey={process.env.REACT_APP_TINYMCE_API}
           onInit={(evt, editor) => editorRef.current = editor}
           initialValue="<p>This is the initial content of the editor.</p>"
           init={{
@@ -61,8 +60,24 @@ const TinyMce = (props) => {
             toolbar: 'insertfile undo redo | formatselect | ' +
             'bold italic backcolor | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | link image | ' +
-            'removeformat | help',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+            'removeformat',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            setup: function (editor) {
+              editor.on('NodeChange', function (e) {
+                if (e.element.tagName === "IMG") { 
+                    // Set an alt attribute. We will insert the value when the image was successfully uploaded and the imageId was returned from the server. We saved the alt tag that we want into the imageId hidden input field (imageId) when the server returned data. Here, we are taking that value and inserting the new alt tag.
+                    console.log(e)
+                    console.log('Content changed to:  ' + editor.getContent());
+                    return; 
+                }
+                return;
+            });
+              // editor.on('change', function (e) {
+              //   console.log('change event fired');
+              //   console.log(e);
+              //   console.log('Content changed to:  ' + editor.getContent());
+              // });
+            }
           }}
         />
         <button onClick={log}>Log editor content</button>

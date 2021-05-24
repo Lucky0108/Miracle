@@ -23,8 +23,8 @@ exports.signup = (req,res) => {
         const username = chance.string({ length: 10, alpha: true, numeric: true });
 
         const _user = new User({
-            firstName,
-            lastName,
+            firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1) ,
+            lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
             email,
             password,
             contact,
@@ -53,12 +53,12 @@ exports.signin = (req,res) => {
         if(user) {
             if(user.authenticate(req.body.password)) {
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d'})
-                const { _id, firstName, lastName, user_name, email, contact, blogs, role } = user
+                const { _id, firstName, lastName, fullName, user_name, email, contact, blogs, role, funFact } = user
                 res.cookie("token", token, { expires: new Date(Date.now() + 24 * 3600000) }) // Cookie expires after 24 hours 
                 res.status(200).json({
                     token: token,
                     user: {
-                        _id, firstName, lastName, email, user_name, contact, blogs, role
+                        _id, firstName, lastName, fullName, email, user_name, contact, blogs, role, funFact
                     },
                 })
             } else {
