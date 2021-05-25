@@ -51,6 +51,11 @@ const BlogSchema = new mongoose.Schema({
       required: true,
       min: 100  
     },
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
     content: {
         type: String,
         required: true,
@@ -62,13 +67,7 @@ const BlogSchema = new mongoose.Schema({
     },
     comments: {
         type: Array,
-        default: [
-            {
-                "name": "",
-                "text": "",
-                "email": ""
-            }
-        ]
+        default: []
     },
     tags: {
         type: Array,

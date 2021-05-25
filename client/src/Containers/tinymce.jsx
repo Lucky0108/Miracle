@@ -17,7 +17,6 @@ const TinyMce = (props) => {
       }
     };
 
-    // ToDO: return not working
     // ToDo: Upload Images in User Id And Show Them in a Modal So user can see and delete past uploaded Images just like wordpress
 
     const imagesUploadHandler = (blobInfo, success, failure) => {
@@ -28,7 +27,7 @@ const TinyMce = (props) => {
         return axios.post( uploadLink, formData, {
             headers: {
                 'Content-Type': "multipart/form-data",
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE0ZDQ0ZjFiMjVkNTJiNDRhYjQ4M2QiLCJpYXQiOjE2MjE2ODY0NjMsImV4cCI6MTYyMTc3Mjg2M30.Mz6EH9okdn-OL4BP9o-7GGiXlo9bs874RwpzZOVC9wc"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE0ZDQ0ZjFiMjVkNTJiNDRhYjQ4M2QiLCJpYXQiOjE2MjE5MzY0MjMsImV4cCI6MTYyMjAyMjgyM30.3nOxw7WO-Q-Wf_uaz54u_AO5OiweHOPq7qwHpwCe_WM"
             }
         })
         .then((response) => {

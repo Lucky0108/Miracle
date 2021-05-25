@@ -32,23 +32,29 @@ exports.getImageById = (req,res,next,id) => {
 
 // Create
 exports.createBlog = (req,res, next) => {
-    const { title, content, tags } = req.body.blog;
+    const { title, description, content, tags } = req.body.blog;
     const random = () => { return Math.floor(Math.random()*1000); } // return a random number for slug to be unique even if title is same
     const blogBody = {
-        title: title,
+        title,
         slug: slugify(`${title}-${new Date().toLocaleDateString()}-${random()}`),
-        content: content,
-        tags: tags,
+        description,
+        content,
+        tags,
         author: req.profile._id,
         category: req.category._id
+    }
+
+    if(tags.length > 4) {
+        return res.status(400).json({ error: "Please Add A Maximum Of 4 Tags Only." })
     }
     
     const _blog = new Blog(blogBody)
     _blog.save((err,blog) => {
         if(err) return res.status(400).json({ error: "Failed To Save Blog!", err: err });
-        req.newBlog = {   // To Pass New Data to next middleware
+        req.newBlog = {   // To Pass New Data to next middleware i.e pushBlogToUser
             _id: blog._id,
             title: blog.title,
+            description: blog.description,
             content: blog.content,
             tags: blog.tags,
             category: blog.category
@@ -61,12 +67,16 @@ exports.createComment = (req,res) => {
     Blog.findByIdAndUpdate(
         { _id: req.blog._id },
         { $push: { comments: req.body.comment } },
-        { new: true, useFindAndModify: false },
-        (err, updatedBlog) => {
-            if(err) return res.status(400).json({ error: "Failed To Post Comment!", err: err })
-            return res.status(201).json({ message: "Comment Posted Successfully", updatedBlog })
-        }
+        { new: true, useFindAndModify: false }
     )
+    .populate("author", "firstName lastName socialLinks funFact")
+    .populate("category", "name")
+    .exec((err, updatedBlog) => {
+        updatedBlog.createdAt = undefined;
+        updatedBlog.updatedAt = undefined;
+        if(err) return res.status(400).json({ error: "Failed To Post Comment!", err: err })
+        return res.status(201).json({ message: "Comment Posted Successfully", updatedBlog })
+    })
 }
 
 exports.uploadImages = (req,res) => {
@@ -108,8 +118,13 @@ exports.getBlogByUser = (req, res) => {
 }
 
 exports.getBlogByCategory = (req,res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 15
+
     Blog.find({ category: req.category._id })
-        .populate("category", "_id name")
+        .populate("author", "firstName")
+        .populate("category", "name")
+        .sort([['_id', 'desc']])
+        .limit(limit)
         .exec((err, blogList) => {
             if (err) return res.status(400).json({ error: "No Blogs Found In This Category!" })
             return res.json(blogList)
@@ -117,13 +132,13 @@ exports.getBlogByCategory = (req,res) => {
 }
 
 exports.getAllBlogs = (req,res) => {
-    let limit = req.query.limit ? parseInt(req.query.limit) : 8
+    let limit = req.query.limit ? parseInt(req.query.limit) : 15
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id"
 
     Blog.find({})
         .populate("author", "firstName")
         .populate("category", "name")
-        .sort([[sortBy, 'asc']])
+        .sort([[sortBy, 'desc']])
         .limit(limit)
         .exec((err, blogs) => {
             if(err) return res.status(400).json({ error: "Something went wrong!", err: err })

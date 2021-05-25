@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 
 /**
@@ -5,11 +6,11 @@ import React from 'react'
 * @function BlogCategories
 **/
 
-const BlogCategories = (props) => {
+const BlogCategories = ({ onClick, title }) => {
   return(
     <>
     <li>
-        <a href={props.link}> {props.title} <span>{props.total}</span> </a>
+      <a onClick={onClick}> {title} </a>
     </li>
     </>
    )

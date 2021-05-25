@@ -476,6 +476,11 @@
 
 @media (max-width: 991px) {
 
+    .blog-details-section .blog-render-area h1 {
+        padding: 1rem !important;
+        font-size: 1.25rem !important;
+    }
+
     .blog-details-section .post h2 {
         font-size: 2rem;
     }
@@ -486,6 +491,11 @@
 
     .blog-details-section .comment-respond .comment-reply-title {
         font-size: 1.33333rem;
+    }
+
+    .blog-details-section .comments-area .empty-comment-section {
+        margin-top: 3rem !important;
+        font-size: 1.5rem !important;
     }
 
     blog-details-section .comment-respond form input {

@@ -179,6 +179,7 @@
 }
 
 .blog-sidebar .category-widget ul li a:hover {
+    cursor: pointer;
     color: #fc6e36;
 }   
 
@@ -268,6 +269,12 @@
 }
 
 @media (max-width: 991px) {
+
+    .blog-pg-section .blog-content h1 {
+        padding: 1rem !important;
+        font-size: 1.25rem !important;
+    }
+
     .blog-pg-section .blog-content .post {
         margin-bottom: 70px;
     }

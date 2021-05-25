@@ -6,7 +6,28 @@ const initState = {
     error: '',
     message: '',
     blogList: [],
-    commentError: ''
+    commentError: '',
+    blogCategories: [],
+    // blog: {
+    //     date: '',
+    //     comments: [],
+    //     tags: [],
+    //     _id: '',
+    //     title: '',
+    //     slug: '',
+    //     content: '',
+    //     author: {
+    //         _id: '',
+    //         fistName: '',
+    //         lastName: '',
+    //         funFact: '',
+    //         socialLinks: []
+    //     },
+    //     category: {
+    //         _id: '',
+    //         name: ''
+    //     }
+    // }
 }
 
 export default (state = initState, action) => {
@@ -27,6 +48,52 @@ export default (state = initState, action) => {
         break;
 
         case blogConstants.GET_ALL_BLOGS_FAILURE:
+            state = {
+                ...state,
+                loading: false,
+                error: action.payload.error
+            }
+        break;
+
+        case blogConstants.GET_BLOG_BY_CATEGORY_REQUEST:
+            state = {
+                ...state,
+                loading: true,
+            }
+        break;
+
+        case blogConstants.GET_BLOG_BY_CATEGORY_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+                blogList: action.payload.blogList
+            }
+        break;
+
+        case blogConstants.GET_BLOG_BY_CATEGORY_FAILURE:
+            state = {
+                ...state,
+                loading: false,
+                error: action.payload.error
+            }
+        break;
+
+        case blogConstants.GET_ALL_CATEGORY_REQUEST:
+            state = {
+                ...state,
+                loading: true,
+            }
+        break;
+
+        case blogConstants.GET_ALL_CATEGORY_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+                blogCategories: action.payload.categories,
+            }
+        break;
+
+        case blogConstants.GET_ALL_CATEGORY_FAILURE:
             state = {
                 ...state,
                 loading: false,
@@ -66,10 +133,11 @@ export default (state = initState, action) => {
 
         case blogConstants.COMMENT_SUCCESS:
             state = {
-                ...state,
+                ...initState,
                 loading: false,
                 commentError: false,
                 message: action.payload.message,
+                blog: action.payload.blog
             }
         break;
 

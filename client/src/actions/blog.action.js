@@ -45,6 +45,46 @@ export const getABlog = (blogId) => {
     }
 }
 
+export const getBlogByCategory = (categoryId) => {
+    return dispatch => {
+        dispatch({ type: blogConstants.GET_BLOG_BY_CATEGORY_REQUEST })
+        const res = axios.get(`/blogs/category/${categoryId}`);
+
+        res.then(response => {
+            if(response.status === 200) {
+                dispatch({ type: blogConstants.GET_BLOG_BY_CATEGORY_SUCCESS,
+                    payload: { blogList: response.data }
+                })
+            }
+        })
+
+        res.catch(error => {
+            dispatch({ type: blogConstants.GET_BLOG_BY_CATEGORY_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        })
+    }
+}
+
+export const getAllCategories = () => {
+    return dispatch => {
+        dispatch({ type: blogConstants.GET_ALL_CATEGORY_REQUEST })
+        const res = axios.get('/categories')
+
+        res.then(response => {
+            dispatch({ type: blogConstants.GET_ALL_CATEGORY_SUCCESS,
+                payload: { categories: response.data }
+            })
+        })
+
+        res.catch(error => {
+            dispatch({ type: blogConstants.GET_ALL_CATEGORY_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        })
+    }
+}
+
 export const postBlogComment = (commentData) => {
     const comment = {  name: commentData.name, text: commentData.text, email: commentData.email } 
     return dispatch => {
@@ -53,7 +93,7 @@ export const postBlogComment = (commentData) => {
 
         res.then(response => {
                 dispatch({ type: blogConstants.COMMENT_SUCCESS,
-                    payload: { message: response.data.message }
+                    payload: { message: response.data.message, blog: response.data.updatedBlog }
                 })
         })
 

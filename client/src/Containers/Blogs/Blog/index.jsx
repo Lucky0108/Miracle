@@ -8,7 +8,8 @@ import BlogList from "../../../Components/UI/Blog/BlogList";
 import BlogCategories from "../../../Components/UI/Blog/BlogCategories";
 import BlogRecent from "../../../Components/UI/Blog/BlogRecent";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBlogs } from "../../../actions/blog.action";
+import { getAllBlogs, getAllCategories, getBlogByCategory } from "../../../actions/blog.action";
+// import { api } from "../../../urlConfig";
 
 /**
  * @author
@@ -16,36 +17,37 @@ import { getAllBlogs } from "../../../actions/blog.action";
  **/
 
 const Blog = () => {
+
     const dispatch = useDispatch();
     const blogs = useSelector(state => state.blogs);
-
+    
     // Fetching Data from Databse On Component Load
     useEffect(() => {
         dispatch(getAllBlogs());
+        dispatch(getAllCategories());
     }, [dispatch]);
 
-    // Function to show only few part of the content
-    const hideContent = (content) => {
-        let hiddenContent = content.substring(0, 250);
-            hiddenContent = content.substring(0, hiddenContent.lastIndexOf(".")+1);
-        return hiddenContent 
+    const loadCategoryBlogList = (categoryId) => {
+        dispatch(getBlogByCategory(categoryId))
+        window.scrollTo(0,0)
     }
 
     const renderBlogList = () => {
         return (
-            blogs.error ? <h1 className="alert-danger p-5"> {blogs.error} </h1> :
+            blogs.error ? <h3 className="alert-danger p-5"> {blogs.error} </h3> :
+            blogs.blogList.length === 0 ? <h3 className="alert-info p-5"> No Blog Found In This Category! </h3> :
             blogs.blogList.map((data, index) => {
-                const { _id, date, author, title, content, tags, slug } = data;
+                const { _id, date, author, title, description, category, slug } = data;
                 return (
                     <BlogList
                         key={index}
                         id={index}
                         blogImg={blogImg}
-                        tags={tags.join(", ")} // Join operator to seperate tags with a comma
+                        category={category.name}
                         date={date}
                         author={author.firstName}
                         heading={title}
-                        content={hideContent(content)}
+                        content={description}
                         link={`/blog/${_id}/${slug}`}
                     />
                 );
@@ -64,8 +66,8 @@ const Blog = () => {
                     <Row>
                         <Col lg={8} xs={12}>
                             <div className="blog-content">
-                                { blogs.loading ? <h1 className="alert-info p-5">Loading...</h1> 
-                                    : renderBlogList() }
+                                { blogs.loading ? <h3 className="alert-info p-5">Loading...</h3> : 
+                                  renderBlogList() }
                             </div>
                         </Col>
                         <Col lg={4} md={8} xs={12} className="blog-pg-right-side">
@@ -124,70 +126,37 @@ const Blog = () => {
                                 <div className="widget category-widget">
                                     <h3>Categories</h3>
                                     <ul>
-                                        <BlogCategories
-                                            link="/blog"
-                                            title="Digital Marketing"
-                                            total="(2)"
-                                        />
-                                        <BlogCategories
-                                            link="/blog"
-                                            title="Web Development"
-                                            total="(3)"
-                                        />
-                                        <BlogCategories
-                                            link="/blog"
-                                            title="SEO Optimization"
-                                            total="(5)"
-                                        />
-                                        <BlogCategories
-                                            link="/blog"
-                                            title="Web Analytics"
-                                            total="(7)"
-                                        />
-                                        <BlogCategories
-                                            link="/blog"
-                                            title="Startup Business"
-                                            total="(10)"
-                                        />
+                                        { blogs.blogCategories.map((category, index) => {
+                                            return (
+                                                <BlogCategories
+                                                key={index}
+                                                onClick={loadCategoryBlogList.bind(this,category._id)}
+                                                title={category.name}
+                                                total="(2)"
+                                                />
+                                            )
+                                        }) }
                                     </ul>
                                 </div>
 
                                 <div className="widget recent-post-widget">
                                     <h3>Recent Post</h3>
                                     <div className="posts">
-                                        <BlogRecent
-                                            date="13 Feb 2020"
-                                            heading="Salesman and above it there hung a picture that he"
-                                            link="/blog"
-                                            img="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVFODg0RUI5NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVFODg0RUI4NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNUY3M0RGMDNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNUY3M0RGMTNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYICwwKCgsKCgwQDAwMDAwMEAwODxAPDgwTExQUExMcGxsbHB8fHx8fHx8fHx8BBwcHDQwNGBAQGBoVERUaHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fH//AABEIAEQARAMBEQACEQEDEQH/xACEAAABBQEBAAAAAAAAAAAAAAAGAgMEBQcBAAEAAgMBAAAAAAAAAAAAAAAAAAMBAgQFEAABAwIEAwYDBwUAAAAAAAABEQIDAAQhMRIFQVEGYXEiMkITFBUHgZGhYnIjJPCxUoI1EQACAgMBAAMBAQEAAAAAAAAAARECITEDEmEiBEFRE//aAAwDAQACEQMRAD8AxCkFz1ADgicFeitai95qJLQSHRzXLWktQtwGOdRMExJFkiLSRklTJVoehv54dQahaWppUgBwCa8ExTDGiC1btDMsxlcXFobyDQgA5UQVbkbqSDtAHaAFBAC45NCmgk0DYOi3zbRFPfRujknbrbDkQ0+UuXilZOnaHg38fzTWWUe6bTbWl26GaOSN3pdqRRzq9OjaF9OSTKu5hiChhBaMMaYmJsiC5oBKoeSZCrimILcCeAqQEUEHqAFUAX/Q2yfOOpLa2ezXaw/yLscNEZVrT+pyCl9bRUdwp6t8Gz327bfaXYsGRy7lu7mmQ7dZMEskbB65T5Ix+o0ivPB0LdcwUl/Fse/wSxyROjurYpNbSt9q5gcclBzB55GoiNEOLYZnXUezTbbciMnVE4LFIRiRxXup1LSY+tPLKRyDB4XuFNEkcxlzsMudBU5I3SA0DvNSA2mNBAugA5+j12I+qZbVxIZd27tRAwAj8Wou9IatK7LCNf5H9mvgKd+vz0kxrdpE1sb15nkuxGZPdQ6QXv5asEpHmxvp050mVJJsNxf1PBHf3MJh3SyJjF0xunU31RuHFp4tP2VNvSxYLKlkrUZE6p2yO720xvAErPHE7k4cO45Uqt/LKX5+kZXcNMUuk4aTx5ZfhW5HLeBLmhVLc+GVSEDUreWZ4KpoIGkaunsz7akgVDDNPNHBAwyzzOEcUTcXOe4o0DvNEglOEbD0b01B07bi0vUG53xHxc48rQPLCx3+LcyeJrF06en8HV4cfC+Qvk2C2uvZiumCYQFYiVIaTmlWraywmTbnW20Qr+Oe1t3RO0WcbmSRujtz+4Dq8ErZcNJ05jTnVL3z/rLV54jS+AS3rc26NIdiP6xpCyMbhGc7h+5PK9DpDvwNdCjwcnqssk7Iy1uDLDcNVxa0scfyuAPd4ajpKGcEnhlRcOYbmZsGMIe4Rnm1cKatZM9olxoa9s5LjyqSouGaWCaOeF5jmhcJIpGlHNc0qCO40NAnGTY+in7n1Dsj7/dZHCSeRzI9CaHRx4GQM9Bc5awdeaThHX/P0dq+rGgWxEcKHJgT7AEFTXBd5BXqGWWV5Q4cKTZyxqWADvbeQzLIuhVqaibibaw2q72beYn3LIbyNrZYYSQHyCMEo1cwuYptW00JtVOrQDtlewHSUJBGHI1sg5ytAy0oSPuqxQ4pVeNACqANP+me0/FbPHdR31xDLFLI0GIoInA+VDgcCuPOsvV/Y6/5LL/lG8moWrTBbaZZXTkDxSvTUT2ogqui5S7kYFc458KRZDJAHqm8jjURlDwAq1FkR0ZSbDGTbbhevCj2nsa493CnXeUhPNYbBgsIia8jzEj7q0zkwxgYOZSrFD3bQB2gDWvpd1Bslt0220fIyO7hlkdPG4hrnF7la/HMEVl64tLOl+Wy8R/S13j6hbVbgtE7E5NK/wBqT9raQ93rXbBqTqa93hjnbe39oHS55OIPa3MVFqedkV6KympD+SXF4/8AkOLjx4ChWjQOk7JG8W8e37HJDG1NTUcmQUoB/satTLK9cVBDcrN1vHDE4eJrFf3mtFLSzF0rCSKc5mnmY5xoAVQBw+2o1ovBaAHI9GvxJ2omfCoZK2EfQXxvz13sJ8J7Z+N1eXT6E/MuVJ7x5zs1fln1jX9NFg+H9/w+XinOsig6JUdW+z802r3v+Z7w1acvc9Ov7UpldOBPTanQL9WafjncsMvxq/IR32Cfq7FrWYRPGgg//9k="
-                                            author=" "
-                                        />
-                                        <BlogRecent
-                                            date="13 Feb 2020"
-                                            heading="Salesman and above it there hung a picture that he"
-                                            link="/blog"
-                                            img="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVFODg0RUI5NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVFODg0RUI4NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNUY3M0RGMDNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNUY3M0RGMTNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYI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"
-                                            author=" "
-                                        />
-                                        <BlogRecent
-                                            date="13 Feb 2020"
-                                            heading="Salesman and above it there hung a picture that he"
-                                            link="/blog"
-                                            img="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVFODg0RUI5NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVFODg0RUI4NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNUY3M0RGMDNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNUY3M0RGMTNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYI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"
-                                            author=" "
-                                        />
+                                        { blogs.blogList.length === 0 ? <p style={{color: "#687693"}}> No Recent Post In This Category </p> :
+                                            blogs.blogList.slice(0,4).map((data, index) => {
+                                            const { date, title, slug, _id, author } = data
+                                            return (
+                                                <BlogRecent
+                                                    key={index}
+                                                    date={date}
+                                                    heading={title}
+                                                    link={`/blog/${_id}/${slug}`}
+                                                    img="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMqaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0MiA3OS4xNjA5MjQsIDIwMTcvMDcvMTMtMDE6MDY6MzkgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVFODg0RUI5NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVFODg0RUI4NTA4RDExRUFBRkQ1QTIzNUE3MEFDRDhEIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNUY3M0RGMDNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNUY3M0RGMTNCMzYxMUVBOEVCQ0NFQjNDNjJBRTZBMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYI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"
+                                                    author={author.firstName}
+                                                />
+                                            )
+                                        }) }
                                     </div>
-                                </div>
-
-                                <div className="widget tag-widget">
-                                    <h3>Tags</h3>
-                                    <ul>
-                                        <BlogCategories link="/blog" title="Hosting" />
-                                        <BlogCategories link="/blog" title="Business" />
-                                        <BlogCategories link="/blog" title="Server" />
-                                        <BlogCategories link="/blog" title="Vps Hosting" />
-                                        <BlogCategories link="/blog" title="Manufacturing" />
-                                    </ul>
                                 </div>
                             </div>
                         </Col>
