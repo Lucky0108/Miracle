@@ -98,7 +98,7 @@ exports.uploadImages = (req,res) => {
         //Save To The Database
         _image.save((err, image) => {
             if(err) return res.status(400).json({ error: "Failed To Upload Image!", err: err })
-            return res.json({location: `http://localhost:4000/api/blog/image/${image._id}` });
+            return res.json({location: `${process.env.BACKEND_API}/api/blog/image/${image._id}` });
         })
     })
 }
