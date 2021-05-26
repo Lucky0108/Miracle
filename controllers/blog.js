@@ -8,6 +8,23 @@ const formidable = require('formidable');
 const blogImage = require('../models/blogImages');
 const fs = require('fs');
 
+// Changing Date Format Function
+const convertDate = (originalDate) => {
+    const month = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+    const dateArray = originalDate.split("/"); // Splitting date into array using seperator '/'
+    let updatedDate = [dateArray[0], dateArray[2]].join(", ");
+    let newMonth = "";
+
+    for (let i = 1; i <= month.length; i++) {  // A loop to compare the month date with month name and assigning name to the month respectively
+        // eslint-disable-next-line eqeqeq
+        if (dateArray[1] == i) {
+            newMonth = month[i - 1];
+        }
+    }
+    return `${newMonth} ${updatedDate} `;
+};
+
+
 exports.getBlogById = (req,res,next,id) => {
     Blog.findById(id)
         .populate("author", "firstName lastName socialLinks funFact")
@@ -109,8 +126,13 @@ exports.getBlog = (req,res) => {
 }
 
 exports.getBlogByUser = (req, res) => {
+    // let limit = req.query.limit ? parseInt(req.query.limit) : 15
+    
     Blog.find({ author: req.profile._id })
-        .populate("author", "_id firstName")
+        .populate("author", "firstName lastName funFact socialLinks")
+        .populate("category", "name")
+        .sort([['_id', 'desc']])
+        // .limit(limit)
         .exec((err, blogList) => {
             if (err) return res.status(400).json({ error: "No Blogs Found Of This User!" })
             return res.json(blogList)
@@ -118,13 +140,13 @@ exports.getBlogByUser = (req, res) => {
 }
 
 exports.getBlogByCategory = (req,res) => {
-    let limit = req.query.limit ? parseInt(req.query.limit) : 15
+    // let limit = req.query.limit ? parseInt(req.query.limit) : 15
 
     Blog.find({ category: req.category._id })
-        .populate("author", "firstName")
+        .populate("author", "firstName lastName")
         .populate("category", "name")
         .sort([['_id', 'desc']])
-        .limit(limit)
+        // .limit(limit)
         .exec((err, blogList) => {
             if (err) return res.status(400).json({ error: "No Blogs Found In This Category!" })
             return res.json(blogList)
@@ -132,14 +154,14 @@ exports.getBlogByCategory = (req,res) => {
 }
 
 exports.getAllBlogs = (req,res) => {
-    let limit = req.query.limit ? parseInt(req.query.limit) : 15
+    // let limit = req.query.limit ? parseInt(req.query.limit) : 15
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id"
 
     Blog.find({})
         .populate("author", "firstName")
         .populate("category", "name")
         .sort([[sortBy, 'desc']])
-        .limit(limit)
+        // .limit(limit)
         .exec((err, blogs) => {
             if(err) return res.status(400).json({ error: "Something went wrong!", err: err })
             if(!blogs) return res.status(404).json({ error: "No Blog Found!" })
@@ -165,15 +187,20 @@ exports.updateBlog = (req,res, next) => {
         return res.status(400).json({ message: "You're not authorized to Update this blog!" })
     }
 
-    const { title, content, tags, category } = req.body.blog;
+    const { title, description, content, tags, category } = req.body.blog;
     const random = () => { return Math.floor(Math.random()*1000); } // return a random number for slug to be unique even if title is same
     const blogBody = {
-        title: title,
+        title,
         slug: slugify(`${title}-${new Date().toLocaleDateString()}-${random()}`),
-        content: content,
-        tags: tags,
-        category: category,
-        date: new Date().toLocaleDateString()
+        content,
+        description,
+        tags,
+        category,
+        date: convertDate(new Date().toLocaleDateString())
+    }
+
+    if(tags.length > 4) {
+        return res.status(400).json({ error: "Please Add A Maximum Of 4 Tags Only." })
     }
 
     Blog.findByIdAndUpdate(
@@ -186,6 +213,7 @@ exports.updateBlog = (req,res, next) => {
                 _id: blog._id,
                 title: blog.title,
                 content: blog.content,
+                description: blog.description,
                 tags: blog.tags,
                 category: blog.category
             }

@@ -76,6 +76,7 @@ router.put(
   isAuthenticated,
   [
     check("blog.title", "Please Enter A Title For Your Blog Post").notEmpty(),
+    check("blog.description", "Please Enter A Short Description About Your Blog in minimum 10 Characters").isLength({ min: 10 }),
     check(
       "blog.content",
       "Please Write a blog Post of Atleast 100 words"
