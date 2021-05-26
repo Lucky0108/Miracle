@@ -66,6 +66,27 @@ export const getBlogByCategory = (categoryId) => {
     }
 }
 
+export const getBlogByUser = (userId) => {
+    return dispatch => {
+        dispatch({ type: blogConstants.GET_BLOG_BY_USER_REQUEST })
+        const res = axios.get(`/blogs/user/${userId}`);
+
+        res.then(response => {
+            if(response.status === 200) {
+                dispatch({ type: blogConstants.GET_BLOG_BY_USER_SUCCESS,
+                    payload: { blogList: response.data }
+                })
+            }
+        })
+
+        res.catch(error => {
+            dispatch({ type: blogConstants.GET_BLOG_BY_USER_FAILURE,
+                payload: { error: error.response.data.error }
+            })
+        })
+    }
+}
+
 export const getAllCategories = () => {
     return dispatch => {
         dispatch({ type: blogConstants.GET_ALL_CATEGORY_REQUEST })

@@ -50,6 +50,7 @@
 
 .blog-pg-section .entry-meta span a {
     color: #687693;
+    cursor: pointer;
 }
 
 .blog-pg-section .entry-details {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 
 /**
@@ -5,7 +6,7 @@ import React from 'react'
 * @function BlogList
 **/
 
-const BlogList = ({ blogImg, heading, date, link, author, content, category, id }) => {
+const BlogList = ({ blogImg, heading, date, link, authorLink, author, content, category, id }) => {
     return (
         <>
             <div className="post standard-format">
@@ -15,7 +16,7 @@ const BlogList = ({ blogImg, heading, date, link, author, content, category, id 
                 </div>
                 <div className="entry-meta">
                     <span>{date}</span>
-                    <span>By: <a href={link}> {author}</a></span>
+                    <span>By: <a href={authorLink}> {author}</a></span>
                 </div>
                 <div className="entry-details">
                     <h3> <a href={link}> {heading} </a>

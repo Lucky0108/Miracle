@@ -32,7 +32,14 @@ const initState = {
 
 export default (state = initState, action) => {
     switch(action.type) {
+
+        // All Request action constants
         case blogConstants.GET_ALL_BLOGS_REQUEST: 
+        case blogConstants.GET_BLOG_BY_CATEGORY_REQUEST:
+        case blogConstants.GET_BLOG_BY_USER_REQUEST:
+        case blogConstants.GET_ALL_CATEGORY_REQUEST:
+        case blogConstants.GET_A_BLOG_REQUEST:
+        case blogConstants.COMMENT_REQUEST:    
             state = {
                 ...state,
                 loading: true
@@ -40,6 +47,8 @@ export default (state = initState, action) => {
         break;
 
         case blogConstants.GET_ALL_BLOGS_SUCCESS:
+        case blogConstants.GET_BLOG_BY_CATEGORY_SUCCESS:
+        case blogConstants.GET_BLOG_BY_USER_SUCCESS:
             state = {
                 ...state,
                 loading: false,
@@ -48,29 +57,10 @@ export default (state = initState, action) => {
         break;
 
         case blogConstants.GET_ALL_BLOGS_FAILURE:
-            state = {
-                ...state,
-                loading: false,
-                error: action.payload.error
-            }
-        break;
-
-        case blogConstants.GET_BLOG_BY_CATEGORY_REQUEST:
-            state = {
-                ...state,
-                loading: true,
-            }
-        break;
-
-        case blogConstants.GET_BLOG_BY_CATEGORY_SUCCESS:
-            state = {
-                ...state,
-                loading: false,
-                blogList: action.payload.blogList
-            }
-        break;
-
         case blogConstants.GET_BLOG_BY_CATEGORY_FAILURE:
+        case blogConstants.GET_BLOG_BY_USER_FAILURE:    
+        case blogConstants.GET_ALL_CATEGORY_FAILURE:    
+        case blogConstants.GET_A_BLOG_FAILURE:
             state = {
                 ...state,
                 loading: false,
@@ -78,12 +68,35 @@ export default (state = initState, action) => {
             }
         break;
 
-        case blogConstants.GET_ALL_CATEGORY_REQUEST:
-            state = {
-                ...state,
-                loading: true,
-            }
-        break;
+        // case blogConstants.GET_BLOG_BY_CATEGORY_REQUEST:
+        //     state = {
+        //         ...state,
+        //         loading: true,
+        //     }
+        // break;
+
+        // case blogConstants.GET_BLOG_BY_CATEGORY_SUCCESS:
+        //     state = {
+        //         ...state,
+        //         loading: false,
+        //         blogList: action.payload.blogList
+        //     }
+        // break;
+
+        // case blogConstants.GET_BLOG_BY_CATEGORY_FAILURE:
+        //     state = {
+        //         ...state,
+        //         loading: false,
+        //         error: action.payload.error
+        //     }
+        // break;
+
+        // case blogConstants.GET_ALL_CATEGORY_REQUEST:
+        //     state = {
+        //         ...state,
+        //         loading: true,
+        //     }
+        // break;
 
         case blogConstants.GET_ALL_CATEGORY_SUCCESS:
             state = {
@@ -93,20 +106,20 @@ export default (state = initState, action) => {
             }
         break;
 
-        case blogConstants.GET_ALL_CATEGORY_FAILURE:
-            state = {
-                ...state,
-                loading: false,
-                error: action.payload.error
-            }
-        break;
+        // case blogConstants.GET_ALL_CATEGORY_FAILURE:
+        //     state = {
+        //         ...state,
+        //         loading: false,
+        //         error: action.payload.error
+        //     }
+        // break;
 
-        case blogConstants.GET_A_BLOG_REQUEST:
-             state = {
-                 ...state,
-                 loading: true
-             }
-        break;
+        // case blogConstants.GET_A_BLOG_REQUEST:
+        //      state = {
+        //          ...state,
+        //          loading: true
+        //      }
+        // break;
 
         case blogConstants.GET_A_BLOG_SUCCESS:
             state = {
@@ -116,20 +129,20 @@ export default (state = initState, action) => {
             }
         break;
 
-        case blogConstants.GET_A_BLOG_FAILURE:
-            state = {
-                ...state,
-                loading: false,
-                error: action.payload.error
-            }
-        break;
+        // case blogConstants.GET_A_BLOG_FAILURE:
+        //     state = {
+        //         ...state,
+        //         loading: false,
+        //         error: action.payload.error
+        //     }
+        // break;
 
-        case blogConstants.COMMENT_REQUEST:
-            state ={
-                ...state,
-                loading: true
-            }
-        break;
+        // case blogConstants.COMMENT_REQUEST:
+        //     state ={
+        //         ...state,
+        //         loading: true
+        //     }
+        // break;
 
         case blogConstants.COMMENT_SUCCESS:
             state = {

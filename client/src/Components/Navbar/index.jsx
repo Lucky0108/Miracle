@@ -74,11 +74,11 @@ const NavbarComp = (props) => {
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
-        <Navbar.Collapse id="basic-navbar-nav">
+        {/* <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto"> 
           <a href="http://miraclesolutions.epizy.com" className="navLink" target="_blank" rel="noopener noreferrer" style={{fontSize:"20px"}}>Store</a>
         </Nav>
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
         {/* <Navbar.Collapse id="basic-navbar-nav">
             {auth.authenticate ? renderLoggedinLinks() : renderNonLoggedinLinks() }
         </Navbar.Collapse> */}

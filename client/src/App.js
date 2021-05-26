@@ -26,6 +26,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { isLoggedin } from './actions';
 import Rocket from './Components/Rocket';
 import WhatsAppIcon from './Components/WhatsappIcon';
+import CategoryBlogsPage from './Containers/Blogs/CategoryBlogs';
 
 // Lazy Load Component
 const ErrorPage = lazy(() => import('./Containers/404'));
@@ -40,6 +41,7 @@ const Services = lazy(() => import('./Containers/Services'));
 const Blog = lazy(() => import('./Containers/Blogs/Blog'));
 const BlogPg = lazy(() => import('./Containers/Blogs/BlogPg'));
 const Quote = lazy(() => import('./Containers/Quote'));
+const UserBlogPage = lazy(() => import ('./Containers/Blogs/UserBlogs'))
 const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
 
 
@@ -83,9 +85,10 @@ function App() {
         <Route exact path="/testimonial" component={Testimonials} />
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/terms" component={Terms} />
-        <Route exact path="/blog" component={Blog} />
+        <Route exact path="/blogs" component={Blog} />
         <Route exact path="/blog/:blogId/:blogslug" component={BlogPg} />
-        <Route exact path="/blogs/user/:userId" component={BlogPg} />
+        <Route exact path="/blogs/user/:userId/:username" component={UserBlogPage} />
+        <Route exact path="/blogs/category/:categoryId/:categoryslug" component={CategoryBlogsPage} />
         <Route exact path="/quote" component={Quote} />
         <Route exact path="/tiny" component={TinyMce} />
         <Route component={ErrorPage} />
