@@ -1,0 +1,134 @@
+.user-profile-blogs {
+    background-color: #fafafa;
+    padding-top: 120px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-profile-image-div {
+    margin-right: 30px;
+}
+
+.user-profile-image-div .user-profile-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.0975);
+    background-color: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+
+.user-profile-image-div .user-profile-image img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.user-profile-info-username, .user-profile-info-details ul  {
+    display: flex;
+}
+
+.user-profile-info-username h2 {
+    color: #262626;
+    font-size: 28px ;
+    font-weight: 300 !important;
+    margin: -5px 0 -6px;
+}
+
+.user-profile-info-username button {
+    padding: 5px 9px;
+}
+
+.followed-btn {
+    border-color: #dadada !important;
+    background-color: #fff !important;
+}
+
+.user-profile-info-details ul li {
+    margin-right: 40px;
+}
+
+.user-profile-info-details ul li:last-child {
+    margin-right: 0px;
+}
+
+.user-profile-info-details ul li span {
+    font-weight: 600;
+}
+
+.user-profile-info-name h1 {
+    display: inline;
+    font-size: 16px;
+    font-weight: 600 !important;
+    color: #262626;
+}
+
+.user-profile-blog-list {
+    border-top: 1px solid #dbdbdb;
+    padding-top: 50px;
+}
+
+@media (min-width: 736px) {
+    
+    .user-profile-info-row {
+        margin-bottom: 44px;
+    }
+
+    .user-profile-info-div div {
+        margin-bottom: 20px;
+    }
+
+    .user-profile-image-div .user-profile-image {
+        height: 150px;
+        width: 150px;
+    }
+
+    .user-profile-info-username button {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 736px) {
+    .user-profile-image-div .user-profile-image {
+        height: 77px;
+        width: 77px;
+    }
+
+    .user-profile-info-username {
+        flex-direction: column;
+    }
+
+    .user-profile-info-username h2 {
+        margin-bottom: 12px;
+    }
+
+    .user-profile-info-details.large , .user-profile-info-name.large {
+        display: none;
+    }
+
+    .user-profile-info-username {
+        margin-bottom: 24px;
+    }
+
+    .user-profile-info-name {
+        padding: 0 16px 21px;
+        font-size: 14px;
+        text-overflow: ellipsis;
+        line-height: 20px;
+    }
+
+    .user-profile-info-details {
+        display: flex;
+        width: 100%;
+        border-top: 1px solid #dbdbdb;
+        padding: 12px 0;
+    }
+
+    .user-profile-info-details ul {
+        width: 100%;
+        justify-content: space-around;
+    }
+}

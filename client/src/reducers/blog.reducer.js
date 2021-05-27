@@ -8,26 +8,26 @@ const initState = {
     blogList: [],
     commentError: '',
     blogCategories: [],
-    // blog: {
-    //     date: '',
-    //     comments: [],
-    //     tags: [],
-    //     _id: '',
-    //     title: '',
-    //     slug: '',
-    //     content: '',
-    //     author: {
-    //         _id: '',
-    //         fistName: '',
-    //         lastName: '',
-    //         funFact: '',
-    //         socialLinks: []
-    //     },
-    //     category: {
-    //         _id: '',
-    //         name: ''
-    //     }
-    // }
+    blog: {
+        date: '',
+        comments: [],
+        tags: [],
+        _id: '',
+        title: '',
+        slug: '',
+        content: '',
+        author: {
+            _id: '',
+            fistName: '',
+            lastName: '',
+            funFact: '',
+            socialLinks: {}
+        },
+        category: {
+            _id: '',
+            name: ''
+        }
+    }
 }
 
 export default (state = initState, action) => {

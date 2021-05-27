@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
@@ -12,7 +12,7 @@ import './Navbar.css'
 * @function Navbar
 **/
 
-const NavbarComp = (props) => {
+const NavbarComp = ({ match }) => {
  
   const [nav, setNav] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -20,7 +20,7 @@ const NavbarComp = (props) => {
   // const dispatch = useDispatch()
 
   const changeNavColor = () => {
-    if(window.scrollY >= 100) {
+    if(window.scrollY >= 100 || (window.location.pathname.includes('/blogs/user/') && window.scrollY >= 0 )) {
       setNav(true)
     } else {
       setNav(false)
@@ -28,6 +28,15 @@ const NavbarComp = (props) => {
   }
 
   window.addEventListener('scroll', changeNavColor);
+
+  useEffect(() => {
+    if(window.location.pathname.includes('/blogs/user/')) {
+      setNav(true)
+    } else {
+      setNav(false)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[window.location.pathname])
 
   // const logoutBtn = () => {
   //   dispatch(logout())
