@@ -65,6 +65,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         default: "Writing to me is simply thinking through my fingers."
+    },
+    followers: {
+        type: Array,
+        default: []
+    },
+    followings: {
+        type: Array,
+        default: []
     }
 },{ timestamps: true });
 

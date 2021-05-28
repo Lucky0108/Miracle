@@ -30,6 +30,7 @@ exports.getUserProfilePicture = (req, res, next) => {
     next();
 }
 
+
 exports.updateUser = (req, res) => {
 
     let form = new formidable.IncomingForm();
@@ -127,4 +128,80 @@ exports.updateEmail = (req, res) => {
 
 exports.getUserBlogList = (req, res) => {
     return res.json(req.profile.blogs)
+}
+
+// Middlewares
+
+// Follower List Increment 
+exports.increaseUserFollower = (req,res, next) => {
+    // User Details Of Logged In User To Add In Follower List
+    const newFollower = { _id: req.profile._id, fullName: req.profile.fullName, user_name: req.profile.user_name }
+    User.findOne({ _id: req.body._id })
+        .exec((err, user) => {
+            if(err) return res.status(400).json({ error: "Something went wrong while searching Database!" })
+            if(user) {
+                let sameProfile = false;
+                for(let i=0; i<user.followers.length; i++) {
+                    if(user.followers.length !== 0) {
+                        let followerId = JSON.stringify(user.followers[i]._id);
+                        let profileId = JSON.stringify(req.profile._id);
+                        if(followerId && followerId == profileId) {
+                            sameProfile = true;
+                            break;
+                        } 
+                    }
+                }
+
+                if(sameProfile) {
+                    return res.status(400).json({ error: `You're Already Following ${req.body.user_name}` })
+                }
+
+                let _user = user;
+                _user.followers.push(newFollower)
+
+                _user.save((err, user) => {
+                    if(err) return res.status(400).json({ error: `Failed To Update ${user.fullName} Follower's List` })
+                    next();
+                })
+            }
+        })
+}
+
+// Following List Increment of logged In User
+exports.increaseProfileFollowing = (req,res) => {
+    User.findByIdAndUpdate(
+        { _id: req.profile._id },
+        { $push: { followings: req.body }},
+        { new: true, useFindAndModify: false },
+        (err, user) => {
+            if(err) return res.status(400).json({ error: `Failed To Update ${user.fullName} Following's List` })
+            res.status(200).json({ message: "User Followed Successfully!" })
+        }
+    )
+}
+
+// Follower List Decrement
+exports.removeUserFollower = (req,res, next) => {
+    User.findByIdAndUpdate(
+        { _id: req.body._id },
+        { $pull: { followers: { _id: req.profile._id } }},
+        { new: true, useFindAndModify: false },
+        (err, user) => {
+            if(err) return res.status(400).json({ error: `Failed To Update ${user.fullName} Follower's List` })
+            next();
+        }
+    )
+}
+
+// Following List Decrement of logged In User
+exports.removeProfileFollowing = (req,res) => {
+    User.findByIdAndUpdate(
+        { _id: req.profile._id },
+        { $pull: { followings: { _id: req.body._id } }},
+        { new: true, useFindAndModify: false },
+        (err, user) => {
+            if(err) return res.status(400).json({ error: `Failed To Update ${user.fullName} Follower's List` })
+            res.status(200).json({ message: "User Unfollowed Successfully!" })
+        }
+    )
 }

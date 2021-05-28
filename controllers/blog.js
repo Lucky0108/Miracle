@@ -129,7 +129,7 @@ exports.getBlogByUser = (req, res) => {
     // let limit = req.query.limit ? parseInt(req.query.limit) : 15
     
     Blog.find({ author: req.profile._id })
-        .populate("author", "firstName lastName funFact socialLinks")
+        .populate("author", "firstName lastName funFact socialLinks user_name followers followings")
         .populate("category", "name")
         .sort([['_id', 'desc']])
         // .limit(limit)
@@ -247,13 +247,6 @@ exports.removeImage = (req,res) => {
 }
 
 // Middlewares
-
-// blogPictures : {
-//     type: Array,
-//     data: Buffer,
-//     contentType: String,
-//     default: []
-// },
 
 // User List Push
 exports.pushBlogInUserBlogList = (req,res) => {

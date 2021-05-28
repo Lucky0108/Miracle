@@ -33,6 +33,7 @@ const Blog = ({ loadAll = true }) => {
         setSearchQuery(e.target.value)
        
         if(e.target.value) {
+            // eslint-disable-next-line array-callback-return
             blogs.blogList.map((blogs, index) => {
                 if(blogs.title.toLowerCase().includes(e.target.value.toLowerCase())) {
                     newBlogList.push(blogs)

@@ -15,11 +15,9 @@ export const getAllBlogs = () => {
         })
 
         res.catch(error => {
-            if(error.response.status === 400 || error.response.status === 404) {
                 dispatch({ type: blogConstants.GET_ALL_BLOGS_FAILURE,
                     payload: { error: error.response.data.error }
                 })
-            }
         })
     }
 }
