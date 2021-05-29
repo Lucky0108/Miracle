@@ -20,15 +20,15 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 message: action.payload.message,
-                loading: "Done"
+                loading: false
             }
         break;
 
         case quoteConstants.QUOTE_FAILURE:
             state = {
-                ...initState,
+                ...state,
                 error: action.payload.message,
-                loading: "Failed"
+                loading: false
             }
         break;
 

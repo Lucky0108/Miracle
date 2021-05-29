@@ -6,7 +6,7 @@ import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../../actions/auth.action'
 import { NavLink, Redirect } from 'react-router-dom'
-import {toastr} from 'react-redux-toastr'
+import { toast } from 'react-toastify';
 
 /**
 * @author
@@ -14,6 +14,8 @@ import {toastr} from 'react-redux-toastr'
 **/
 
 const Login = (props) => {
+
+  const toastId = React.useRef(null);
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
@@ -30,12 +32,16 @@ const Login = (props) => {
   }
 
   useEffect(() => {
-    if(auth.message) {
-      toastr.success("Success", auth.message)
-      auth.message = ''
+    if(auth.loading) {
+      toastId.current = toast.info("❕ Loading...", {autoClose: false})
+    }
+    if(auth.authenticate) {
+      toast.dismiss(toastId.current);
+      toast.success("✔ Logged In Succesfully!")
     }
     if(auth.error) {
-      toastr.error("Error", auth.error);
+      toast.dismiss(toastId.current);
+      toast.error(`❌ ${auth.error}`)
       auth.error = "";
     }
   },[auth])
@@ -57,8 +63,8 @@ const Login = (props) => {
                   <Form onSubmit={loginSubmit}>
                     <Input
                       controlId="loginEmail"
-                      title="Email address"
-                      type="email" 
+                      title="Email/Phone"
+                      type="text" 
                       placeholder="Enter Your Email / Phone" 
                       value={user} 
                       onChange = {e => setUser(e.target.value)}

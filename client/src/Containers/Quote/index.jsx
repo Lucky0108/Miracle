@@ -4,7 +4,7 @@ import PageTitle from '../../Components/UI/PageTitle'
 import { Container, Col, Row } from 'react-bootstrap'
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 import { useDispatch, useSelector } from 'react-redux'
-import { toastr } from 'react-redux-toastr'
+import { toast } from 'react-toastify';
 import { quoteAction } from '../../actions'
 
 
@@ -14,6 +14,8 @@ import { quoteAction } from '../../actions'
 **/
 
 const Quotes = (props) => {
+
+  const toastId = React.useRef(null);
 
   const dispatch = useDispatch();
   const quote = useSelector(state => state.quote)
@@ -33,15 +35,17 @@ const Quotes = (props) => {
 
   useEffect(() => {
     if (quote.loading) {
-      toastr.info("Loading...")
-      quote.loading = "";
+      toastId.current = toast.info("❕ Loading...", {autoClose: false})
     }
 
     if (quote.message) {
-      toastr.success("Success", quote.message)
+      toast.dismiss(toastId.current);
+      toast.success(`✔ ${quote.message}`)
       quote.message = "";
+      setName(''); setEmail(''); setPhone(''); setService(''); setMessage('');
     } else if (quote.error) {
-      toastr.error("Error", quote.error)
+      toast.dismiss(toastId.current);
+      toast.error(`❌ ${quote.error}`)
       quote.error = "";
     }
   }, [quote, quote.loading, quote.message, quote.error])

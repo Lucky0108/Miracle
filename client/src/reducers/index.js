@@ -4,7 +4,6 @@ import newsReducer from './newsletter.reducer'
 import queryReducer from './query.reducer'
 import quoteReducer from './quote.reducer'
 import blogReducer from './blog.reducer'
-import {reducer as toastrReducer} from 'react-redux-toastr'
 const { combineReducers } = require("redux");
 
 const rootReducers = combineReducers({
@@ -13,7 +12,6 @@ const rootReducers = combineReducers({
     news: newsReducer,
     query: queryReducer,
     quote: quoteReducer,
-    toastr: toastrReducer,
     blogs: blogReducer 
 })
 

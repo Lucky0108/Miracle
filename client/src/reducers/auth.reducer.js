@@ -61,7 +61,6 @@ export default (state = initState, action) => {
         case authConstants.LOGIN_SUCCESS:
             state = {
                 ...state,
-                message: "Logged In Successfully!",
                 token: action.payload.token,
                 user: action.payload.user,
                 authenticating: false,

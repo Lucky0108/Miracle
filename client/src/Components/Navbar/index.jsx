@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { logout } from '../../actions'
-// import { toastr } from 'react-redux-toastr'
-// import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../actions'
+import { toast } from 'react-toastify';
 
 /**
 * @author
@@ -16,8 +15,8 @@ const NavbarComp = ({ match }) => {
  
   const [nav, setNav] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  // const auth = useSelector(state => state.auth)
-  // const dispatch = useDispatch()
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
   const changeNavColor = () => {
     if(window.scrollY >= 100 || (window.location.pathname.includes('/blogs/user/') && window.scrollY >= 0 )) {
@@ -29,44 +28,42 @@ const NavbarComp = ({ match }) => {
 
   window.addEventListener('scroll', changeNavColor);
 
+  const logoutBtn = () => {
+    dispatch(logout())
+  }
+
   useEffect(() => {
     if(window.location.pathname.includes('/blogs/user/')) {
       setNav(true)
     } else {
       setNav(false)
     }
+
+    if(auth.success) {
+      toast.success("✔ You are logged out successfully!!");
+      auth.success = false;
+      auth.loading = false;
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[window.location.pathname])
+  },[auth, window.location.pathname])
 
-  // const logoutBtn = () => {
-  //   dispatch(logout())
-  // }
+  const renderLoggedinLinks = () => {
+    return (
+      <Nav className="ml-auto"> 
+       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+       <a className="navLink" onClick={logoutBtn} style={{cursor: "pointer"}}>Logout</a>
+      </Nav>
+    )
+  }
 
-  // useEffect(() => {
-  //   if(auth.success) {
-  //     toastr.success("Success", "You are logged out successfully!!");
-  //     auth.success = false;
-  //     auth.loading = false;
-  //   }
-  // },[auth, auth.success, auth.loading])
-
-  // const renderLoggedinLinks = () => {
-  //   return (
-  //     <Nav className="ml-auto"> 
-  //      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-  //      <a className="navLink" onClick={logoutBtn} style={{cursor: "pointer"}}>Logout</a>
-  //     </Nav>
-  //   )
-  // }
-
-  // const renderNonLoggedinLinks = () => {
-  //   return (
-  //     <Nav className="ml-auto"> 
-  //      <NavLink to="/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
-  //      <NavLink to="/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
-  //     </Nav>
-  //   )
-  // }
+  const renderNonLoggedinLinks = () => {
+    return (
+      <Nav className="ml-auto"> 
+       <NavLink to="/user/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
+       <NavLink to="/user/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
+      </Nav>
+    )
+  }
 
   return (
     <>
@@ -79,15 +76,10 @@ const NavbarComp = ({ match }) => {
             <NavLink exact to="/" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Home</NavLink>
             <NavLink to="/about" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>About Us</NavLink>
             <NavLink to="/service" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Services</NavLink>
-            {/* <NavLink to="/blog" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Blog</NavLink> */}
+            <NavLink to="/blogs" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Blogs</NavLink>
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
-        {/* <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto"> 
-          <a href="http://miraclesolutions.epizy.com" className="navLink" target="_blank" rel="noopener noreferrer" style={{fontSize:"20px"}}>Store</a>
-        </Nav>
-        </Navbar.Collapse> */}
         {/* <Navbar.Collapse id="basic-navbar-nav">
             {auth.authenticate ? renderLoggedinLinks() : renderNonLoggedinLinks() }
         </Navbar.Collapse> */}

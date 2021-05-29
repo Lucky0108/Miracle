@@ -5,8 +5,7 @@ import footCloud from '../../img/footer-shape.webp'
 import './Footer.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { newsletter } from '../../actions/newsletter.action'
-import {toastr} from 'react-redux-toastr'
-
+import { toast } from 'react-toastify';
 
 /**
 * @author
@@ -55,6 +54,8 @@ const Footer = (props) => {
         return ( FooterServiceList.map((val, index) => { return ( <li key={index}> <a href={val[0]} target="_blank" rel="noopener noreferrer"> {val[1]} </a> </li> ) }) )
     }
 
+    const toastId = React.useRef(null);
+
     const [email, setEmail] = useState('')
     const news = useSelector(state => state.news)
 
@@ -68,14 +69,15 @@ const Footer = (props) => {
 
     useEffect(() => {
         if(news.loading) {
-            toastr.info("Loading...");
-            toastr.loading = "";
+            toastId.current = toast.info("❕ Loading...", {autoClose: false})
         }
         if(news.message) {
-            toastr.success("Success", news.message);
+            toast.dismiss(toastId.current);
+            toast.success(`✔ ${news.message}`)
             news.message = "";
         } else if(news.error) {
-            toastr.warning("Oops", news.error || news.message);
+            toast.dismiss(toastId.current);
+            toast.warning(`⚠ ${news.error || news.message}`)
             news.error = "";
         }
     }, [news, news.message, news.error, news.loading])

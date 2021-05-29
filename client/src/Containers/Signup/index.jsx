@@ -5,7 +5,7 @@ import Input from '../../Components/UI/Input'
 import { useSelector, useDispatch } from 'react-redux'
 import { signup } from '../../actions/auth.action';
 import { Redirect, NavLink } from 'react-router-dom';
-import { toastr } from 'react-redux-toastr'
+import { toast } from 'react-toastify';
 
 /**
 * @author
@@ -14,13 +14,15 @@ import { toastr } from 'react-redux-toastr'
 
 const Signup = (props) => {
 
+  const toastId = React.useRef(null);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [contact, setContact] = useState('');
-
-  // const toastr = useSelector(state => state.toastr)
+  const [done, setDone] = useState(false);
+  
   const auth = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
@@ -32,45 +34,29 @@ const Signup = (props) => {
   }
 
   useEffect(() => {
-    if (auth.loading) {
-      toastr.info('Loading...')
+    if(auth.loading) {
+      toastId.current = toast.info("❕ Loading...", {autoClose: false})
     }
     if (auth.message) {
-      toastr.success("Success", auth.message);
+      toast.dismiss(toastId.current);
+      toast.success(`✔ ${auth.message}`)
       auth.message = ""
-      setFirstName(''); setLastName(''); setEmail(''); setPassword(''); setContact('');
-      <Redirect to='/user/login' />
+      setDone(true); setFirstName(''); setLastName(''); setEmail(''); setPassword(''); setContact('');
     }
     if (auth.error) {
-      toastr.error("Error", auth.error)
+      toast.dismiss(toastId.current);
+      toast.error(`❌ ${auth.error}`)
       auth.error = ""
     }
   }, [auth])
-  // useEffect(() => {
-  //   if(user.loading === true){
-  //     toastr.info('Loading...')
-  //    } else if(user.loading === "Done") {
-  //      toastr.success('Congratulations', user.message)
-  //      setFirstName('')
-  //      setLastName('')
-  //      setEmail('')
-  //      setPassword('')
-  //      user.message = '';
-  //      user.loading = '';
-  //      return <Redirect to={'/login'} />
-  //    } else if(user.loading === "Failed") {
-  //      toastr.error('Error', user.error)
-  //      user.loading = ""
-  //      user.error = ""
-  //    }
-
-  // }, [user, user.loading, user.message, user.error])
 
   if (auth.authenticate) {
     return <Redirect to={'/blogs'} />
   }
 
-
+  if(done) {
+    return <Redirect to={'/user/login'} />
+  }
 
   return (
     <>
@@ -137,7 +123,7 @@ const Signup = (props) => {
                       Submit
                   </Button>
                   </Form>
-                  <div className="confirmDiv"> Already a user? <NavLink to="/admin/login"> Login </NavLink></div>
+                  <div className="confirmDiv"> Already a user? <NavLink to="/user/login"> Login </NavLink></div>
                 </Card.Body>
               </Card>
             </Col>

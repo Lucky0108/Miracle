@@ -5,7 +5,7 @@ import './Contact.css'
 import ContactInfoList from '../../Components/UI/ContactInfoList'
 import { useDispatch, useSelector } from 'react-redux'
 import { queryAction } from '../../actions/query.action'
-import { toastr } from 'react-redux-toastr'
+import { toast } from 'react-toastify';
 import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 
 /**
@@ -14,6 +14,8 @@ import HomeHeading from '../../Components/UI/Home/HomeHeadings'
 **/
 
 const Contact = (props) => {
+
+  const toastId = React.useRef(null);
 
   const dispatch = useDispatch();
   const query = useSelector(state => state.query)
@@ -33,18 +35,20 @@ const Contact = (props) => {
 
   useEffect(() => {
     if (query.loading) {
-      toastr.info("Loading...")
-      query.loading = "";
+      toastId.current = toast.info("❕ Loading...", {autoClose: false})
     }
 
     if (query.message) {
-      toastr.success("Success", query.message)
+      toast.dismiss(toastId.current);
+      toast.success(`✔ ${query.message}`)
       query.message = "";
+      setName(''); setEmail(''); setPhone(''); setService(''); setMessage('');
     } else if (query.error) {
-      toastr.error("Error", query.error)
+      toast.dismiss(toastId.current);
+      toast.error(`❌ ${query.error}`)
       query.error = "";
     }
-  }, [query, query.loading, query.message, query.error])
+  }, [query, query.message, query.error, query.loading])
 
   return (
     <>

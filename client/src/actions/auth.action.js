@@ -28,6 +28,7 @@ export const login = (user) => {
         res.then(response => {
             const { token, user } = response.data;
             localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
             dispatch({ type: authConstants.LOGIN_SUCCESS,
                 payload: { token, user }
             })
@@ -51,11 +52,6 @@ export const isLoggedin = () => {
                 type: authConstants.LOGIN_SUCCESS,
                 payload: { token, user }
             });
-        } else {
-            dispatch({
-                type: authConstants.LOGIN_FAILURE,
-                // payload: { error: 'Your session expired! Please Log in again!' }
-            })
         }
     }
 }

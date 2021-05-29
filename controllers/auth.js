@@ -9,7 +9,7 @@ const Chance = require('chance')
 const chance = new Chance();
 
 exports.signup = (req,res) => {
-    User.findOne({ $or: [{email: req.body.email}, { $and: [{ contact: req.body.contact }, { contact: {$ne: null} }] }] })
+    User.findOne({ $or: [{email: req.body.email}, { $and: [{ contact: req.body.contact }, { contact: {$ne: ""} }] }] })
     .exec((err,user) => {
         if(err) { 
             return res.status(404).json({ error: err }) 
@@ -35,7 +35,8 @@ exports.signup = (req,res) => {
         _user.save((error, data) => {
             if(error) { 
                 return res.status(400).json({ 
-                    error: "Something Went Wrong!"
+                    error: "Something Went Wrong!",
+                    err: error
                 });
             }
             if(data){ 

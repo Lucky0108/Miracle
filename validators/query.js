@@ -5,8 +5,8 @@ exports.validateQuery = [
     .isLength({min: 2, max:20})
     .withMessage("Please Enter Your Name"),
     check('phone')
-    .isMobilePhone("en-IN")
-    .withMessage("Please Enter A Valid Indian Contact Number"),
+    .isMobilePhone()
+    .withMessage("Please Enter A Valid Contact Number"),
     check('email')
     .isEmail()
     .withMessage("Please Enter A Valid Email Address"),

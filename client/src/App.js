@@ -2,7 +2,7 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import ReduxToastr from 'react-redux-toastr'
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import loadingImg from './img/ball-triangle.svg'
 
@@ -11,13 +11,8 @@ import Navbar from './Components/Navbar';
 import Home from './Containers/Home';
 import Footer from './Components/Footer';
 
-// Commented to use later
-// import Login from './Containers/Login';
-// import Signup from './Containers/Signup';
-
-
 // CSS Imports for packages
-import 'react-redux-toastr/src/styles/index.scss'
+import 'react-toastify/dist/ReactToastify.css';
 import '../node_modules/react-modal-video/scss/modal-video.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,8 +21,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { isLoggedin } from './actions';
 import Rocket from './Components/Rocket';
 import WhatsAppIcon from './Components/WhatsappIcon';
-// import CategoryBlogsPage from './Containers/Blogs/CategoryBlogs';
-
+// import Login from './Containers/Login';
 // Lazy Load Component
 const ErrorPage = lazy(() => import('./Containers/404'));
 const Team = lazy(() => import('./Containers/Team'));
@@ -38,9 +32,11 @@ const Policy = lazy(() => import('./Containers/Policy'))
 const About = lazy(() => import('./Containers/About'));
 const Contact = lazy(() => import('./Containers/Contact'));
 const Services = lazy(() => import('./Containers/Services'));
+const Quote = lazy(() => import('./Containers/Quote'));
+// const Signup = lazy(() => import('./Containers/Signup'));
 // const Blog = lazy(() => import('./Containers/Blogs/Blog'));
 // const BlogPg = lazy(() => import('./Containers/Blogs/BlogPg'));
-const Quote = lazy(() => import('./Containers/Quote'));
+// const CategoryBlogsPage = lazy(() => import ('./Containers/Blogs/CategoryBlogs'));
 // const UserBlogPage = lazy(() => import ('./Containers/Blogs/UserBlogs'))
 // const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
 
@@ -97,13 +93,14 @@ function App() {
       <Footer />
       <WhatsAppIcon />
       <Rocket />
-      <ReduxToastr 
-        newestOnTop={true}
-        preventDuplicates
-        transitionIn="fadeIn"
-        transitionOut="fadeOut"
-        progressBar
-        closeOnToastrClick
+      <ToastContainer
+          position="top-right"
+          autoClose={6000}
+          hideProgressBar={false}
+          closeOnClick
+          rtl={false}
+          draggable
+          pauseOnHover
       />
     </div>
   );
