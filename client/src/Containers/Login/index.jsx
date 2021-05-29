@@ -15,7 +15,7 @@ import {toastr} from 'react-redux-toastr'
 
 const Login = (props) => {
 
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const auth = useSelector(state => state.auth);
 
@@ -24,23 +24,24 @@ const Login = (props) => {
   const loginSubmit = (e) => {
     e.preventDefault();
 
-    const user = { email, password };
+    const userData = { user, password };
 
-    dispatch(login(user))
+    dispatch(login(userData))
   }
 
   useEffect(() => {
-    if(auth.authenticate) {
-      toastr.success("Success", "Login was Success!!")
+    if(auth.message) {
+      toastr.success("Success", auth.message)
+      auth.message = ''
     }
     if(auth.error) {
       toastr.error("Error", auth.error);
       auth.error = "";
     }
-  },[auth, auth.authenticate, auth.loading, auth.error])
+  },[auth])
 
   if(auth.authenticate) {
-    return <Redirect to={"/"} />
+    return <Redirect to={"/blogs"} />
   }
 
   return (
@@ -58,9 +59,9 @@ const Login = (props) => {
                       controlId="loginEmail"
                       title="Email address"
                       type="email" 
-                      placeholder="Enter email" 
-                      value={email} 
-                      onChange = {e => setEmail(e.target.value)}
+                      placeholder="Enter Your Email / Phone" 
+                      value={user} 
+                      onChange = {e => setUser(e.target.value)}
                     />
 
                     <Input
@@ -75,7 +76,7 @@ const Login = (props) => {
                       Submit
                   </Button>
                   </Form>
-                 {/* <div className="confirmDiv"> Not a user yet? <NavLink to="/admin/signup"> Sign up </NavLink></div> */}
+                 <div className="confirmDiv"> Not a user yet? <NavLink to="/user/signup"> Sign up </NavLink></div>
                 </Card.Body>
               </Card>
             </Col>

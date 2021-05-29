@@ -53,12 +53,12 @@ exports.signin = (req,res) => {
         if(user) {
             if(user.authenticate(req.body.password)) {
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d'})
-                const { _id, firstName, lastName, fullName, user_name, email, contact, blogs, role, funFact } = user
+                const { _id, firstName, lastName, fullName, user_name, email, contact, blogs, role, funFact, socialLinks } = user
                 res.cookie("token", token, { expires: new Date(Date.now() + 24 * 3600000) }) // Cookie expires after 24 hours 
                 res.status(200).json({
                     token: token,
                     user: {
-                        _id, firstName, lastName, fullName, email, user_name, contact, blogs, role, funFact
+                        _id, firstName, lastName, fullName, email, user_name, contact, blogs, role, funFact, socialLinks
                     },
                 })
             } else {

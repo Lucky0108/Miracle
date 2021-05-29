@@ -1,6 +1,6 @@
 export * from './auth.action'
-export * from './userSignup.action'
 export * from './newsletter.action'
 export * from './query.action'
 export * from './quote.action'
 export * from './blog.action'
+export * from './user.action'

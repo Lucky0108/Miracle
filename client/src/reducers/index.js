@@ -1,5 +1,5 @@
 import authReducer from './auth.reducer'
-import userReducer from './userSignup.reducer'
+import userReducer from './user.reducer'
 import newsReducer from './newsletter.reducer'
 import queryReducer from './query.reducer'
 import quoteReducer from './quote.reducer'

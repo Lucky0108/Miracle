@@ -1,38 +1,48 @@
 import axios from '../helpers/axios'
-import { authConstants } from './constants'
+import { authConstants, signupConstants } from './constants'
 
-export const login = (user) => {
-   
-    return (dispatch) => {
-
-        dispatch({ type: authConstants.LOGIN_REQUEST });
-        const res = axios.post('/signin', { ...user });
+export const signup = (userData) => {
+    return dispatch => {
+        dispatch({ type: signupConstants.SIGNUP_REQUEST })
+        const res = axios.post('/signup', { ...userData })
 
         res.then(response => {
-            if (response.status === 200) {
-                const { token, user } = response.data;
-                localStorage.setItem("token", token);
-                localStorage.setItem("user", JSON.stringify(user));
-                dispatch({ type: authConstants.LOGIN_SUCCESS,
-                    payload: { token, user }
-                })
-            }
+            dispatch({ type: signupConstants.SIGNUP_SUCCESS,
+                payload: { message: response.data.message }
+            })
         })
 
-        res.catch((error) => {
-            if(error.response) {
-                if(error.response.status === 400 || error.response.status === 404 || error.response.status === 422) {
-                    dispatch({ type: authConstants.LOGIN_FAILURE,
-                        payload: { message: error.response.data.message || error.response.data.error }
-                    })
-                }
-            }
+        res.catch(error => {
+            dispatch({ type: signupConstants.SIGNUP_FAILURE,
+                payload: { error: error.response.data.error  }
+            })
+        })
+    }
+}
+
+export const login = (user) => {
+    return dispatch => {
+        dispatch({ type: authConstants.LOGIN_REQUEST })
+        const res = axios.post('/signin', { ...user })
+
+        res.then(response => {
+            const { token, user } = response.data;
+            localStorage.setItem("token", token);
+            dispatch({ type: authConstants.LOGIN_SUCCESS,
+                payload: { token, user }
+            })
+        })
+
+        res.catch(error => {
+            dispatch({ type: authConstants.LOGIN_FAILURE,
+                payload: { error: error.response.data.error }
+            })
         })
     }
 }
 
 export const isLoggedin = () => {
-    return async dispatch => {
+    return dispatch => {
         const token = localStorage.getItem("token");
         if (token) {
             const user = JSON.parse(localStorage.getItem("user"))
@@ -44,7 +54,7 @@ export const isLoggedin = () => {
         } else {
             dispatch({
                 type: authConstants.LOGIN_FAILURE,
-                payload: { error: 'Failed To Login' }
+                // payload: { error: 'Your session expired! Please Log in again!' }
             })
         }
     }

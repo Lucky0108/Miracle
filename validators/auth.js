@@ -11,7 +11,7 @@ exports.validateSignupRequest = [
     .isLength({min: 6})
     .withMessage('Password Must Be Atleast 6 characters!'),
     check('contact')
-    .if(body('contact').exists()).isMobilePhone()
+    .if(body('contact').notEmpty()).isMobilePhone()
     .withMessage("Please Enter A Valid Contact Number or Leave it Empty!")
 ];
 exports.validateSigninRequest = [
@@ -19,8 +19,8 @@ exports.validateSigninRequest = [
     .isLength({min: 1})
     .withMessage('Please Enter Your Email Or Contact Number'),
     check('password')
-    .isLength({min:6})
-    .withMessage('Password Must Be Atleast 6 Characters')
+    .isLength({min:1})
+    .withMessage('Password field cannot be empty')
 ]
 
 exports.isRequestValidated = (req,res,next) => {
