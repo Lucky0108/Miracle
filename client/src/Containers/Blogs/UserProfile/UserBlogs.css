@@ -58,6 +58,10 @@
     background-color: #fff !important;
 }
 
+.followed-btn a {
+    color: #262626;
+}
+
 .user-profile-info-details ul li {
     margin-right: 40px;
 }

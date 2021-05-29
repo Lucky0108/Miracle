@@ -59,8 +59,8 @@ const NavbarComp = ({ match }) => {
   const renderNonLoggedinLinks = () => {
     return (
       <Nav className="ml-auto"> 
-       <NavLink to="/user/login" className="navLink" activeClassName="activeNavLink">Login</NavLink>
-       <NavLink to="/user/signup" className="navLink" activeClassName="activeNavLink">Join Us</NavLink>
+       <NavLink to="/user/login" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Login</NavLink>
+       <NavLink to="/user/signup" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Join Us</NavLink>
       </Nav>
     )
   }
@@ -80,9 +80,9 @@ const NavbarComp = ({ match }) => {
             <NavLink to="/contact" className="navLink" activeClassName="activeNavLink" onClick={() => setTimeout(() => {setExpanded(false)}, 200)}>Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
-        {/* <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav">
             {auth.authenticate ? renderLoggedinLinks() : renderNonLoggedinLinks() }
-        </Navbar.Collapse> */}
+        </Navbar.Collapse>
         </Container>
       </Navbar>
     </>

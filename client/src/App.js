@@ -21,7 +21,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { isLoggedin } from './actions';
 import Rocket from './Components/Rocket';
 import WhatsAppIcon from './Components/WhatsappIcon';
-// import Login from './Containers/Login';
+import Login from './Containers/Login';
+
 // Lazy Load Component
 const ErrorPage = lazy(() => import('./Containers/404'));
 const Team = lazy(() => import('./Containers/Team'));
@@ -33,12 +34,12 @@ const About = lazy(() => import('./Containers/About'));
 const Contact = lazy(() => import('./Containers/Contact'));
 const Services = lazy(() => import('./Containers/Services'));
 const Quote = lazy(() => import('./Containers/Quote'));
-// const Signup = lazy(() => import('./Containers/Signup'));
-// const Blog = lazy(() => import('./Containers/Blogs/Blog'));
-// const BlogPg = lazy(() => import('./Containers/Blogs/BlogPg'));
-// const CategoryBlogsPage = lazy(() => import ('./Containers/Blogs/CategoryBlogs'));
-// const UserBlogPage = lazy(() => import ('./Containers/Blogs/UserBlogs'))
-// const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
+const Signup = lazy(() => import('./Containers/Signup'));
+const Blog = lazy(() => import('./Containers/Blogs/Blog'));
+const BlogPg = lazy(() => import('./Containers/Blogs/BlogPg'));
+const CategoryBlogsPage = lazy(() => import ('./Containers/Blogs/CategoryBlogs'));
+const UserBlogPage = lazy(() => import ('./Containers/Blogs/UserProfile'))
+const TinyMce = lazy(() => import('./Containers/tinymce.jsx'));
 
 
 
@@ -74,19 +75,19 @@ function App() {
         <Route exact path='/service' component={Services} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
-        {/* <Route exact path='/user/login' component={Login} /> */}
-        {/* <Route exact path='/user/signup' component={Signup} /> */}
+        <Route exact path='/user/login' component={Login} />
+        <Route exact path='/user/signup' component={Signup} />
         <Route exact path='/team' component={Team} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/testimonial" component={Testimonials} />
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/terms" component={Terms} />
-        {/* <Route exact path="/blogs" component={Blog} /> */}
-        {/* <Route exact path="/blog/:blogId/:blogslug" component={BlogPg} /> */}
-        {/* <Route exact path="/blogs/user/:userId/:username" component={UserBlogPage} /> */}
-        {/* <Route exact path="/blogs/category/:categoryId/:categoryslug" component={CategoryBlogsPage} /> */}
+        <Route exact path="/blogs" component={Blog} />
+        <Route exact path="/blog/:blogId/:blogslug" component={BlogPg} />
+        <Route exact path="/blogs/user/:userId/:username" component={UserBlogPage} />
+        <Route exact path="/blogs/category/:categoryId/:categoryslug" component={CategoryBlogsPage} />
         <Route exact path="/quote" component={Quote} />
-        {/* <Route exact path="/tiny" component={TinyMce} /> */}
+        <Route exact path="/tiny" component={TinyMce} />
         <Route component={ErrorPage} />
       </Switch>
       </Suspense>
