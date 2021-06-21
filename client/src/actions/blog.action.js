@@ -64,26 +64,25 @@ export const getBlogByCategory = (categoryId) => {
     }
 }
 
-export const getBlogByUser = (userId) => {
+export const getBlogUserDetails = (userId) => {
     return dispatch => {
-        dispatch({ type: blogConstants.GET_BLOG_BY_USER_REQUEST })
-        const res = axios.get(`/blogs/user/${userId}`);
+        dispatch({ type: blogConstants.GET_BLOG_USER_REQUEST })
+        const res = axios.get(`/user/profile/${userId}`);
 
         res.then(response => {
-            if(response.status === 200) {
-                dispatch({ type: blogConstants.GET_BLOG_BY_USER_SUCCESS,
-                    payload: { blogList: response.data }
+                dispatch({ type: blogConstants.GET_BLOG_USER_SUCCESS,
+                    payload: { user: response.data }
                 })
-            }
         })
 
         res.catch(error => {
-            dispatch({ type: blogConstants.GET_BLOG_BY_USER_FAILURE,
+            dispatch({ type: blogConstants.GET_BLOG_USER_FAILURE,
                 payload: { error: error.response.data.error }
             })
         })
     }
 }
+
 
 export const getAllCategories = () => {
     return dispatch => {

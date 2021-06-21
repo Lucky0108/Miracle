@@ -6,12 +6,12 @@ import React from 'react'
 * @function BlogList
 **/
 
-const BlogList = ({ blogImg, heading, date, link, authorLink, author, content, category, id }) => {
+const BlogList = ({ blogThumbnail, heading, date, link, authorLink, author, content, category, id }) => {
     return (
         <>
             <div className="post standard-format">
                 <div className="entry-media">
-                    <img src={blogImg} alt={heading} />
+                    <img src={blogThumbnail} alt={heading} />
                     <div className="cat"> {category} </div>
                 </div>
                 <div className="entry-meta">

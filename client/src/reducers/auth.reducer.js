@@ -14,6 +14,8 @@ const initState = {
         blogs: "", 
         role: "", 
         funFact: "", 
+        followers: [],
+        followings: [],
         socialLinks: ""
     },
     error: null,

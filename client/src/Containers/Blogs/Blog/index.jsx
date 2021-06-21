@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+// import { NavLink } from 'react-router-dom';
 import "./Blog.css";
 import PageTitle from "../../../Components/UI/PageTitle";
 import { Col, Container, Row } from "react-bootstrap";
-import blogImg from "../../../img/blog-img.webp";
+import blogDefault from "../../../img/blog-default.jpg";
 import logo from "../../../img/logo.webp";
 import BlogList from "../../../Components/UI/Blog/BlogList";
 import BlogRecent from "../../../Components/UI/Blog/BlogRecent";
@@ -25,69 +26,78 @@ const Blog = ({ loadAll = true }) => {
 
     // Fetching Data from Databse On Component Load
     useEffect(() => {
-        if (loadAll) { dispatch(getAllBlogs())};
+        if (loadAll) { dispatch(getAllBlogs()) };
         dispatch(getAllCategories());
     }, [dispatch, loadAll]);
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value)
-       
-        if(e.target.value) {
+
+        if (e.target.value) {
             // eslint-disable-next-line array-callback-return
             blogs.blogList.map((blogs, index) => {
-                if(blogs.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+                if (blogs.title.toLowerCase().includes(e.target.value.toLowerCase())) {
                     newBlogList.push(blogs)
-                } 
+                }
             })
             setOldBlogList(newBlogList);
-        } else{
+        } else {
             setOldBlogList(blogs.blogList)
-        } 
+        }
+    }
+
+    const checkBlogThumbnail = (content) => {
+
+        let div = document.createElement('div');
+        div.innerHTML = content;
+        let firstImage = div.getElementsByTagName('img')[0]
+        let ImgSrc = firstImage ? firstImage.getAttribute("src") : blogDefault;
+        return ImgSrc;
     }
 
     const renderBlogList = () => {
-            return (
-                blogs.error ? <h3 className="alert-danger p-5"> {blogs.error} </h3> :
+        return (
+            blogs.error ? <h3 className="alert-danger p-5"> {blogs.error} </h3> :
                 blogs.blogList.length === 0 ? <h3 className="alert-info p-5"> No Blog Found In This List ! </h3> :
-                oldBlogList.length === 0 ? (
-                    <h3 className="alert-info p-5"> No Blog Found For That Search! Please Check Out Other Latest Blogs! </h3> ,
-                    blogs.blogList.map((data, index) => {
-                        const { _id, date, author, title, description, category, slug } = data;
-                        return (
-                            <BlogList
-                                key={index}
-                                id={index}
-                                blogImg={blogImg}
-                                category={category.name}
-                                date={date}
-                                author={author.firstName}
-                                heading={title}
-                                content={description}
-                                link={`/blog/${_id}/${slug}`}
-                                authorLink={`/blogs/user/${author._id}/${author.firstName}${author.lastName ? '-' + author.lastName : ''}`}
-                            />
-                        );
-                    })    
-                )  : (
-                    oldBlogList.map((data, index) => {
-                        const { _id, date, author, title, description, category, slug } = data;
-                        return (
-                            <BlogList
-                                key={index}
-                                id={index}
-                                blogImg={blogImg}
-                                category={category.name}
-                                date={date}
-                                author={author.firstName}
-                                heading={title}
-                                content={description}
-                                link={`/blog/${_id}/${slug}`}
-                                authorLink={`/blogs/user/${author._id}/${author.firstName}${author.lastName ? '-' + author.lastName : ''}`}
-                            />
-                        );
-                    })    
-                )
-            ) 
+                    oldBlogList.length === 0 ? (
+                        <h3 className="alert-info p-5"> No Blog Found For That Search! Please Check Out Other Latest Blogs! </h3>,
+                        blogs.blogList.map((data, index) => {
+                            const { _id, date, author, title, description, content, category, slug } = data;
+                            return (
+                                <BlogList
+                                    key={index}
+                                    id={index}
+                                    blogThumbnail={checkBlogThumbnail(content)}
+                                    category={category.name}
+                                    date={date}
+                                    author={author.firstName}
+                                    heading={title}
+                                    content={description}
+                                    link={`/blog/${_id}/${slug}`}
+                                    authorLink={`/blogs/user/${author._id}/${author.firstName}${author.lastName ? '-' + author.lastName : ''}`}
+                                />
+                            );
+                        })
+                    ) : (
+                        oldBlogList.map((data, index) => {
+                            const { _id, date, author, title, description, category, slug } = data;
+                            return (
+                                <BlogList
+                                    key={index}
+                                    id={index}
+                                    blogThumbnail={blogDefault}
+                                    category={category.name}
+                                    date={date}
+                                    author={author.firstName}
+                                    heading={title}
+                                    content={description}
+                                    link={`/blog/${_id}/${slug}`}
+                                    authorLink={`/blogs/user/${author._id}/${author.firstName}${author.lastName ? '-' + author.lastName : ''}`}
+                                />
+                            );
+                        })
+                    )
+        )
     }
 
     return (
@@ -100,6 +110,10 @@ const Blog = ({ loadAll = true }) => {
                 <Container>
                     <Row>
                         <Col lg={8} xs={12}>
+                            {/* <div className="blog-list-type">
+                                <NavLink exact to="/blogs/feed" className="blogListType"> Feed </NavLink>
+                                <NavLink exact to="/blogs" className="blogListType"> Feed </NavLink>
+                            </div> */}
                             <div className="blog-content">
                                 {blogs.loading ? <h3 className="alert-info p-5">Loading...</h3> :
                                     renderBlogList()}
@@ -144,18 +158,18 @@ const Blog = ({ loadAll = true }) => {
 
                                 <div className="widget search-widget">
                                     <h3>Search</h3>
-                                        <div>
-                                            <input
-                                                type="text"
-                                                placeholder="Search Post..."
-                                                className="form-control"
-                                                onChange={handleSearchChange}
-                                                value={searchQuery}
-                                            />
-                                            <button>
-                                                <i className="fas fa-search"></i>
-                                            </button>
-                                        </div>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            placeholder="Search Post..."
+                                            className="form-control"
+                                            onChange={handleSearchChange}
+                                            value={searchQuery}
+                                        />
+                                        <button>
+                                            <i className="fas fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="widget category-widget">
@@ -172,6 +186,7 @@ const Blog = ({ loadAll = true }) => {
                                                 </li>
                                             )
                                         })}
+                                        <li> <a href="/blogs"> All Categories </a> </li>
                                     </ul>
                                 </div>
 

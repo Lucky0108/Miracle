@@ -53,17 +53,22 @@
     padding: 5px 9px;
 }
 
-.followed-btn {
+.followed-btn, .remove-btn {
     border-color: #dadada !important;
     background-color: #fff !important;
 }
 
-.followed-btn a {
+.followed-btn a, .remove-btn a {
     color: #262626;
 }
 
 .user-profile-info-details ul li {
     margin-right: 40px;
+    cursor: pointer;
+}
+
+.user-profile-info-details ul li:first-child {
+    cursor: default;
 }
 
 .user-profile-info-details ul li:last-child {
@@ -81,9 +86,69 @@
     color: #262626;
 }
 
+.user-follow-list-modal .modal-body {
+    min-height: 200px;
+    overflow: auto;
+}
+
+.modal-content {
+    border-radius: 12px;
+}
+
+.userFollowerList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.user-followers-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-followers-info span {
+    margin-left: 1rem;
+}
+
+.user-followers-info span p {
+    margin-bottom: -8px;
+}
+
+.user-followers-info img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.remove-btn { 
+    padding: 5px 9px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .user-profile-blog-list {
     border-top: 1px solid #dbdbdb;
     padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user-profile-blogs.blog-pg-section .entry-meta>span+span, .user-profile-blogs.blog-pg-section .entry-media .cat {
+    display: none;
+}
+
+.user-profile-blogs.blog-pg-section .entry-meta {
+    padding: 15px 0 0;
+}
+
+.user-profile-blogs.blog-pg-section .post h3 {
+    margin: .4em 0;
+}
+
+.user-profile-blogs.blog-pg-section .post p {
+    margin-bottom: 1rem;
 }
 
 @media (min-width: 736px) {

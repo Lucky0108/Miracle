@@ -101,7 +101,6 @@ function App() {
           closeOnClick
           rtl={false}
           draggable
-          pauseOnHover
       />
     </div>
   );

@@ -6,6 +6,12 @@
 
 .blog-pg-section .entry-media {
     position: relative;
+    /* border: 1px solid #e8e8e8; */
+}
+
+.blog-pg-section .entry-media img {
+    display: block;
+    margin: auto;
 }
 
 .blog-pg-section .entry-media .cat {
@@ -271,10 +277,10 @@
 
 @media (max-width: 991px) {
 
-    .blog-pg-section .blog-content h1 {
+    /* .blog-pg-section .blog-content h1 {
         padding: 1rem !important;
         font-size: 1.25rem !important;
-    }
+    } */
 
     .blog-pg-section .blog-content .post {
         margin-bottom: 70px;

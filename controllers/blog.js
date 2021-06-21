@@ -61,7 +61,7 @@ exports.createBlog = (req,res, next) => {
         category: req.category._id
     }
 
-    if(tags.length > 4) {
+    if(tags && tags.length > 4) {
         return res.status(400).json({ error: "Please Add A Maximum Of 4 Tags Only." })
     }
     
@@ -71,10 +71,12 @@ exports.createBlog = (req,res, next) => {
         req.newBlog = {   // To Pass New Data to next middleware i.e pushBlogToUser
             _id: blog._id,
             title: blog.title,
+            slug: slugify(`${blog.title}-${new Date().toLocaleDateString()}-${random()}`),
             description: blog.description,
             content: blog.content,
             tags: blog.tags,
-            category: blog.category
+            category: blog.category,
+            date: blog.date
         }
         next();
     })
@@ -199,7 +201,10 @@ exports.updateBlog = (req,res, next) => {
         date: convertDate(new Date().toLocaleDateString())
     }
 
-    if(tags.length > 4) {
+    if(!category) {
+        return res.status(400).json({ error: "Please Select A Category!" })
+    }
+    if(tags && tags.length > 4) {
         return res.status(400).json({ error: "Please Add A Maximum Of 4 Tags Only." })
     }
 
@@ -209,9 +214,10 @@ exports.updateBlog = (req,res, next) => {
         { new: true, useFindAndModify: false },
         (err, blog) => {
             if(err) return res.status(400).json({ message: "Failed To Update Blog!" })
-            req.updateBlog = {   // To Pass New Data to next middleware
+            req.updatedBlog = {   // To Pass New Data to next middleware
                 _id: blog._id,
                 title: blog.title,
+                slug: slugify(`${blog.title}-${new Date().toLocaleDateString()}-${random()}`),
                 content: blog.content,
                 description: blog.description,
                 tags: blog.tags,
@@ -264,8 +270,8 @@ exports.pushBlogInUserBlogList = (req,res) => {
 // User List Update
 exports.updateUserBlogList = (req,res) => {
     User.findOneAndUpdate(
-        { _id: req.profile._id },
-        { $set: { blogs: req.updateBlog } },
+        { _id: req.profile._id, 'blogs._id': req.updatedBlog._id },
+        { $set: { "blogs.$": req.updatedBlog }},
         { new: true, useFindAndModify: false },
         (err, user) => {
             if(err) return res.status(400).json({ error: "Failed To Update User Blog List!" })

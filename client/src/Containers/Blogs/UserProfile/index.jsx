@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react'
 import './UserBlogs.css'
-import { Container, Row, Col, Modal } from 'react-bootstrap';
-import blogImg from "../../../img/blog-img.webp";
+import '../Blog/Blog.css'
+import { Container, Row, Col } from 'react-bootstrap';
+import blogDefault from "../../../img/blog-default.jpg";
 import BlogList from "../../../Components/UI/Blog/BlogList";
 import { useDispatch, useSelector } from 'react-redux';
-import { getBlogByUser } from '../../../actions/blog.action';
 import { api } from '../../../urlConfig';
 import { followRequest, unfollowRequest } from '../../../actions/user.action';
+import ModalComp from '../../../Components/UI/Modal';
+import { getBlogUserDetails } from '../../../actions/blog.action';
 import { toast } from 'react-toastify';
 
 /**
@@ -20,15 +22,25 @@ const UserBlogsProfile = ({ match }) => {
   const toastId = React.useRef(null);
 
   const dispatch = useDispatch();
-  const blogs = useSelector(state => state.blogs);
+  const blog = useSelector(state => state.blogs);
   const auth = useSelector(state => state.auth);
   const [largeScreen, setLargeScreen] = useState(true);
+  let author = "";
+  let loggedInUser = JSON.parse(localStorage.getItem("user"));
 
   // Modal State
   const [show, setShow] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShowFollowers(false)
+    setShowFollowing(false)
+    setShow(false)
+  };
   const handleShow = () => setShow(true);
+  const handleFollowerShow = () => setShowFollowers(true);
+  const handleFollowingShow = () => setShowFollowing(true);
 
   const changeScreenElements = () => {
     if (window.screen.width < 736) {
@@ -39,44 +51,95 @@ const UserBlogsProfile = ({ match }) => {
   }
 
   const sendFollowRequest = (authorId, authorName, authorUserName) => {
-    if(!auth.user._id) {
+    if (!auth.user._id) {
       handleShow()
     } else {
       const authorBody = { _id: JSON.parse(authorId), fullName: authorName, user_name: authorUserName }
       dispatch(followRequest(auth.user._id, authorBody))
-    }
+      loggedInUser.followings.push(authorBody);
+      localStorage.setItem("user", JSON.stringify(loggedInUser)) // Saving user back in Local Storage
+      }
   }
 
   const sendUnfollowRequest = (authorId) => {
-    const authorBody = { _id: JSON.parse(authorId)}
+    const authorBody = { _id: JSON.parse(authorId) }
     dispatch(unfollowRequest(auth.user._id, authorBody))
+
+    for(let i = 0; i < loggedInUser.followings.length; i++) {
+      let loggedInUserFollowingsId = JSON.stringify(loggedInUser.followings[i]._id)
+      if(loggedInUserFollowingsId === authorId) {
+        loggedInUser.followings.splice(i,1);
+        localStorage.setItem("user", JSON.stringify(loggedInUser)) // Saving user back in Local Storage
+        break;
+      }
+    }
+
   }
 
   const checkFollowButtonRender = (authorId, authorName, authorUserName, authorFollowers) => {
     let isFollowing = false; // To Check Follow Button Condition
-    let profileId = JSON.stringify(auth.user._id);
+    let loggedInUserId = JSON.stringify(auth.user._id); // LoggedInUserId
     authorId = JSON.stringify(authorId);
-     
-    if(authorFollowers && authorFollowers.length !== 0) {
-      for(let i=0; i<authorFollowers.length; i++) {
-        let followerId = JSON.stringify(authorFollowers[i]._id);
+
+    if (authorFollowers && authorFollowers.length !== 0) {
+      for (let i = 0; i < authorFollowers.length; i++) {
+        let authorFollowersId = JSON.stringify(authorFollowers[i]._id);
 
         // Check If The LoggedIn User Is Already In Profile Page User Followers List
-        if(followerId === profileId) {
+        if (authorFollowersId === loggedInUserId) {
           isFollowing = true;
           break;
         }
       }
     }
 
-    if(profileId && authorId === profileId) {
+    if (loggedInUserId && authorId === loggedInUserId) {
       return <button className="button btn followed-btn"><a href="/user/profile">Edit Profile &nbsp; <i className="fas fa-user"></i></a></button>
     }
 
-    if(!auth.user._id || !isFollowing) {
-      return <button onClick={() => {sendFollowRequest(authorId, authorName, authorUserName)}} className="btn btn-primary">Follow</button>
-    } else if(isFollowing) {
-      return <button onClick={() => {sendUnfollowRequest(authorId)}} className="btn followed-btn">Following &nbsp; <i className="fas fa-check"></i></button>
+    if (!auth.user._id || !isFollowing) {
+      return <button onClick={() => { sendFollowRequest(authorId, authorName, authorUserName) }} className="btn btn-primary">Follow</button>
+    } else if (isFollowing) {
+      return <button onClick={() => { sendUnfollowRequest(authorId) }} className="btn followed-btn">Following &nbsp; <i className="fas fa-check"></i></button>
+    }
+  }
+
+  // To Render Remove Following Button Only On Logged In User
+  const checkRemoveButtonRender = (authorId, userId, userFullName, userName) => {
+    if(loggedInUser) {
+      let isFollowing = false; // To Check Follow Button Condition
+      let isMyProfile = false; // To Check Same Profile Button Condition
+      let loggedInUserId = JSON.stringify(auth.user._id);  // LoggedInUserId
+      let loggedInUserFollowings = loggedInUser.followings; // LoggedInUser Followings List
+      authorId = JSON.stringify(authorId); // Id Of Profile Page User
+      userId = JSON.stringify(userId); // Id Of Following's User List 
+  
+      if (loggedInUserFollowings && loggedInUserFollowings.length !== 0) {
+        for (let i = 0; i < loggedInUserFollowings.length; i++) {
+          let loggedInUserFollowingId = JSON.stringify(loggedInUserFollowings[i]._id);
+        //  console.log(loggedInUserFollowingId, userId)
+          // Check If The LoggedIn User Is Already In Profile Page User Followers List
+          if (loggedInUserFollowingId === userId) {
+            isFollowing = true;
+            break;
+          }
+          if (userId === loggedInUserId) {
+            isMyProfile = true;
+            break;
+          }
+        }
+      }
+  
+      if (isMyProfile) {
+        return  
+      }
+     
+      if (!auth.user._id || !isFollowing) {
+        return <button onClick={() => { sendFollowRequest(userId, userFullName, userName) }} className="btn btn-primary">Follow</button>
+      } else if (isFollowing) {
+        return <button onClick={() => { sendUnfollowRequest(userId) }} className="btn remove-btn">Following</button>
+      }
+  
     }
   }
 
@@ -87,8 +150,8 @@ const UserBlogsProfile = ({ match }) => {
         <div className="user-profile-info-details large">
           <ul>
             <li> <span> {totalBlogs} </span> <a>Blogs</a>  </li>
-            <li> <span> {followersCount} </span> <a>Followers</a> </li>
-            <li> <span> {followingsCount} </span> <a>Following</a> </li>
+            <li onClick={handleFollowerShow}> <span> {followersCount} </span> <a>Followers</a> </li>
+            <li onClick={handleFollowingShow}> <span> {followingsCount} </span> <a>Following</a> </li>
           </ul>
         </div>
         <div className="user-profile-info-name large">
@@ -112,8 +175,8 @@ const UserBlogsProfile = ({ match }) => {
         <div className="user-profile-info-details small">
           <ul>
             <li> <span> {totalBlogs} </span> <a>Blogs</a>  </li>
-            <li> <span> {followersCount} </span> <a>Followers</a> </li>
-            <li> <span> {followingsCount} </span> <a>Following</a> </li>
+            <li onClick={handleFollowerShow}> <span> {followersCount} </span> <a>Followers</a> </li>
+            <li onClick={handleFollowingShow}> <span> {followingsCount} </span> <a>Following</a> </li>
           </ul>
         </div>
       </>
@@ -122,52 +185,48 @@ const UserBlogsProfile = ({ match }) => {
 
   useEffect(() => {
 
-    dispatch(getBlogByUser(match.params.userId));
+    dispatch(getBlogUserDetails(match.params.userId));
     changeScreenElements();
 
-    if (auth.loading) {
-      toastId.current =  toast.info("❕ Loading...",{autoClose: false})
-    }
-    if (auth.message) {
-      toast.dismiss(toastId.current);
-      toast.success(`✔ ${auth.message}`, {autoClose: 2000})
-      auth.message = "";
-    } else if (auth.error) {
-      toast.dismiss(toastId.current);
-      toast.error(`❌ ${auth.error}`, {autoClose: 2000})
-      auth.error = "";
-    }
+  }, [dispatch, match.params.userId, auth.message, auth.error])
 
-  }, [dispatch, match.params.userId, auth, auth.message, auth.error])
+  const checkBlogThumbnail = (content) => {
+
+    let div = document.createElement('div');
+    div.innerHTML = content;
+    let firstImage = div.getElementsByTagName('img')[0]
+    let ImgSrc = firstImage ? firstImage.getAttribute("src") : blogDefault;
+    return ImgSrc;
+  }
 
   const renderUserBlogList = () => {
+    author = blog.user;
     return (
-      blogs.blogList.map((data, index) => {
-        const { _id, date, author, title, description, category, slug } = data;
+      author.blogs.map((data, index) => {
+        const { _id, date, title, content, description, slug } = data;
         return (
-          <BlogList
-            key={index}
-            id={index}
-            date={date}
-            blogImg={blogImg}
-            category={category.name}
-            author={author.firstName}
-            heading={title}
-            content={description}
-            link={`/blog/${_id}/${slug}`}
-            authorLink={`/blogs/user/${author._id}/${author.firstName}${author.lastName ? '-' + author.lastName : ''}`}
-          />
+          <Col lg={6} xs={12}>
+            <BlogList
+              key={index}
+              id={index}
+              date={date}
+              blogThumbnail={checkBlogThumbnail(content)}
+              heading={title}
+              content={description}
+              link={`/blog/${_id}/${slug}`}
+            />
+          </Col>
         );
       })
     )
   }
 
   const renderUserDetails = () => {
-    if (blogs.blogList[0] && blogs.blogList[0].author) {
+    if (blog.user) {
       // Destructring user details
-      const { _id, firstName, lastName, user_name, funFact, followers, followings } = blogs.blogList[0].author;
+      const { _id, firstName, lastName, user_name, funFact, followers, followings, blogs } = blog.user;
       let fullName = `${firstName} ${lastName}`;
-      let totalBlogs = blogs.blogList.length;
+      let totalBlogs = blogs.length;
       let followersCount = followers.length;
       let followingsCount = followings.length;
       return (
@@ -176,7 +235,7 @@ const UserBlogsProfile = ({ match }) => {
             <div className="user-profile-image-div">
               <div className="user-profile-image">
                 <img
-                  src={`${api}/user/profile/${_id}`}
+                  src={`${api}/user/profile/image/${_id}`}
                   alt="Profile" />
               </div>
             </div>
@@ -188,7 +247,7 @@ const UserBlogsProfile = ({ match }) => {
                 <div className="user-profile-info-username">
                   <h2> {user_name} </h2>
                   {/* Passing Id And Followers List Of Author */}
-                  {checkFollowButtonRender(_id, firstName, user_name, followers)}
+                  {checkFollowButtonRender(_id, fullName, user_name, followers)}
                 </div>
                 {largeScreen ? renderLargeScreenElements(fullName, funFact, totalBlogs, followersCount, followingsCount) : ''}
               </div>
@@ -198,39 +257,107 @@ const UserBlogsProfile = ({ match }) => {
           {!largeScreen ? renderSmallScreenElements(fullName, funFact, totalBlogs, followersCount, followingsCount) : ''}
 
           <div className="user-profile-blog-list">
-            <Row>
-              <div className="blog-pg-section">
-                <div className="blog-content">
-                  {renderUserBlogList()}
-                </div>
-              </div>
-            </Row>
+            {renderUserBlogList()}
           </div>
         </Row>
       )
     }
   }
 
+  // To Show Text After Follow Request
+  if (auth.loading) {
+    toastId.current = toast.info("❕ Loading...", { autoClose: false })
+  }
+  if (auth.message) {
+    toast.dismiss(toastId.current);
+    toast.success(`✔ ${auth.message}`, { autoClose: 2000 })
+    auth.message = "";
+  } else if (auth.error) {
+    toast.dismiss(toastId.current);
+    toast.error(`❌ ${auth.error}`, { autoClose: 2000 })
+    auth.error = "";
+  }
+
   return (
     <>
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login Required</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Sorry, You need to be LoggedIn to follow someone! 
-          <br />
-          <hr />
-          <div className="d-flex justify-content-between">
-          <a href="/user/login"> Login Here</a> OR <a href="/user/signup">Signup Here</a> 
-          </div>
-        
-        </Modal.Body>
-      </Modal>
-      <section className="user-profile-blogs section-padding">
+      <ModalComp
+        props={{ show: show, onHide: handleClose }}
+        title="Login Required"
+        body={
+          <>
+            Sorry, You need to Login to follow someone!
+            <br />
+            <hr />
+            <div className="d-flex justify-content-between">
+              <a href="/user/login"> Login Here</a> OR <a href="/user/signup">Signup Here</a>
+            </div>
+          </>
+        }
+      />
+
+      <ModalComp
+        props={{ show: showFollowers, onHide: handleClose, centered: true, className: "user-follow-list-modal" }}
+        title="Followers List"
+        body={
+          <>
+            {blog.user && blog.user.followers.map((followers, index) => {
+              return (
+                <li key={index} className="userFollowerList">
+                  <div className="user-followers-info">
+                    <a href={`/blogs/user/${followers._id}/${followers.fullName.includes(" ") ? followers.fullName.split(' ').join('-') : followers.fullName}`}>
+                      <img src={`${api}/user/profile/image/${followers._id}`} alt="Profile" />
+                    </a>
+                    <span>
+                    <a href={`/blogs/user/${followers._id}/${followers.fullName.includes(" ") ? followers.fullName.split(' ').join('-') : followers.fullName}`}>
+                      <p style={{ color: "#000" }}> {followers.user_name} </p>
+                    </a>
+                      <p style={{ color: "#8e8e8e" }}> {followers.fullName} </p>
+                    </span>
+                  </div>
+                  <div> {checkRemoveButtonRender(blog.user._id, followers._id, followers.fullName, followers.user_name)} </div>
+                </li>
+              )
+            })}
+          </>
+        }
+      />
+
+      <ModalComp
+        props={{ show: showFollowing, onHide: handleClose, centered: true, className: "user-follow-list-modal" }}
+        title="Following List"
+        body={
+          <>
+            {blog.user && blog.user.followings.map((following, index) => {
+              return (
+                <li key={following._id} className="userFollowerList">
+                  <div className="user-followers-info">
+                    <a href={`/blogs/user/${following._id}/${following.fullName.includes(" ") ? following.fullName.split(' ').join('-') : following.fullName}`}>
+                      <img src={`${api}/user/profile/image/${following._id}`} alt="Profile" />
+                    </a>
+                    <span>
+                    <a href={`/blogs/user/${following._id}/${following.fullName.includes(" ") ? following.fullName.split(' ').join('-') : following.fullName}`}>
+                      <p style={{ color: "#000" }}> {following.user_name} </p>
+                    </a>
+                      <p style={{ color: "#8e8e8e" }}> {following.fullName} </p>
+                    </span>
+                    
+                  </div>
+                  <div> {checkRemoveButtonRender(blog.user._id, following._id, following.fullName, following.user_name)} </div>
+                  {/* <div> <button className="btn remove-btn">Remove</button> </div>  */}
+                </li>
+              )
+            })}
+          </>
+        }
+      />
+
+      <section className="blog-pg-section user-profile-blogs section-padding">
         <Container>
-          {blogs.loading ? <h3 className="alert-info p-5">Loading...</h3> :
-            renderUserDetails()}
+          <div className="blog-content">
+
+            {blog.loading ? <h3 className="alert-info p-5">Loading...</h3> :
+              renderUserDetails()}
+          </div>
         </Container>
       </section>
     </>

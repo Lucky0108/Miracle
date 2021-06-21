@@ -21,6 +21,11 @@ exports.getUser = (req, res) => {
     return res.json(req.profile)
 }
 
+exports.getUserDetails = (req,res) => {
+    req.profile.role = req.profile.createdAt = req.profile.updatedAt = req.profile.profilePicture = req.profile.hash_password = req.profile.contact = req.profile.email = undefined;
+    return res.json(req.profile)
+}
+
 // Load Image In Background as middleware
 exports.getUserProfilePicture = (req, res, next) => {
     if (req.profile.profilePicture.data) {
